@@ -1,0 +1,70 @@
+.drag-item {
+    border: 1px solid rgb(4, 149, 238);
+    background-color: rgba(4, 149, 238, 0.08);
+    color: rgb(4, 149, 238);
+    border-radius: 0.25rem;
+    appearance: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.5rem 1.125rem;
+  }
+  
+  .example-container {
+    border: 1px solid rgb(213, 213, 213);
+  
+    .example-list {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+  
+      .example-box-parent {
+        display: inline-block;
+        margin: 8px 12px;
+  
+        .example-box {
+          cursor: pointer;
+          font-size: 18px;
+          padding: 4px 12px;
+          border-radius: 4px;
+          color: rgb(255, 255, 255);
+          white-space: nowrap;
+          background-color: rgb(62, 178, 227);
+        }
+      }
+    }
+  }
+  
+  @import '../../../../../@theme/styles/themes.scss';
+  
+  @include nb-install-component() {
+    ::ng-deep {
+      .lh-1-5 {
+        line-height: 2.5;
+      }
+    }
+  }
+  
+  .question-description {
+    padding: 20px;
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-color: rgb(213, 213, 213);
+    border-radius: 4px 4px 0 0;
+  
+    .example-list-fillup {
+      min-width: 150px;
+      height: 30px;
+      line-height: 30px;
+      background: rgb(245, 246, 247);
+      border: 1px solid rgb(204, 204, 204);
+      border-radius: 4px;
+      display: inline-block;
+      margin: 0 8px -10px;
+      text-align: center;
+    }
+  }
+  

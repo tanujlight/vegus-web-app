@@ -1,0 +1,22 @@
+::ng-deep {
+    .highlighted-question-description {
+      .highlighted {
+        padding: 0 5px;
+  
+        &:hover {
+          background: #fcfc74;
+        }
+  
+        cursor: pointer;
+      }
+  
+      .highlighted-option {
+        background: #fcfc74;
+      }
+  
+      .selected {
+        background: #83f85c !important;
+      }
+    }
+  }
+  

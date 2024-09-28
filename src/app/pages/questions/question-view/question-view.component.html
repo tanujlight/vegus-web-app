@@ -1,0 +1,30 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+<div class="question-view-dialog">
+  <nb-card class="question-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>Question Overview</label>
+        <span *ngIf="question?.uniqueIdentifier">({{question?.uniqueIdentifier}})</span>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="container">
+        <h6>Max marks: {{ question?.marks }}</h6>
+        <div *ngIf="question">
+          <ngx-question-view-renderer
+            [userType]="'admin'"
+            [viewMode]="'exam'"
+            [question]="question"
+          ></ngx-question-view-renderer>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

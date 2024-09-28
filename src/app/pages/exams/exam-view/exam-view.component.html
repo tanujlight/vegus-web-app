@@ -1,0 +1,54 @@
+<div class="exam-view-dialog">
+  <nb-card class="exam-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>Exam Overview</label> &nbsp;
+        <span *ngIf="exam?.uniqueIdentifier">({{exam?.uniqueIdentifier}})</span>
+        <button nbButton size="small" status="primary">{{ examStepper?.selectedIndex + 1 }}</button>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <h6>Max marks: {{ examMarks }}</h6>
+      <div class="row">
+        <div class="col-sm-12">
+          <nb-stepper #examStepper orientation="horizontal" disableStepNavigation="false">
+            <nb-step *ngFor="let item of exam?.questionsAndCaseStudies; let questionsAndCaseStudyIndex = index">
+              <!-- Renders Case study -->
+              <ngx-case-study-view-renderer
+                *ngIf="item.type == 'caseStudy'"
+                [caseStudy]="item.caseStudy"
+                [userType]="'admin'"
+                [viewMode]="'exam'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-case-study-view-renderer>
+
+              <!-- Renders Question -->
+              <ngx-question-view-renderer
+                *ngIf="item.type == 'question'"
+                [question]="item.question"
+                [userType]="'admin'"
+                [viewMode]="'exam'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-question-view-renderer>
+
+              <!-- <div class="mt-2">
+                <button [disabled]="questionsAndCaseStudyIndex == 0" nbButton nbStepperPrevious>prev</button>&nbsp;
+                <button
+                  [disabled]="questionsAndCaseStudyIndex == exam?.questionsAndCaseStudies.length - 1"
+                  status="primary"
+                  nbButton
+                  nbStepperNext
+                >
+                  next
+                </button>
+              </div> -->
+            </nb-step>
+          </nb-stepper>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

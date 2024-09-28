@@ -1,0 +1,240 @@
+<div>
+  <div class="row">
+    <!-- Question Title -->
+    <div class="col-sm-12 mb-3 question-title">
+      <ngx-sanatize-html-string [htmlString]="question?.title"></ngx-sanatize-html-string>
+    </div>
+  </div>
+
+  <div *ngIf="question && question.type === 'MULTIPLE_CHOICE'">
+    <ngx-view-multiple-choice
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-multiple-choice>
+  </div>
+  <div *ngIf="question && question.type === 'MULTIPLE_RESPONSE'">
+    <ngx-view-multiple-response
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-multiple-response>
+  </div>
+  <div *ngIf="question && question.type === 'CHART_EXHIBIT'">
+    <ngx-view-chart-exhibit
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-chart-exhibit>
+  </div>
+  <div *ngIf="question && question.type === 'FILL_IN_THE_BLANKS'">
+    <ngx-view-fill-in-the-blanks
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-fill-in-the-blanks>
+  </div>
+  <div *ngIf="question && question.type === 'MULTIPLE_RESPONSE_N'">
+    <ngx-view-multiple-response-n
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-multiple-response-n>
+  </div>
+  <div *ngIf="question && question.type === 'AUDIO'">
+    <ngx-view-audio
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-audio>
+  </div>
+  <div *ngIf="question && question.type === 'VIDEO'">
+    <ngx-view-video
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-video>
+  </div>
+  <div *ngIf="question && question.type === 'DRAG_DROP_ORDERED_RESPONSE'">
+    <ngx-view-drag-drop-ordered-response
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drag-drop-ordered-response>
+  </div>
+  <div *ngIf="question && question.type === 'MATRIX_MULTIPLE_CHOICE'">
+    <ngx-view-matrix-multiple-choice
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-matrix-multiple-choice>
+  </div>
+  <div *ngIf="question && question.type === 'MATRIX_MULTIPLE_RESPONSE'">
+    <ngx-view-matrix-multiple-response
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-matrix-multiple-response>
+  </div>
+  <div *ngIf="question && question.type === 'MULTIPLE_RESPONSE_GROUPING'">
+    <ngx-view-multiple-response-grouping
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-multiple-response-grouping>
+  </div>
+  <div *ngIf="question && question.type === 'DROP_DOWN_TABLE'">
+    <ngx-view-drop-down-table
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drop-down-table>
+  </div>
+  <div *ngIf="question && question.type === 'GRAPHIC_IN_QUESTION'">
+    <ngx-view-graphic-in-question
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-graphic-in-question>
+  </div>
+  <div *ngIf="question && question.type === 'GRAPHIC_IN_ANSWER'">
+    <ngx-view-graphic-in-answer
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-graphic-in-answer>
+  </div>
+  <div *ngIf="question && question.type === 'DROP_DOWN_CLOZE'">
+    <ngx-view-drop-down-cloze
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drop-down-cloze>
+  </div>
+  <div *ngIf="question && question.type === 'DRAG_DROP_CLOZE'">
+    <ngx-view-drag-drop-cloze
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drag-drop-cloze>
+  </div>
+
+  <div *ngIf="question && question.type === EQuestionType.DRAG_DROP_DYADS">
+    <ngx-view-drag-drop-dyads
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drag-drop-dyads>
+  </div>
+
+  <div *ngIf="question && question.type === EQuestionType.DROP_DOWN_DYADS">
+    <ngx-view-drop-down-dyads
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drop-down-dyads>
+  </div>
+
+  <div *ngIf="question && question.type === EQuestionType.DROP_DOWN_TRIADS">
+    <ngx-view-drop-down-triads
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drop-down-triads>
+  </div>
+
+  <div *ngIf="question && question.type === EQuestionType.DRAG_DROP_TRIADS">
+    <ngx-view-drag-drop-triads
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-drag-drop-triads>
+  </div>
+
+  <div *ngIf="question && question.type === 'HIGHLIGHT_TEXT'">
+    <ngx-view-highlight-text
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-highlight-text>
+  </div>
+  <div *ngIf="question && question.type === 'HIGHLIGHT_TABLE'">
+    <ngx-view-highlight-table
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-highlight-table>
+  </div>
+  <div *ngIf="question && question.type === 'BOWTIE'">
+    <ngx-view-bow-tie
+      [userType]="userType"
+      [viewMode]="viewMode"
+      [question]="question"
+      [user]="user"
+      (submitAnswer)="submitAnswer.emit($event)"
+    ></ngx-view-bow-tie>
+  </div>
+
+  <div
+    class="d-flex justify-content-end mt-2"
+    *ngIf="(userType == 'student' && viewMode == 'report') || userType == 'admin'"
+  >
+    <button nbButton>Max marks: {{ question?.marks }}</button>
+    &nbsp;
+    <button *ngIf="userType == 'student' && viewMode == 'report'" nbButton>
+      Obtained: {{ question?.marksObtained }}
+    </button>
+    &nbsp;
+    <button [nbPopover]="appliedScoringRule.description" nbPopoverTrigger="hint" nbButton>
+      {{ appliedScoringRule?.rule }} scoring rule
+    </button>
+  </div>
+
+  <div class="mt-2" *ngIf="question?.explanation && (userType === 'admin' || viewMode === 'report')">
+    <ngx-explanation [explanation]="question?.explanation"></ngx-explanation>
+  </div>
+</div>

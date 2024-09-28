@@ -1,0 +1,19 @@
+<div class="calculator-container">
+  <mat-card class="calculator-card">
+    <mat-card-header class="calculator-header">
+      <mat-card-title>Calculator</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="calculator-display">
+        <input [(ngModel)]="expression" class="expression-input" placeholder="0" (keydown)="onKeyDown($event)" />
+      </div>
+      <div class="calculator-buttons">
+        <div class="row" *ngFor="let row of buttonRows">
+          <div class="button" *ngFor="let button of row" (click)="addToExpression(button)">
+            {{ button }}
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

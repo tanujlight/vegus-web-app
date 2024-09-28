@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-sm-12 text-justify">
+    <span class="lh-1-5" *ngFor="let item of content; let contentIndex = index">
+      <ng-container *ngIf="item.type === 'fillup'">
+        <span *ngIf="userType === 'student' && viewMode === 'report'">
+          <nb-icon
+            [status]="
+              question.optionsArray[item.optionsArrayIndex].userSelectedAnswer ===
+              question.optionsArray[item.optionsArrayIndex].correct
+                ? 'success'
+                : 'danger'
+            "
+            [icon]="
+              question.optionsArray[item.optionsArrayIndex].userSelectedAnswer ===
+              question.optionsArray[item.optionsArrayIndex].correct
+                ? 'checkmark-circle-2-outline'
+                : 'close-circle-outline'
+            "
+          ></nb-icon>
+        </span>
+        <span>
+          <select
+            size="small"
+            nbSelect
+            class="select-box"
+            [disabled]="(userType === 'student' && viewMode === 'report') || (userType === 'admin' && showAnswer)"
+            [(ngModel)]="question.optionsArray[item.optionsArrayIndex].userSelectedAnswer"
+            placeholder="Select Category"
+          >
+            <option value="">Select</option>
+            <option
+              [value]="selectOption"
+              *ngFor="let selectOption of question.optionsArray[item.optionsArrayIndex].options"
+            >
+              {{ selectOption }}
+            </option>
+          </select>
+        </span>
+        <span *ngIf="(userType === 'student' && viewMode === 'report') || (userType === 'admin' && showAnswer)">
+          <button class="ml-1" size="tiny" nbButton outline status="info">
+            {{ question.optionsArray[item.optionsArrayIndex].correct }}
+          </button>
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'newline'">
+        <br />
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'text'">
+        <span>{{ item.value }}</span>
+      </ng-container>
+    </span>
+  </div>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

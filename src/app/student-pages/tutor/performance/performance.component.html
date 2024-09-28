@@ -1,0 +1,110 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+<div class="student-performance-page">
+  <div class="row">
+    <div class="col-sm-6">
+      <nb-card>
+        <nb-card-header>QBank Usage ({{ performanceData?.questionsCount.total || '--' }})</nb-card-header>
+        <nb-card-body>
+          <div echarts [options]="questionsCountChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-sm-6">
+      <nb-card>
+        <nb-card-header
+          >Question Performance ({{ performanceData?.questionsStatusesCount.total || '--' }})</nb-card-header
+        >
+        <nb-card-body>
+          <div echarts [options]="questionsStatusesCountChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-sm-6">
+      <nb-card>
+        <nb-card-header>Practice Tests ({{ performanceData?.practiceTestsCounts.created || '--' }})</nb-card-header>
+        <nb-card-body>
+          <div echarts [options]="practiceTestsCountChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-sm-6">
+      <nb-card>
+        <nb-card-header>
+          <span>Score Points</span>
+          <span> ({{ performanceData?.questionsMarks.totalScored || '--' }})</span>
+        </nb-card-header>
+        <nb-card-body>
+          <div echarts [options]="questionsMarksChartOptions" class="echart"></div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <div class="col-12 categories-tree-view">
+      <nb-card>
+        <nb-card-header>
+          <div class="d-flex justify-content-between">
+            <span>Categories Performance</span>
+            <span>
+              <input
+                placeholder="Search by name"
+                nbInput
+                [nbFilterInput]="dataSource"
+                id="search"
+                class="search-input"
+              />
+            </span>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)" [levelPadding]="50">
+            <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+            <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+            <ng-container [nbTreeGridColumnDef]="customColumn">
+              <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+                {{ customColumn }}
+              </th>
+              <td nbTreeGridCell *nbTreeGridCellDef="let row">
+                <nb-icon
+                  *ngIf="row.data.isSubcategory"
+                  style="font-size: 12px"
+                  icon="corner-down-right-outline"
+                ></nb-icon>
+                <div [ngStyle]="{'padding-left': row.data.isSubcategory ? '20px' : '0px'}">
+                  <div>
+                    <ngx-fs-icon [isSubcategory]="row.data.isSubcategory" [expanded]="row.expanded"></ngx-fs-icon>
+                    {{ row.data[customColumn] }}
+                  </div>
+
+                  <nb-progress-bar [size]="'tiny'" [value]="row.data.progress" status="primary"></nb-progress-bar>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container
+              *ngFor="let column of defaultColumns; let index = index"
+              [nbTreeGridColumnDef]="column"
+              [showOn]="getShowOn(index)"
+            >
+              <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+                {{ column }}
+              </th>
+
+              <td nbTreeGridCell *nbTreeGridCellDef="let row">{{ getCellValue(row.data[column], column) }}</td>
+            </ng-container>
+          </table>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+</div>

@@ -1,0 +1,212 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+<div class="create-test-page">
+  <nb-card>
+    <nb-card-header>
+      <span> Practice Test </span>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="title">Test Mode: Tutor</label>
+            </div>
+          </div>
+          <hr class="custom-hr" />
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="category">
+                Question Type
+                <nb-icon
+                  icon="alert-circle-outline"
+                  nbTooltip="Traditional	Questions & Next Generation Questions"
+                  nbTooltipStatus="primary"
+                ></nb-icon>
+                <i class="muted-text">Total available</i>
+                <nb-badge [text]="allQuestionsCount" position="initial"></nb-badge>
+              </label>
+              <div class="question-type-box">
+                <nb-checkbox
+                  [(ngModel)]="questionType.traditional.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionType.traditional.label }}
+                  <nb-badge [text]="questionType.traditional.count" position="initial"></nb-badge>
+                </nb-checkbox>
+
+                <nb-checkbox
+                  [(ngModel)]="questionType.nextGeneration.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionType.nextGeneration.label }}
+                  <nb-badge [text]="questionType.nextGeneration.count" position="initial"></nb-badge>
+                </nb-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <hr class="custom-hr" />
+          <div class="col-12">
+            <div class="form-group">
+              <label>
+                Question Mode
+                <nb-icon icon="alert-circle-outline" nbTooltip="Question modes" nbTooltipStatus="primary"></nb-icon>
+              </label>
+
+              <!-- Question modes checkboxes -->
+              <div class="question-mode-box">
+                <!-- Unused checkbox -->
+                <nb-checkbox
+                  [(ngModel)]="questionModes.unused.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionModes.unused.label }}
+                  <nb-badge [text]="questionModes.unused.count" position="initial"></nb-badge>
+                </nb-checkbox>
+
+                <!-- Incorrect checkbox -->
+                <nb-checkbox
+                  [(ngModel)]="questionModes.incorrect.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionModes.incorrect.label }}
+                  <nb-badge [text]="questionModes.incorrect.count" position="initial"></nb-badge>
+                </nb-checkbox>
+
+                <!-- Marked checkbox -->
+                <nb-checkbox
+                  [(ngModel)]="questionModes.marked.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionModes.marked.label }}
+                  <nb-badge [text]="questionModes.marked.count" position="initial"></nb-badge>
+                </nb-checkbox>
+
+                <!-- Omitted checkbox -->
+                <nb-checkbox
+                  [(ngModel)]="questionModes.omitted.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionModes.omitted.label }}
+                  <nb-badge [text]="questionModes.omitted.count" position="initial"></nb-badge>
+                </nb-checkbox>
+
+                <!-- Correct checkbox -->
+                <nb-checkbox
+                  [(ngModel)]="questionModes.correct.selected"
+                  [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="recalculateQuestionsCount()"
+                >
+                  {{ questionModes.correct.label }}
+                  <nb-badge [text]="questionModes.correct.count" position="initial"></nb-badge>
+                </nb-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <hr class="custom-hr" />
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="category">
+                Question Category
+                <nb-icon
+                  icon="alert-circle-outline"
+                  nbTooltip="Question Categories"
+                  nbTooltipStatus="primary"
+                ></nb-icon>
+              </label>
+              <br />
+              <label class="category-selectAll">
+                <nb-checkbox
+                  (ngModelChange)="handleSubjectsSelection($event, 'all')"
+                  [ngModel]="allCategorySubCategory"
+                >
+                  Subjects
+                </nb-checkbox>
+              </label>
+
+              <nb-accordion *ngFor="let category of categories; let catIndex = index" class="mb-2">
+                <nb-accordion-item [disabled]="!category.count">
+                  <nb-accordion-item-header>
+                    <nb-checkbox
+                      [(ngModel)]="category.selected"
+                      [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="handleSubjectsSelection($event, 'category', catIndex, category)"
+                      [disabled]="!category.count"
+                    >
+                      <span>{{ category.name }}<nb-badge [text]="category.count" position="initial"></nb-badge></span>
+                    </nb-checkbox>
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                    <div class="row">
+                      <div
+                        class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4"
+                        *ngFor="let subCategoryItem of category.subCategories"
+                      >
+                        <nb-checkbox
+                          [(ngModel)]="subCategoryItem.selected"
+                          [ngModelOptions]="{standalone: true}"
+                          (ngModelChange)="handleSubjectsSelection($event, 'subCategory', catIndex, category)"
+                          [disabled]="!category.count || !subCategoryItem.count"
+                        >
+                          <span
+                            >{{ subCategoryItem.name }}
+                            <nb-badge [text]="subCategoryItem.count" position="initial"></nb-badge>
+                          </span>
+                        </nb-checkbox>
+                      </div>
+                    </div>
+                  </nb-accordion-item-body>
+                </nb-accordion-item>
+              </nb-accordion>
+            </div>
+          </div>
+
+          <hr class="custom-hr" />
+
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="noOfQuestions">No. of questions</label>
+              <div class="d-flex">
+                <input
+                  nbInput
+                  type="number"
+                  min="1"
+                  [max]="maximumAllowedQuestions"
+                  [(ngModel)]="noOfQuestions"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-control"
+                  [disabled]="!maximumAllowedQuestions"
+                />
+                <span class="muted-text">
+                  Max allowed per block
+                  <nb-badge [text]="maximumAllowedQuestions" position="initial"></nb-badge>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="primary" [disabled]="!maximumAllowedQuestions" (click)="save()" hero>
+        Generate Test
+      </button>
+    </nb-card-footer>
+  </nb-card>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+</div>

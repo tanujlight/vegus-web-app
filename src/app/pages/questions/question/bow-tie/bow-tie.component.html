@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-4">
+    <label for="rowsCount">Actions</label>
+    <div *ngFor="let item of question.actionsArray; let index = index" class="row-item">
+      <nb-checkbox [(ngModel)]="item.isCorrect">
+        <textarea nbInput fullWidth [(ngModel)]="item.value" class="form-control" placeholder="Action"></textarea>
+        <i class="nb-trash" (click)="removeItem('Action', index)"></i>
+      </nb-checkbox>
+    </div>
+    <button nbButton fullWidth status="primary" size="large" (click)="addItem('Action')">Add Action</button>
+  </div>
+  <div class="col-4">
+    <label for="rowsCount">Conditions</label>
+    <div *ngFor="let item of question.conditionsArray; let index = index" class="row-item">
+      <nb-checkbox [(ngModel)]="item.isCorrect">
+        <textarea nbInput fullWidth [(ngModel)]="item.value" class="form-control" placeholder="Condition"></textarea>
+        <i class="nb-trash" (click)="removeItem('Condition', index)"></i>
+      </nb-checkbox>
+    </div>
+    <button nbButton fullWidth status="primary" size="large" (click)="addItem('Condition')">Add Condition</button>
+  </div>
+  <div class="col-4">
+    <label for="rowsCount">Parameters</label>
+    <div *ngFor="let item of question.paramsArray; let index = index" class="row-item">
+      <nb-checkbox [(ngModel)]="item.isCorrect">
+        <textarea nbInput fullWidth [(ngModel)]="item.value" class="form-control" placeholder="Parameter"></textarea>
+        <i class="nb-trash" (click)="removeItem('Parameter', index)"></i>
+      </nb-checkbox>
+    </div>
+    <button nbButton fullWidth status="primary" size="large" (click)="addItem('Parameter')">Add Parameter</button>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="row multiple-response-view">
+  <!-- Question view for student when they are taking the exam -->
+  <ng-container *ngIf="userType == 'student' && viewMode == 'exam'">
+    <div class="col-sm-12" *ngFor="let item of question?.optionsArray; let i = index">
+      <label>
+        <nb-checkbox [(ngModel)]="item.userSelectedAnswer">
+          <span>({{ i + 1 }}) </span>
+          {{ item.value }}
+        </nb-checkbox>
+      </label>
+    </div>
+  </ng-container>
+
+  <!-- Question view for student when they are checking the report -->
+  <ng-container *ngIf="userType == 'student' && viewMode == 'report'">
+    <div class="col-12 d-flex align-items-center" *ngFor="let item of question?.optionsArray; let i = index">
+      <span class="tick-close-icon-container">
+        <nb-icon *ngIf="item.isCorrect" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+        <nb-icon
+          *ngIf="item.userSelectedAnswer && !item.isCorrect"
+          [status]="'danger'"
+          [icon]="'close-circle-outline'"
+        ></nb-icon>
+      </span>
+      <nb-checkbox disabled [(ngModel)]="item.userSelectedAnswer">
+        <span>({{ i + 1 }}) </span>
+        {{ item.value }}
+      </nb-checkbox>
+    </div>
+  </ng-container>
+
+  <!-- Question view for admin when they are viewing it on their portal -->
+  <ng-container *ngIf="userType == 'admin'">
+    <div class="col-sm-12" *ngFor="let item of question?.optionsArray; let i = index">
+      <label>
+        <nb-checkbox *ngIf="!showAnswer">
+          <span>({{ i + 1 }}) </span>
+          {{ item.value }}
+        </nb-checkbox>
+        <nb-checkbox disabled [value]="item.isCorrect" *ngIf="showAnswer">
+          <span>({{ i + 1 }}) </span>
+          {{ item.value }}
+        </nb-checkbox>
+      </label>
+    </div>
+  </ng-container>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

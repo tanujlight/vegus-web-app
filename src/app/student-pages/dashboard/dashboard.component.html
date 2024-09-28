@@ -1,0 +1,19 @@
+<div class="student-dashboard-page">
+  <nb-card>
+    <nb-card-header>Welcome!</nb-card-header>
+
+    <nb-card-body class="dashboard-page-content">
+      <button nbButton size="giant" status="primary" (click)="routeTo('student-pages/exams/list')">
+        <nb-icon icon="book-outline"></nb-icon> &nbsp; <span>Scheduled Exams</span>
+      </button>
+
+      <button nbButton size="giant" status="info" (click)="routeTo('student-pages/reports/list')">
+        <nb-icon icon="file-text-outline"></nb-icon> &nbsp; <span>Exam Reports</span>
+      </button>
+
+      <button nbButton size="giant" status="primary" (click)="routeTo('student-pages/flash-cards/list')">
+        <nb-icon icon="flash-outline"></nb-icon> &nbsp; <span>Flash Cards</span>
+      </button>
+    </nb-card-body>
+  </nb-card>
+</div>

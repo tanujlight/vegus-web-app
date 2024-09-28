@@ -1,0 +1,64 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam & Admin When they are viewing on their portal -->
+  <div class="col-12 mt-2">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col">{{ question.heading1 }}</th>
+          <th scope="col">{{ question.heading2 }}</th>
+          <th *ngIf="showAnswer || (userType === 'student' && viewMode === 'report')" scope="col">Correct Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of question.optionsArray; let i = index">
+          <td>{{ item.value }}</td>
+          <td>
+            <div class="row">
+              <div *ngIf="userType === 'student' && viewMode === 'report'" class="col-2">
+                <nb-icon
+                  [status]="item.userSelectedAnswer === item.correct ? 'success' : 'danger'"
+                  [icon]="
+                    item.userSelectedAnswer === item.correct ? 'checkmark-circle-2-outline' : 'close-circle-outline'
+                  "
+                ></nb-icon>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <select
+                    nbSelect
+                    id="category"
+                    [disabled]="userType === 'student' && viewMode === 'report'"
+                    fullWidth
+                    [(ngModel)]="item.userSelectedAnswer"
+                    class="form-control"
+                    placeholder="Select Category"
+                  >
+                    <option value="">Select</option>
+                    <option [value]="itemOption" *ngFor="let itemOption of item.options">{{ itemOption }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td *ngIf="showAnswer || (userType === 'student' && viewMode === 'report')">
+            <button size="small" nbButton outline status="info">
+              {{ item.correct }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

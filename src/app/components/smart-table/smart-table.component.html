@@ -1,0 +1,69 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+
+<nb-card class="table-card-header">
+  <nb-card-header>
+    <span>{{ title }}</span>
+    <span>Total count: {{ totalItemsCount }}</span>
+
+    <!-- <div *ngIf="tableCommonFilters.length > 0" class="table-common-filters">
+      <span>Filters: </span>
+      <div *ngFor="let f of tableCommonFilters" class="single-filter-container">
+        <span>{{ f.name }}</span>
+        <nb-select
+          matRipple
+          class="select-field"
+          (selectedChange)="tableCommonFiltersChange($event, f)"
+          [placeholder]="f.placeholder"
+          [(selected)]="f.selected"
+          [disabled]="f.disabled"
+        >
+          <nb-option matRipple *ngFor="let o of f.options" [value]="o.value">{{ o.name }} </nb-option>
+        </nb-select>
+      </div>
+    </div> -->
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="buttons-row custom-new-button">
+      <button nbButton matRipple [status]="'primary'" (click)="this.onCustomAction.emit({action: 'add'})" *ngIf="addButton">
+        New {{ addButton }}
+      </button>
+      <button class="more-action-button" [nbContextMenu]="tableActions" *ngIf="tableActions && tableActions.length">⋮</button>
+    </div>
+
+    <ng2-smart-table
+      class="example-smart-table"
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (editConfirm)="onEditConfirm($event)"
+      (createConfirm)="onCreateConfirm($event)"
+      (custom)="this.onCustomAction.emit($event)"
+      (userRowSelect)="this.onUserRowSelect.emit($event)"
+    >
+    </ng2-smart-table>
+
+    <div class="mt-2 d-flex justify-content-between">
+      <div>
+        <label>Show items per page:</label>&nbsp;
+
+        <select [ngModel]="settings.pager.perPage" (ngModelChange)="changePager($event)">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Total count: {{ totalItemsCount }}</label>
+      </div>
+    </div>
+
+    <!-- Show total count outside the table -->
+  </nb-card-body>
+</nb-card>

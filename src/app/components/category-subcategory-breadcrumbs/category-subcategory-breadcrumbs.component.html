@@ -1,0 +1,14 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li
+      *ngFor="let item of breadcrumbs; let i = index"
+      class="breadcrumb-item"
+      aria-current="page"
+      (click)="onSelectBreadcrum($event, item)"
+    >
+      <span [ngClass]="item === 'Categories' || item === 'Sub Categories' ? 'breadcrumb-link' : 'font-weight-bold'">{{
+        item
+      }}</span>
+    </li>
+  </ol>
+</nav>
