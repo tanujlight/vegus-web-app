@@ -1,0 +1,37 @@
+@import '../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  ::ng-deep {
+    .progress-loader {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      z-index: 9999;
+      background: #0000002e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .loading-spinner {
+        background-color: #fffffffc;
+        padding: 18px 35px;
+        border-radius: 30px;
+        text-align: center;
+
+        .mat-progress-spinner circle,
+        .mat-spinner circle {
+          stroke: nb-theme(color-info-500);
+        }
+
+        .loading-message {
+          margin-top: 10px;
+          display: block;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

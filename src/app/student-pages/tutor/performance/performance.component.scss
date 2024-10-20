@@ -1,0 +1,31 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .student-performance-page {
+    .categories-tree-view {
+      button[nbTreeGridRowToggle] {
+        background: transparent;
+        border: none;
+        padding: 0;
+      }
+
+      table {
+        table-layout: auto !important;
+      }
+
+      .search-input {
+        padding: 3px 10px;
+      }
+
+      ::ng-deep .row-toggle-button {
+        color: nb-theme(text-basic-color);
+      }
+    }
+  }
+}

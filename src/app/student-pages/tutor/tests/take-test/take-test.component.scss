@@ -1,0 +1,47 @@
+@import '../../../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  ::ng-deep .taketest-dialog {
+    width: 100vw;
+    margin: 0 auto;
+
+    nb-card.full-height {
+      height: 100vh;
+    }
+
+    nb-card-header {
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .end {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ccc;
+  flex-wrap: wrap;
+
+  .start-buttons,
+  .center-buttons,
+  .end-buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      margin: 5px;
+    }
+  }
+}
+
+:host ::ng-deep nb-stepper .header {
+  display: none;
+}

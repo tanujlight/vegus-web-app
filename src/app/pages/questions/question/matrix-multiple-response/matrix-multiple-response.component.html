@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="columnsCount">No of columns</label>
+      <input
+        nbInput
+        type="number"
+        id="columnsCount"
+        fullWidth
+        [(ngModel)]="question.columnsCount"
+        class="form-control"
+        min="1"
+        max="20"
+        (change)="columnCountChange()"
+        placeholder="No of Columns"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="rowsCount">No of rows</label>
+      <input
+        nbInput
+        type="number"
+        id="rowsCount"
+        fullWidth
+        [(ngModel)]="question.rowsCount"
+        class="form-control"
+        min="4"
+        max="10"
+        (change)="rowCountChange()"
+        placeholder="No of rows"
+      />
+    </div>
+  </div>
+  <div class="col-sm-12" *ngIf="question.optionsArray && question.optionsArray.length">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input nbInput fullWidth class="form-control" placeholder="Heading" [(ngModel)]="question.actionTitle" />
+        </div>
+      </div>
+      <div class="col" *ngFor="let column of question.columns; let columnIndex = index">
+        <div class="form-group">
+          <input
+            nbInput
+            fullWidth
+            class="form-control"
+            placeholder="Heading"
+            [(ngModel)]="question.columns[columnIndex].value"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let item of question.optionsArray; let i = index">
+      <div class="col">
+        <div class="form-group">
+          <input nbInput fullWidth class="form-control" [(ngModel)]="item.value" placeholder="Write here!" />
+        </div>
+      </div>
+      <div class="col" *ngFor="let optionItem of item.options; let optionIndex = index">
+        <div class="form-group">
+          <input
+            type="checkbox"
+            [id]="(question?.id || question?._id) + '-checkbox-' + i + '-' + optionIndex"
+            [name]="(question?.id || question?._id) + '-options-' + i + '-' + optionIndex"
+            [(ngModel)]="question.optionsArray[i].options[optionIndex].isCorrect"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

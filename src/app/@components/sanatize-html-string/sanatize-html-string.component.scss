@@ -1,0 +1,15 @@
+::ng-deep {
+  .sanitize-html-container {
+    .table th,
+    .table td {
+      border: 1px solid #dee2e6 !important;
+    }
+
+    .image.image_resized {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<div class="report-view">
+  <nb-card>
+    <nb-card-header class="d-flex align-exams-center justify-content-between">
+      <span class="d-flex align-items-center">{{ finalReport?.title }}</span>
+
+      <div *ngIf="showDetails">
+        <button
+          data-toggle="tooltip"
+          data-placement="top"
+          title="previous"
+          nbButton
+          size="small"
+          status="secondary"
+          (click)="previousQuestion()"
+        >
+          <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+        </button>
+        &nbsp;
+        <button
+          data-toggle="tooltip"
+          data-placement="top"
+          title="next"
+          nbButton
+          size="small"
+          status="secondary"
+          (click)="nextQuestion()"
+        >
+          <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
+        </button>
+        &nbsp;
+        <button nbButton size="small" status="primary">Question {{ reportStepper?.selectedIndex + 1 }}</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row" *ngIf="!showDetails">
+        <div class="col-sm-6 col-12">
+          <p><b>Submitted Date:</b> {{ userAnswerSheet?.createdAt | date : 'longDate' }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p><b>Total Marks:</b> {{ finalReport?.totalMarks }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p><b>Exam Type:</b> {{ finalReport?.type }}</p>
+        </div>
+        <div *ngIf="finalReport?.type == 'time-based'" class="col-sm-6 col-12">
+          <p><b>Time Limit:</b> {{ finalReport?.timeLimit }} min(s)</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p><b>Total Questions:</b> {{ totalQuestions }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p><b>Attempted Questions:</b> {{ attemptedQuestionsLength }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p><b>Scored Marks:</b> {{ userAnswerSheet?.userScore }} ({{ scoredMarksInPercentage }}%)</p>
+        </div>
+        <div class="col-sm-12">
+          <div class="text-center">
+            <button nbButton status="primary" (click)="toggleShowDetails()">Review</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showDetails">
+        <div class="col-sm-12">
+          <nb-stepper #reportStepper orientation="horizontal">
+            <nb-step *ngFor="let exam of finalReport?.questionsAndCaseStudies; let questionsAndCaseStudyIndex = index">
+              <!-- Renders Case study -->
+              <ngx-case-study-view-renderer
+                *ngIf="exam.type == 'caseStudy'"
+                [caseStudy]="exam.caseStudy"
+                [userType]="'student'"
+                [viewMode]="'report'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-case-study-view-renderer>
+
+              <!-- Renders Question -->
+              <ngx-question-view-renderer
+                *ngIf="exam.type == 'question'"
+                [question]="exam.question"
+                [userType]="'student'"
+                [viewMode]="'report'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-question-view-renderer>
+            </nb-step>
+          </nb-stepper>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

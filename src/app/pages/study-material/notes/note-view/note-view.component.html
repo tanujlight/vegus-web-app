@@ -1,0 +1,37 @@
+<div class="note-view-dialog">
+  <nb-card class="note-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>{{ title }}</label>
+        <span *ngIf="uniqueIdentifier">({{uniqueIdentifier}})</span>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div id="outerContainer">
+        <div class="pdf-container">
+          <pdf-viewer
+            [src]="fileUrl"
+            [rotation]="0"
+            [original-size]="false"
+            [show-all]="true"
+            [fit-to-page]="true"
+            [zoom]="1"
+            [zoom-scale]="'page-width'"
+            [stick-to-page]="false"
+            [render-text]="true"
+            [external-link-target]="'blank'"
+            [autoresize]="true"
+            [show-borders]="false"
+            style="width: 100%; height: calc(100vh - 160px);"
+          ></pdf-viewer>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+</div>

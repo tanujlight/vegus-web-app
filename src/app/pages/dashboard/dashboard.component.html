@@ -1,0 +1,63 @@
+<div class="dashboard-page">
+  <nb-card>
+    <nb-card-header>Welcome!</nb-card-header>
+
+    <nb-card-body class="dashboard-page-content">
+      <div class="row" *ngIf="user?.role == 'Admin' || user?.role == 'admin'">
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="primary" (click)="routeTo('pages/users/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="people-outline"></nb-icon> &nbsp; <span>Users</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalUsers }}</nb-card-footer>
+          </nb-card>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="info" (click)="routeTo('pages/questions/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="file-text-outline"></nb-icon> &nbsp; <span>Questions</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalQuestions }}</nb-card-footer>
+          </nb-card>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="primary" (click)="routeTo('pages/exams/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="book-open-outline"></nb-icon> &nbsp; <span>Exams</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalExams }}</nb-card-footer>
+          </nb-card>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="info" (click)="routeTo('pages/case-studies/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="book-outline"></nb-icon> &nbsp; <span>Case Studies</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalCaseStudies }}</nb-card-footer>
+          </nb-card>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="primary" (click)="routeTo('pages/categories/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="briefcase-outline"></nb-icon> &nbsp; <span>Categories</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalCategories }}</nb-card-footer>
+          </nb-card>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <nb-card status="info" (click)="routeTo('pages/flash-cards/list')">
+            <nb-card-header class="d-flex align-items-center">
+              <nb-icon icon="flash-outline"></nb-icon> &nbsp; <span>Flash Cards</span></nb-card-header
+            >
+            <nb-card-footer>{{ result.totalFlashCards }}</nb-card-footer>
+          </nb-card>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

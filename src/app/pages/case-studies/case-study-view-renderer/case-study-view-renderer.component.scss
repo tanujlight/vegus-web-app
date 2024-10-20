@@ -1,0 +1,39 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import '../../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  ::ng-deep {
+    mat-tab-group {
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      mat-tab-body {
+        padding: 1.25rem;
+      }
+    }
+
+    .case-sudy-stepper {
+      .header {
+        width: 90%;
+        margin: 0 auto 10px;
+
+        .step {
+          width: 1.5rem;
+
+          .label-index {
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep nb-stepper .header {
+  display: none;
+}

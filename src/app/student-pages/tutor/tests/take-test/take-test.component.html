@@ -1,0 +1,80 @@
+<div class="taketest-dialog exam-view-dialog">
+  <nb-card class="full-height">
+    <!-- Page header -->
+    <nb-card-header>
+      <div class="header-content">
+        <div class="start">Practice Test</div>
+        <div class="center">
+          TID: {{ test?.uniqueIdentifier }} <br />
+          QID: {{ activeQuestion?.uniqueIdentifier }}
+        </div>
+        <div class="end">
+          Time: <ngx-countup-timer [(currentValue)]="test.timeSpent" [showTimer]="true"></ngx-countup-timer> / Question
+          {{ currIndex }} of {{ test.noOfQuestions }} <br />
+          <button [size]="'tiny'" nbButton status="info" [nbPopover]="calculatorPopover" nbPopoverPlacement="bottom">
+            <nb-icon icon="calculator" pack="ion"></nb-icon> cal</button
+          >&nbsp;
+          <button [size]="'tiny'" nbButton status="warning" (click)="markAsReview()">
+            <nb-icon icon="flag-outline"></nb-icon> Mark
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+
+    <!-- Page body -->
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-12">
+          <nb-stepper #examStepper orientation="horizontal">
+            <nb-step *ngFor="let exam of test?.questionsAndCaseStudies; let questionsAndCaseStudyIndex = index">
+              <!-- Renders Case study -->
+              <ngx-tutor-case-study-view-renderer
+                *ngIf="exam.type == 'caseStudy'"
+                [caseStudy]="exam.caseStudy"
+                (submitAnswer)="handleSubmitAnswer($event, questionsAndCaseStudyIndex)"
+                [nextClicked]="nextClicked.asObservable()"
+                [prevClicked]="prevClicked.asObservable()"
+                [goToSpecificIndex]="gotToSpecificCaseStudyIndex.asObservable()"
+              ></ngx-tutor-case-study-view-renderer>
+
+              <!-- Renders Question -->
+              <ngx-tutor-question-view-renderer
+                *ngIf="exam.type == 'question'"
+                [question]="exam.question"
+                [isActive]="examStepper.selectedIndex === questionsAndCaseStudyIndex"
+                (submitAnswer)="handleSubmitAnswer($event, questionsAndCaseStudyIndex)"
+              ></ngx-tutor-question-view-renderer>
+            </nb-step>
+          </nb-stepper>
+        </div>
+      </div>
+    </nb-card-body>
+
+    <!-- Page footer -->
+    <nb-card-footer class="footer-buttons">
+      <div class="start-buttons">
+        <button [size]="'small'" nbButton status="info" (click)="onEndConfirm($event)">
+          <nb-icon icon="log-out-outline"></nb-icon>End
+        </button>
+        <button [size]="'small'" nbButton status="danger" (click)="onSuspendConfirm($event)">
+          <nb-icon icon="pause-circle-outline"></nb-icon>Suspend
+        </button>
+      </div>
+
+      <div class="end-buttons">
+        <button [size]="'small'" nbButton status="primary" [disabled]="currIndex === 1" (click)="prevBtnClicked()">
+          <nb-icon icon="arrow-back-outline"></nb-icon>Previous
+        </button>
+        <button [size]="'small'" nbButton status="secondary" (click)="openNavigatorDialog()">Navigator</button>
+        <button [size]="'small'" nbButton status="primary" (click)="nextBtnClicked()">
+          Next<nb-icon icon="arrow-forward-outline"></nb-icon>
+        </button>
+      </div>
+    </nb-card-footer>
+  </nb-card>
+
+  <!-- Calculator component -->
+  <ng-template #calculatorPopover>
+    <ngx-calculator></ngx-calculator>
+  </ng-template>
+</div>

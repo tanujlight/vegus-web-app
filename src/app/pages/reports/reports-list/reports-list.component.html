@@ -1,0 +1,29 @@
+<div class="exams-table">
+  <div class="mb-2 row">
+    <div class="col-12 col-sm-4">
+      <button class="mb-1" type="button" size="small" (click)="back()" nbButton>Back</button>
+    </div>
+
+    <div class="col-12 col-sm-8 text-right">
+      <button class="mb-1" type="button" size="small" status="info" nbButton>
+        {{ studentsList.length }} Students Attempted
+      </button>
+      &nbsp;
+      <button class="mb-1" type="button" size="small" status="info" nbButton>
+        Max Marks: {{ studentsList[0]?.exam.totalMarks || 0 }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+
+  <app-smart-table
+    [title]="tableHeading"
+    [tableSettings]="tableSettings"
+    [columns]="tableColumns"
+    [data]="studentsList"
+    (onCustomAction)="onCustomAction($event)"
+  >
+  </app-smart-table>
+</div>

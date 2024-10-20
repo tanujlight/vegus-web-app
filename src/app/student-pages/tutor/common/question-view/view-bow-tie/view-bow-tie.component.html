@@ -1,0 +1,185 @@
+<div class="row">
+  <!-- First Group - Actions To take -->
+  <div class="col-4" cdkDropListGroup>
+    <div class="question-description">
+      <!-- First Input Action -->
+      <div
+        class="example-list-fillup"
+        cdkDropList
+        [cdkDropListData]="userSelectedAnswer.action1"
+        [cdkDropListDisabled]="question?.isAttempted"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <span role="button" *ngIf="userSelectedAnswer.action1 && userSelectedAnswer.action1.length" cdkDrag>
+          <span *ngIf="question?.showAnswer">
+            <nb-icon
+              [status]="userSelectedAnswer?.action1[0]?.isCorrect ? 'success' : 'danger'"
+              [icon]="userSelectedAnswer?.action1[0]?.isCorrect ? 'checkmark-circle-2-outline' : 'close-circle-outline'"
+            ></nb-icon>
+          </span>
+          <span>{{ userSelectedAnswer?.action1[0]?.value }}</span>
+        </span>
+        <span *ngIf="!userSelectedAnswer.action1 || !userSelectedAnswer.action1.length">Action To Take</span>
+      </div>
+
+      <!-- Second Input Action -->
+      <div
+        class="example-list-fillup"
+        cdkDropList
+        [cdkDropListData]="userSelectedAnswer.action2"
+        [cdkDropListDisabled]="question?.isAttempted"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <span role="button" *ngIf="userSelectedAnswer.action2 && userSelectedAnswer.action2.length" cdkDrag>
+          <span *ngIf="question?.showAnswer">
+            <nb-icon
+              [status]="userSelectedAnswer?.action2[0]?.isCorrect ? 'success' : 'danger'"
+              [icon]="userSelectedAnswer?.action2[0]?.isCorrect ? 'checkmark-circle-2-outline' : 'close-circle-outline'"
+            ></nb-icon>
+          </span>
+          <span>{{ userSelectedAnswer?.action2[0]?.value }}</span>
+        </span>
+        <span *ngIf="!userSelectedAnswer.action2 || !userSelectedAnswer.action2.length">Action To Take</span>
+      </div>
+    </div>
+
+    <!-- List of Actions To Take -->
+    <div class="common-cols">
+      <nb-card>
+        <nb-card-header>Actions To Take</nb-card-header>
+        <nb-list
+          class="example-list"
+          cdkDropList
+          [cdkDropListData]="question.actionsArray"
+          [cdkDropListDisabled]="question?.isAttempted"
+          (cdkDropListDropped)="droptoList($event)"
+        >
+          <nb-list-item role="button" *ngFor="let item of question.actionsArray; let index = index" cdkDrag>
+            <span *ngIf="question?.showAnswer">
+              <nb-icon *ngIf="item.isCorrect" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+            </span>
+            <span>{{ item.value }}</span>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
+
+  <!-- Second Group - Conditions -->
+  <div class="col-4" cdkDropListGroup>
+    <div class="question-description condition">
+      <!-- Condition Input box -->
+      <div
+        class="example-list-fillup"
+        cdkDropList
+        [cdkDropListData]="userSelectedAnswer.condition"
+        [cdkDropListDisabled]="question?.isAttempted"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <span role="button" *ngIf="userSelectedAnswer.condition && userSelectedAnswer.condition.length" cdkDrag>
+          <span *ngIf="question?.showAnswer">
+            <nb-icon
+              [status]="userSelectedAnswer?.condition[0]?.isCorrect ? 'success' : 'danger'"
+              [icon]="
+                userSelectedAnswer?.condition[0]?.isCorrect ? 'checkmark-circle-2-outline' : 'close-circle-outline'
+              "
+            ></nb-icon>
+          </span>
+          <span>{{ userSelectedAnswer?.condition[0]?.value }}</span>
+        </span>
+        <span *ngIf="!userSelectedAnswer.condition || !userSelectedAnswer.condition.length">Condition</span>
+      </div>
+    </div>
+
+    <!-- List of options for conditions -->
+    <div class="common-cols">
+      <nb-card>
+        <nb-card-header>Potential Condition</nb-card-header>
+        <nb-list
+          class="example-list"
+          cdkDropList
+          [cdkDropListData]="question.conditionsArray"
+          [cdkDropListDisabled]="question?.isAttempted"
+          (cdkDropListDropped)="droptoList($event)"
+        >
+          <nb-list-item role="button" *ngFor="let item of question.conditionsArray; let index = index" cdkDrag>
+            <span *ngIf="question?.showAnswer">
+              <nb-icon *ngIf="item.isCorrect" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+            </span>
+            <span>{{ item.value }}</span>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
+
+  <!-- Third Group - Parameters To Monitor -->
+  <div class="col-4" cdkDropListGroup>
+    <div class="question-description">
+      <!-- Parameter to monitor input box 1 -->
+      <div
+        class="example-list-fillup"
+        cdkDropList
+        [cdkDropListData]="userSelectedAnswer.param1"
+        [cdkDropListDisabled]="question?.isAttempted"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <span role="button" *ngIf="userSelectedAnswer.param1 && userSelectedAnswer.param1.length" cdkDrag>
+          <span *ngIf="question?.showAnswer">
+            <nb-icon
+              [status]="userSelectedAnswer?.param1[0]?.isCorrect ? 'success' : 'danger'"
+              [icon]="userSelectedAnswer?.param1[0]?.isCorrect ? 'checkmark-circle-2-outline' : 'close-circle-outline'"
+            ></nb-icon>
+          </span>
+          <span>{{ userSelectedAnswer?.param1[0]?.value }}</span>
+        </span>
+        <span *ngIf="!userSelectedAnswer.param1 || !userSelectedAnswer.param1.length">Parameter To Monitor</span>
+      </div>
+
+      <!-- Parameter to monitor input box 2 -->
+      <div
+        class="example-list-fillup"
+        cdkDropList
+        [cdkDropListData]="userSelectedAnswer.param2"
+        [cdkDropListDisabled]="question?.isAttempted"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <span role="button" *ngIf="userSelectedAnswer.param2 && userSelectedAnswer.param2.length" cdkDrag>
+          <span *ngIf="question?.showAnswer">
+            <nb-icon
+              [status]="userSelectedAnswer?.param2[0]?.isCorrect ? 'success' : 'danger'"
+              [icon]="userSelectedAnswer?.param2[0]?.isCorrect ? 'checkmark-circle-2-outline' : 'close-circle-outline'"
+            ></nb-icon>
+          </span>
+          <span>{{ userSelectedAnswer?.param2[0]?.value }}</span>
+        </span>
+        <span *ngIf="!userSelectedAnswer.param2 || !userSelectedAnswer.param2.length">Parameter To Monitor</span>
+      </div>
+    </div>
+
+    <!-- List of parameters to monitor -->
+    <div class="common-cols">
+      <nb-card>
+        <nb-card-header>Parameters To Monitor</nb-card-header>
+        <nb-list
+          class="example-list"
+          cdkDropList
+          [cdkDropListData]="question.paramsArray"
+          [cdkDropListDisabled]="question?.isAttempted"
+          (cdkDropListDropped)="droptoList($event)"
+        >
+          <nb-list-item role="button" *ngFor="let item of question.paramsArray; let index = index" cdkDrag>
+            <span *ngIf="question?.showAnswer">
+              <nb-icon *ngIf="item.isCorrect" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+            </span>
+            <span>{{ item.value }}</span>
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </div>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

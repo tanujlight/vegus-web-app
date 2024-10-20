@@ -1,0 +1,30 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+<div class="video-view-dialog">
+  <nb-card class="video-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>{{ title }}</label>
+        <span *ngIf="uniqueIdentifier">({{uniqueIdentifier}})</span>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div id="outerContainer">
+        <div class="video-container">
+          <video controls autoplay controlsList="nodownload" poster="assets/images/play-button-sign-black-icon.jpg">
+            <source [src]="fileUrl" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+</div>

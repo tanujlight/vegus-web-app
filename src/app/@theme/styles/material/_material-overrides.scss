@@ -1,0 +1,215 @@
+@mixin material-overrides() {
+  @include nb-for-themes(material-dark, material-light) {
+    nb-layout-header {
+      background: #fff !important;
+      nav{
+        border-bottom: 1px solid #E5E5E5;
+        box-shadow: none !important;
+      }
+      nb-actions,
+      .logo-container {
+        nb-icon,
+        .user-name {
+          color: #000 !important;
+        }
+        
+      }
+
+      .select-button {
+        background-color: nb-theme(background-basic-color-3) !important;
+      }
+    }
+
+    nb-sidebar {
+      transition: width 0.3s;
+      background: nb-theme(color-basic-100);
+      .main-container {
+        transition: width 0.3s;
+        .menu-item{
+          border-bottom: none;
+          &:not(:has(.menu-item)) a.active, a:hover{
+            background: nb-theme(color-primary-200);
+            color: nb-theme(color-primary-500);
+            .menu-icon{
+              color: nb-theme(color-primary-500)
+            }
+          }
+          &:has(.menu-item) a.active{
+            background: #fff;
+            color: #000;
+            .menu-icon{
+              color: #000
+            }
+          }
+          
+          .menu-items{
+            padding: 0 !important;
+            .menu-item{
+              a{padding: 0.75rem 1.25rem;}
+              a.active, a:hover{
+                background: nb-theme(color-primary-200);
+                color: nb-theme(color-primary-500);
+                .menu-icon{
+                  color: nb-theme(color-primary-500)
+                }
+              }
+              
+            }
+          }
+        } 
+      }
+    }
+
+    nb-layout-footer{
+      nav{
+        background-color: nb-theme(color-basic-100) !important;
+        color: #000 !important;
+        border-top: none !important;
+      }
+    }
+    nb-card {
+      border-bottom-left-radius: 0.125rem;
+      border-bottom-right-radius: 0.125rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 4px 10px 15px -3px #0087bd1c;
+      nb-card-header,
+      .tabset {
+        background-color: nb-theme(card-divider-color);
+      }
+
+    }
+    nb-card.table-card-header{
+      padding: 20px;
+      table{
+        tr{
+          background: transparent !important;
+          border-bottom: 1px solid #E6EFF5;
+          td,th{
+            border: none !important;
+            padding: 10px !important;
+          }
+          th{
+            .ng2-smart-title{
+              color: nb-theme(color-primary-500);
+              font-weight: 500;
+              a{
+                color: nb-theme(color-primary-500);
+                font-weight: 500;
+              }
+            }
+          }
+          .form-control{
+            border-color: #D6E7FF;
+            border-radius: 0.45rem;
+          }
+        }
+      }
+    }
+    nb-accordion{
+      box-shadow: none !important;
+      nb-accordion-item-body{
+        .sub-item{
+          box-shadow: none !important;
+          border-bottom: 1px solid #E5E5E5;
+        }
+      }
+    }
+    .banner-container{
+      background-color: nb-theme(color-primary-500);
+      border-radius: 1rem;
+      color: #fff;
+      .flex-box{
+        display: flex;
+        flex-direction: row;
+        .box-1{
+          padding:0 4rem;
+          display: flex;
+          // gap: 15px;
+          flex-direction: column;
+          justify-content: center;
+          // align-items: center;
+          .sub-heading{
+            font-size:18px;
+            font-weight: 400;
+            color: #fff;
+          }
+          .title{
+            margin-top: 0px !important;
+            margin-bottom:15px;
+            font-size:34px;
+            font-weight: bold;
+            color: #fff;
+          }
+          .cta-btn{
+            background: #fff;
+            border-radius: 100px;
+            padding:0.75rem 1.25rem;
+            font-weight: 500;
+            border: none;
+            width: fit-content;
+          }
+        }
+        .box-2{
+          background: url('/assets/images/s-patterns.png');
+        }
+      }
+    }
+    .section-container{
+      padding:10px 0;
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+      .title{
+        font-size: 16px;
+        font-weight:bold;
+      }
+      .flex-box{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    }
+    button.big-card-btn{
+      width: 250px;
+      border-radius:.75rem;
+      border: none !important;
+      padding:1.25rem;
+      text-align: left;
+      .flex-label{
+        margin-top:15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    button.big-card-btn.bg-ac-1{
+      background-color: #FFD6FB;
+      color: #FF3A8D;
+    }
+    button.big-card-btn.bg-ac-2{
+      background-color: #D6E7FF;
+      color: #0067A9;
+    }
+    button.big-card-btn.bg-ac-3{
+      background-color: #FFF3D6;
+      color: #FFB03A;
+    }
+    .shape-rectangle{
+      border-radius: 0.75rem !important;
+    }
+
+    [nbinput] {
+      font-weight: 400;
+
+      &.status-basic:focus:hover {
+        border-color: nb-theme(color-primary-focus) !important;
+      }
+    }
+
+    [nbbutton] {
+      box-shadow: none !important;
+    }
+  }
+}

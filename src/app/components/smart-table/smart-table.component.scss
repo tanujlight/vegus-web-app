@@ -1,0 +1,89 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import '../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  nb-card.table-card-header {
+    transform: translate3d(0, 0, 0);
+
+    .custom-new-button {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nb-card-header {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1.5rem;
+      justify-content: space-between;
+
+      .table-common-filters {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 480px) {
+          flex-direction: column;
+        }
+
+        .single-filter-container {
+          margin-left: 10px;
+          display: inline-flex;
+          align-items: center;
+
+          nb-select {
+            margin-left: 10px;
+            width: 10rem;
+          }
+        }
+      }
+    }
+  }
+
+  ::ng-deep {
+    ng2-smart-table {
+      table {
+        tr {
+          th {
+            padding: 0.5rem 1rem;
+            padding-right: 1.25rem;
+          }
+
+          td {
+            padding: 0.5rem 1rem;
+            text-align: left;
+
+            &.ng2-smart-actions {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .example-smart-table {
+      .form-control {
+        color: nb-theme(form-control-color);
+      }
+      input.form-control {
+        height: initial;
+      }
+
+      .ng2-smart-title {
+        min-width: 50px;
+      }
+    }
+  }
+
+  .more-action-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="navigator-dialog">
+  <nb-card class="navigator-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>Navigator ({{ questions.length }})</label>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table
+        class="example-smart-table"
+        [settings]="tableSettings"
+        [source]="questions"
+        (userRowSelect)="onUserRowSelect($event)"
+      >
+      </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>{{ questionsCount.total }} Questions, {{ questionsCount.unseen }} Unseen</label>
+      </div>
+      <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>close</button>
+    </nb-card-footer>
+  </nb-card>
+</div>

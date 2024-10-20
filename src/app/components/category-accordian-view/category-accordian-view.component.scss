@@ -1,0 +1,37 @@
+@import '../../@theme/styles/themes.scss';
+
+.category-accordian-view {
+  nb-accordion-item {
+    nb-accordion-item-header {
+      display: flex;
+      justify-content: space-between;
+
+      .category-video-count {
+        margin-right: 20px;
+        color: nb-theme(color-primary-500);
+      }
+    }
+  }
+
+  nb-accordion-item-body {
+    .sub-item {
+      background-color: #fff;
+      font-family: Poppins, sans-serif;
+      //   font-size: 0.9375rem;
+      //   font-weight: 400;
+      line-height: 1.25rem;
+      color: nb-theme(color-info-900);
+      padding: 1.25rem;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+
+      .subcategory-video-count {
+        color: nb-theme(color-primary-500);
+      }
+    }
+  }
+}

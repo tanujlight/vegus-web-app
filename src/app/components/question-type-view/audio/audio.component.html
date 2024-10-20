@@ -1,0 +1,59 @@
+<div class="row">
+  <!-- Question Title and its defination -->
+  <div class="col-sm-12">
+    <img style="height: 20px" src="assets/images/audio.png" />Listen to the audio
+    <audio controls *ngIf="question && question.audioUrl">
+      <source [src]="question?.audioUrl | sanitizeUrl" type="audio/ogg" />
+      <source [src]="question?.audioUrl | sanitizeUrl" type="audio/mpeg" />
+      <source [src]="question?.audioUrl | sanitizeUrl" type="audio/wav" />
+    </audio>
+  </div>
+
+  <!-- Question view for student when they are taking the exam -->
+  <div *ngIf="userType == 'student' && viewMode == 'exam'" class="col-sm-12">
+    <nb-radio-group [(ngModel)]="question.userSelectedAnswer">
+      <nb-radio [value]="i" *ngFor="let item of question?.optionsArray; let i = index">
+        <span>({{ i + 1 }}) </span>
+        {{ item.value }}
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+
+  <!-- Question view for student when they are checking the report -->
+  <div *ngIf="userType == 'student' && viewMode == 'report'" class="col-sm-12">
+    <nb-radio-group [(ngModel)]="question.userSelectedAnswer">
+      <nb-radio disabled [value]="i" *ngFor="let item of question?.optionsArray; let i = index">
+        <span>({{ i + 1 }}) </span>
+        <nb-icon *ngIf="correctOption == i" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+        <nb-icon
+          *ngIf="question.userSelectedAnswer == i && question.userSelectedAnswer != correctOption"
+          [status]="'danger'"
+          [icon]="'close-circle-outline'"
+        ></nb-icon>
+        <span> {{ item.value }}</span>
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+
+  <!-- Question view for admin when they are viewing it on their portal -->
+  <div *ngIf="userType == 'admin'" class="col-sm-12">
+    <nb-radio-group [(ngModel)]="correctOption">
+      <nb-radio [disabled]="showAnswer" [value]="i" *ngFor="let item of question?.optionsArray; let i = index">
+        <span>({{ i + 1 }}) </span>
+        {{ item.value }}
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import './@theme/styles/themes';
+
+// Dialog components scss
+::ng-deep {
+  body {
+    text-align: justify;
+  }
+
+  nb-card {
+    nb-card-header {
+      @media screen and (max-width: 468px) {
+        padding: 0.7rem 1rem !important;
+      }
+    }
+
+    nb-card-body {
+      @media screen and (max-width: 468px) {
+        padding: 0.7rem 1rem !important;
+      }
+    }
+
+    nb-card-footer {
+      @media screen and (max-width: 468px) {
+        padding: 0.7rem 1rem !important;
+      }
+    }
+  }
+
+  nb-stepper {
+    .step-content {
+      @media screen and (max-width: 468px) {
+        padding: 0.7rem !important;
+      }
+    }
+  }
+
+  nb-user {
+    .user-container {
+      .user-picture.initials {
+        color: white;
+        border-radius: 100px;
+        background-color: nb-theme(color-primary-500);
+      }
+
+      .user-title {
+        color: #000;
+      }
+    }
+  }
+
+  .layout {
+    .layout-container {
+      .content {
+        .columns {
+          background-color: #edf1f7;
+        }
+      }
+    }
+  }
+
+  nb-layout-footer {
+    nav {
+      background-color: nb-theme(color-info-500) !important;
+    }
+  }
+
+  .question-component-dialog-container {
+    nb-card.question-card {
+      height: calc(100vh - 50px);
+    }
+  }
+  .casestudy-component-dialog-container {
+    .casestudy-content {
+      height: calc(100vh - 50px);
+      max-width: calc(100vw - 100px);
+      background-color: #fff;
+      overflow: scroll;
+    }
+  }
+
+  .case-study-component-dialog-container {
+    nb-card.case-study-card {
+      height: calc(100vh - 50px);
+    }
+  }
+
+  img {
+    height: auto;
+  }
+
+  label {
+    font-weight: bold !important;
+  }
+
+  .menu-items {
+    .menu-item {
+      a {
+        font-weight: 500 !important;
+      }
+    }
+  }
+
+  .nb-trash {
+    color: #b00020 !important;
+  }
+
+  .ck-editor__editable {
+    min-height: 300px;
+    max-height: 500px; /* Set the maximum height after which the scroll will appear */
+    overflow-y: auto; /* Enable vertical scroll when content exceeds the maximum height */
+  }
+
+  nb-popover {
+    max-width: 300px;
+  }
+
+  .nb-theme-material-light {
+    .native-input:disabled ~ .text {
+      color: nb-theme(color-info-500) !important;
+    }
+
+    .paragraph,
+    .ng-star-inserted p span {
+      color: nb-theme(color-info-500) !important;
+      font-family: Poppins, sans-serif !important;
+      background-color: transparent !important;
+    }
+
+    .question-view-dialog-card {
+      .question-title {
+        .paragraph,
+        p {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .nb-theme-material-light .nb-tree-grid-header-cell button {
+    text-transform: capitalize;
+  }
+}

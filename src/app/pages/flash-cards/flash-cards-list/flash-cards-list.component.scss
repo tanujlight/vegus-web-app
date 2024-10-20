@@ -1,0 +1,103 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import '../../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  ::ng-deep .flash-cards-table {
+    .flash-card-table-view {
+      margin-top: 10px;
+    }
+
+    .category-sub-category-card {
+      cursor: pointer;
+    }
+
+    nb-stepper {
+      .header {
+        display: none;
+      }
+
+      nb-flip-card {
+        nb-card {
+          nb-card-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          nb-card-footer {
+            text-align: center;
+            cursor: pointer;
+          }
+        }
+      }
+
+      nb-card-back {
+        nb-card {
+          nb-card-body {
+            .flash-card-description-smaller-view {
+              display: none;
+            }
+
+            @media only screen and (max-width: 575px) {
+              .flash-card-description-bigger-view {
+                display: none;
+              }
+
+              .flash-card-description-smaller-view {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    .breadcrumb{
+      padding: 0;
+      background-color: transparent !important;
+      li{
+        color: nb-theme(color-primary-500) !important;
+        font-weight: normal;
+      }
+    }
+    .breadcrumb-link {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .form-control {
+      color: nb-theme(form-control-color);
+    }
+
+    td.ng2-smart-actions {
+      ng2-st-tbody-custom {
+        display: flex;
+        height: 100%;
+        width: 100%;
+      }
+
+      ng2-st-tbody-edit-delete {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 575px) {
+      #fadeshow1 {
+        display: none;
+      }
+    }
+  }
+}

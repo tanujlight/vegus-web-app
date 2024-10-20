@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-12">
+    <div class="form-group">
+      <label for="optionsCount">Body</label>
+      <textarea rows="6" nbInput [(ngModel)]="question.content" fullWidth placeholder="Write here"></textarea>
+      <p>Please use this syntax to add the fillups b/w the text: [[Cause]] & [[Effect]]</p>
+    </div>
+  </div>
+
+  <div class="col-12 mb-2">
+    <div class="mt-2 mb-2">
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let itemOption of question.allOptions; let i = index"
+          [removable]="true"
+          (removed)="remove(itemOption)"
+        >
+          {{ itemOption }}
+          <nb-icon icon="close-outline" matChipRemove></nb-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <input nbInput class="form-control" placeholder="Write options" (change)="addOption($event)" />
+  </div>
+
+  <div class="col-sm-6"></div>
+  <div class="col-sm-12">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Fillup</th>
+          <th scope="col">Correct Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cause -->
+        <tr>
+          <td>{{ question.cause.label }}</td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.cause.value"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of selectableOptions(question.effect)">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+
+        <!-- Effect -->
+        <tr>
+          <td>{{ question.effect.label }}</td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.effect.value"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of selectableOptions(question.cause)">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

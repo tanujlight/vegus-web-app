@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-12">
+    <h6>{{ caseStudy?.title }}</h6>
+    <nb-stepper #caseStudyStepper orientation="horizontal" class="case-sudy-stepper">
+      <nb-step *ngFor="let question of caseStudy?.questions; let questionIndex = index">
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-tab-group>
+              <mat-tab *ngFor="let tab of getFilteredTabs(question); let tabIndex = index" [label]="tab.title">
+                <ngx-sanatize-html-string [htmlString]="tab.description"></ngx-sanatize-html-string>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+          <div class="col-sm-6">
+            <label>Item {{ questionIndex + 1 }} of {{ caseStudy?.questions.length }}</label>
+            <ngx-tutor-question-view-renderer
+              [question]="question"
+              [isActive]="caseStudyStepper.selectedIndex === questionIndex"
+              [lastCaseStudyQuestion]="caseStudy?.questions[caseStudy?.questions.length - 1]"
+              (submitAnswer)="nextQuestion($event, questionIndex)"
+            ></ngx-tutor-question-view-renderer>
+          </div>
+        </div>
+      </nb-step>
+    </nb-stepper>
+  </div>
+</div>

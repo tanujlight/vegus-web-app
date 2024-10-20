@@ -1,0 +1,16 @@
+<div class="categories-table">
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+
+  <app-smart-table
+    [title]="'Categories'"
+    [tableSettings]="tableSettings"
+    [addButton]="'Category'"
+    [columns]="tableColumns"
+    [dataSource]="null"
+    [isServerSide]="false"
+    [data]="categories"
+    (onCustomAction)="onCustomAction($event)"
+  >
+  </app-smart-table>
+</div>

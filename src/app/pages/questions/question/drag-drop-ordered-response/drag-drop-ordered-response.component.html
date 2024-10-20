@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="optionsCount">No of options</label>
+      <input
+        nbInput
+        type="number"
+        id="optionsCount"
+        fullWidth
+        [(ngModel)]="question.optionsCount"
+        class="form-control"
+        (change)="optionCountChange()"
+        placeholder="No of options"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6"></div>
+
+  <div class="col-sm-12" *ngIf="question.optionsArray && question.optionsArray.length">
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="type">Options</label>
+        <div class="form-group" *ngFor="let item of question.optionsArray; let i = index">
+          <input nbInput fullWidth class="form-control" [(ngModel)]="item.value" />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <label for="type">Sort Order</label>
+        <div class="form-group" *ngFor="let item of question.optionsArray; let i = index">
+          <input type="number" nbInput fullWidth class="form-control" [(ngModel)]="item.sequence" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

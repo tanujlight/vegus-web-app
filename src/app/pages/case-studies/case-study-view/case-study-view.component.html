@@ -1,0 +1,21 @@
+<div class="case-study-view-dialog">
+  <nb-card class="case-study-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <div>
+        <label>Case Study Overview</label>
+        <span *ngIf="caseStudy?.uniqueIdentifier">({{caseStudy?.uniqueIdentifier}})</span>
+      </div>
+      <div>
+        <button type="button" size="small" class="ml-auto" (click)="back()" nbButton>X</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <h6>Max marks: {{ caseStudyMarks }}</h6>
+      <ngx-case-study-view-renderer
+        [userType]="'admin'"
+        [viewMode]="'exam'"
+        [caseStudy]="caseStudy"
+      ></ngx-case-study-view-renderer>
+    </nb-card-body>
+  </nb-card>
+</div>

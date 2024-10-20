@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="optionsCount">Body</label>
+      <textarea rows="6" nbInput [(ngModel)]="question.content" fullWidth placeholder="Write here"></textarea>
+      <p>Please use this syntax to add the fillups b/w the text: [[Cause]], [[Effect_1]], [[Effect_2]]</p>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Fill up</th>
+          <th scope="col">Options</th>
+          <th scope="col">Correct Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cause -->
+        <tr>
+          <td>{{ question.cause.label }}</td>
+          <td>
+            <div class="mt-2 mb-2">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let itemOption of question.cause.options"
+                  [removable]="true"
+                  (removed)="remove(itemOption, 'cause')"
+                >
+                  {{ itemOption }}
+                  <nb-icon icon="close-outline" matChipRemove></nb-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <input nbInput class="form-control" (change)="addOption($event, 'cause')" />
+          </td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.cause.correct"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of question.cause.options">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+
+        <!-- Effect 1 -->
+        <tr>
+          <td>{{ question.effect1.label }}</td>
+          <td>
+            <div class="mt-2 mb-2">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let itemOption of question.effect1.options"
+                  [removable]="true"
+                  (removed)="remove(itemOption, 'effect1')"
+                >
+                  {{ itemOption }}
+                  <nb-icon icon="close-outline" matChipRemove></nb-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <input nbInput class="form-control" (change)="addOption($event, 'effect1')" />
+          </td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.effect1.correct"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of question.effect1.options">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+
+        <!-- Effect 2 -->
+        <tr>
+          <td>{{ question.effect2.label }}</td>
+          <td>
+            <div class="mt-2 mb-2">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let itemOption of question.effect2.options"
+                  [removable]="true"
+                  (removed)="remove(itemOption, 'effect2')"
+                >
+                  {{ itemOption }}
+                  <nb-icon icon="close-outline" matChipRemove></nb-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <input nbInput class="form-control" (change)="addOption($event, 'effect2')" />
+          </td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.effect2.correct"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of question.effect2.options">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="flash-cards-table">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li _ngcontent-ulb-c447="" aria-current="page" class="breadcrumb-item ng-star-inserted"><span _ngcontent-ulb-c447="" ng-reflect-ng-class="breadcrumb-link" class="breadcrumb-link">Flash Cards</span></li>
+      <li
+        *ngFor="let item of breadcrumbs; let i = index"
+        class="breadcrumb-item"
+        aria-current="page"
+        (click)="i !== breadcrumbs.length - 1 && onSelectBreadcrumb(item)"
+      >
+        <span
+          [ngClass]="
+            item === 'Categories' || item === 'Sub Categories'
+              ? 'breadcrumb-link'
+              : item !== 'Flash Cards'
+              ? 'font-weight-bold'
+              : ''
+          "
+          >{{ item }}</span
+        >
+      </li>
+    </ol>
+  </nav>
+
+  <!-- Categories list card view  -->
+  <div *ngIf="!selectedCategory" class="row">
+    <div class="col-12 mb-4">
+      <h6 class="">Select Category</h6>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg-3" *ngFor="let category of categories">
+      <nb-card class="category-sub-category-card" status="primary" (click)="onSelectCategory(category)">
+        <nb-card-header>{{ category.name }}</nb-card-header>
+        <nb-card-body>
+          <span *ngIf="category.description">{{ category.description }} &nbsp</span>
+          <span>Sub Categories: {{ category.subCategories.length }}</span>
+        </nb-card-body>
+        <!-- <nb-card-footer>By Wikipedia</nb-card-footer> -->
+      </nb-card>
+    </div>
+  </div>
+
+  <div *ngIf="selectedCategory && !selectedSubCategory" class="row">
+    <div class="col-12 mb-4">
+      <h6 class="">Select Sub Category</h6>
+    </div>
+    <div class="col-6 col-sm-4 col-md-4 col-lg-3" *ngFor="let subCategory of selectedCategory.subCategories">
+      <nb-card class="category-sub-category-card" status="info" (click)="onSelectSubCategory(subCategory)">
+        <nb-card-header>{{ subCategory.name }}</nb-card-header>
+        <nb-card-body>
+          {{ subCategory.description || '--' }}
+        </nb-card-body>
+        <!-- <nb-card-footer>By Wikipedia</nb-card-footer> -->
+      </nb-card>
+    </div>
+  </div>
+
+  <div *ngIf="selectedCategory && selectedSubCategory">
+    <!-- Add new Flash card button: display only to admin -->
+    <div *ngIf="user?.role === 'admin' || user?.role === 'Admin'" class="row">
+      <div class="col-12">
+        <button nbButton matRipple [status]="'primary'" (click)="openAddFlashCardDialog()">Add Flash Card</button>&nbsp;
+        <button nbButton matRipple [status]="'info'" (click)="switchView()">
+          {{ isTableView ? 'Switch to Cards View' : 'Switch to Table View' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Stepper View -->
+    <nb-stepper *ngIf="!isTableView" orientation="horizontal">
+      <nb-step *ngIf="flashCards.length === 0">
+        <nb-card [size]="flashCardSize">
+          <nb-card-header>{{ selectedCategory.name }} ({{ selectedSubCategory.name }})</nb-card-header>
+          <nb-card-body>
+            <h5 class="text-center mb-0">No Flash Cards</h5>
+          </nb-card-body>
+        </nb-card>
+      </nb-step>
+
+      <nb-step *ngFor="let flashCard of flashCards; let flashCardIndex = index">
+        <div>
+          <nb-flip-card [showToggleButton]="false" [flipped]="flashCard.flipped">
+            <nb-card-front>
+              <nb-card [size]="flashCardSize">
+                <nb-card-header>
+                  <div class="d-flex justify-content-between">
+                    <div>{{ selectedCategory.name }} ({{ selectedSubCategory.name }})<span *ngIf="flashCard.uniqueIdentifier">({{flashCard.uniqueIdentifier}})</span></div>
+                    <div *ngIf="user?.role === 'admin' || user?.role === 'Admin'" class="d-flex">
+                      <nb-icon
+                        (click)="openEditFlashCardDialog(flashCard.id)"
+                        role="button"
+                        class="mr-3"
+                        icon="edit-2-outline"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Edit"
+                      ></nb-icon>
+                      <nb-icon
+                        (click)="onDeleteConfirm(flashCard)"
+                        status="danger"
+                        role="button"
+                        icon="trash-2-outline"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Delete"
+                      ></nb-icon>
+                    </div>
+                  </div>
+                </nb-card-header>
+                <nb-card-body>
+                  <div class="d-flex justify-content-center align-items-center h-100">
+                    <h2 class="text-center mb-0">{{ flashCard.title }}</h2>
+                  </div>
+                </nb-card-body>
+                <nb-card-footer (click)="flashCard.flipped = true">
+                  <div class="d-flex justify-content-between">
+                    <span>View Details</span>
+                    <span>{{ flashCardIndex + 1 }} / {{ flashCards.length }}</span>
+                  </div>
+                </nb-card-footer>
+              </nb-card>
+            </nb-card-front>
+            <nb-card-back>
+              <nb-card [size]="flashCardSize">
+                <nb-card-header>{{ flashCard.title }}</nb-card-header>
+                <nb-card-body>
+                  <div class="row h-100 flash-card-description-bigger-view">
+                    <div class="col-6 h-100 overflow-auto">
+                      <ngx-sanatize-html-string [htmlString]="flashCard.description"></ngx-sanatize-html-string>
+                    </div>
+                    <div class="col-6 h-100 overflow-auto">
+                      <ngx-sanatize-html-string
+                        [htmlString]="flashCard.importantDescription"
+                      ></ngx-sanatize-html-string>
+                    </div>
+                  </div>
+                  <div class="row h-100 flash-card-description-smaller-view">
+                    <nb-accordion>
+                      <nb-accordion-item>
+                        <nb-accordion-item-header>Description </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                          <ngx-sanatize-html-string [htmlString]="flashCard.description"></ngx-sanatize-html-string>
+                        </nb-accordion-item-body>
+                      </nb-accordion-item>
+
+                      <nb-accordion-item>
+                        <nb-accordion-item-header>Important Description </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                          <ngx-sanatize-html-string
+                            [htmlString]="flashCard.importantDescription"
+                          ></ngx-sanatize-html-string>
+                        </nb-accordion-item-body>
+                      </nb-accordion-item>
+                    </nb-accordion>
+                  </div>
+                </nb-card-body>
+                <nb-card-footer (click)="flashCard.flipped = false">
+                  <div class="d-flex justify-content-between">
+                    <span>Hide Details</span>
+                    <span>{{ flashCardIndex + 1 }} / {{ flashCards.length }}</span>
+                  </div>
+                </nb-card-footer>
+              </nb-card>
+            </nb-card-back>
+          </nb-flip-card>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button [disabled]="flashCardIndex == 0" status="primary" nbButton nbStepperPrevious>
+            <nb-icon icon="arrow-ios-back-outline"></nb-icon></button
+          >&nbsp;
+          <button [disabled]="flashCardIndex == flashCards.length - 1" status="primary" nbButton nbStepperNext>
+            <nb-icon icon="arrow-ios-forward-outline"></nb-icon>
+          </button>
+        </div>
+      </nb-step>
+    </nb-stepper>
+
+    <!-- Table View only for admin -->
+    <div *ngIf="isTableView" class="flash-card-table-view">
+      <app-smart-table
+        [tableSettings]="tableSettings"
+        [columns]="tableColumns"
+        [data]="flashCards"
+        (onCustomAction)="onCustomAction($event)"
+      >
+      </app-smart-table>
+    </div>
+  </div>
+</div>

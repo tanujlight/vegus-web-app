@@ -1,0 +1,24 @@
+<div class="category-accordian-view mb-2" *ngFor="let categoryItem of categories">
+  <nb-accordion>
+    <nb-accordion-item [expanded]="categoryItem.expanded">
+      <nb-accordion-item-header>
+        <span>{{ categoryItem?.name }}</span>
+        <div class="category-video-count">
+          <nb-icon icon="film-outline"></nb-icon>{{ categoryItem?.count || 0 }} {{ type }}
+        </div>
+      </nb-accordion-item-header>
+      <nb-accordion-item-body>
+        <div
+          class="sub-item"
+          *ngFor="let subCategoryItem of categoryItem.subcategories"
+          (click)="itemClicked(categoryItem, subCategoryItem)"
+        >
+          <span>{{ subCategoryItem.name }}</span>
+          <div class="subcategory-video-count">
+            <nb-icon icon="film-outline"></nb-icon>{{ subCategoryItem?.count || 0 }} {{ type }}
+          </div>
+        </div>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+  </nb-accordion>
+</div>

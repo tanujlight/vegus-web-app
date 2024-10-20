@@ -1,0 +1,45 @@
+<div>
+  <nb-card>
+    <nb-card-header>
+      <span> Exams </span>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div *ngIf="!exams || exams.length === 0" class="col-12">
+          <h6 class="text-center">No exams is Scheduled</h6>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12" *ngFor="let examItem of exams">
+          <nb-card>
+            <nb-card-header class="text-center">
+              <span> {{ examItem.title }} </span>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-12">
+                  <p>STARTED ON: {{ examItem.startDate | date : 'medium' }}</p>
+                </div>
+                <div class="col-12">
+                  <p>END ON: {{ examItem.endDate | date : 'medium' }}</p>
+                </div>
+                <div class="col-12">
+                  <p>Total Marks: {{ examItem.totalMarks }}</p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <span *ngIf="examItem.type == 'time-based'">Time Limit: {{ examItem.timeLimit }} min(s)</span>
+                    <span *ngIf="examItem.type == 'tutorial'">No Time Limit</span>
+                  </p>
+                </div>
+                <div class="col-12 text-right">
+                  <button nbButton status="primary" [disabled]="examItem.disabled" (click)="takeExam(examItem)" hero>
+                    Take Exam
+                  </button>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

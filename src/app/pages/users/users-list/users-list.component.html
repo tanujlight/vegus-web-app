@@ -1,0 +1,15 @@
+<div class="users-table">
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+
+  <app-smart-table
+    [title]="'Users'"
+    [tableSettings]="tableSettings"
+    [addButton]="'User'"
+    [columns]="tableColumns"
+    [dataSource]="dataSource"
+    [isServerSide]="true"
+    (onCustomAction)="onCustomAction($event)"
+  >
+  </app-smart-table>
+</div>

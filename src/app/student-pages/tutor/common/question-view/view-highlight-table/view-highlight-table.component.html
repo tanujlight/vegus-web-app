@@ -1,0 +1,58 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam & Admin When they are viewing on their portal -->
+  <div class="col-12 mt-2 highlighted-question-description">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col" class="col-4">{{ question.heading1 }}</th>
+          <th scope="col" class="col-8">{{ question.heading2 }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let optionArrayItem of question.optionsArray; let optionArrayIndex = index">
+          <td>{{ optionArrayItem.title }}</td>
+          <td>
+            <div class="text-justify">
+              <span class="lh-1-5" *ngFor="let item of optionArrayItem.contentArray; let contentIndex = index">
+                <ng-container *ngIf="item.type === 'fillup'">
+                  <span *ngIf="question?.showAnswer">
+                    <nb-icon *ngIf="item.correct" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+                    <nb-icon
+                      *ngIf="item.userSelectedAnswer && !item.correct"
+                      [status]="'danger'"
+                      [icon]="'close-circle-outline'"
+                    ></nb-icon>
+                  </span>
+                  <span *ngIf="!question?.isAttempted">
+                    <span
+                      class="highlighted"
+                      role="button"
+                      [ngClass]="item.userSelectedAnswer ? 'selected' : ''"
+                      (click)="fillupClicked(optionArrayIndex, item.value, contentIndex)"
+                      >{{ item.value }}</span
+                    >
+                  </span>
+                  <span *ngIf="question?.isAttempted">
+                    <span
+                      class="highlighted"
+                      [ngClass]="item.userSelectedAnswer ? 'selected' : item.correct ? 'highlighted-option' : ''"
+                      >{{ item.value }}1</span
+                    >
+                  </span>
+                </ng-container>
+
+                <ng-container *ngIf="item.type === 'text'">
+                  <span>{{ item.value }}</span>
+                </ng-container>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

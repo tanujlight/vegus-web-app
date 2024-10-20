@@ -1,0 +1,77 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam & Admin When they are viewing on their portal -->
+  <div class="col-12 mt-2">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col" [ngClass]="actionColumnWidth">{{ question?.actionTitle }}</th>
+          <th
+            scope="col"
+            [ngClass]="questionColumnWidth"
+            *ngFor="let headingItem of question.columns; let columnIndex = index"
+          >
+            {{ headingItem?.value }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of question.optionsArray; let i = index">
+          <td>
+            {{ item.value }}
+          </td>
+          <td *ngFor="let optionItem of item.options; let optionIndex = index">
+            <div class="row">
+              <div *ngIf="userType === 'student' && viewMode === 'report'" class="col-2">
+                <nb-icon
+                  *ngIf="optionItem.isCorrect"
+                  [status]="'success'"
+                  [icon]="'checkmark-circle-2-outline'"
+                ></nb-icon>
+                <nb-icon
+                  *ngIf="optionItem.userSelectedAnswer && !optionItem.isCorrect"
+                  [status]="'danger'"
+                  [icon]="'close-circle-outline'"
+                ></nb-icon>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <!-- When student is taking the exam & admin is seeing this with hide answer -->
+                  <nb-checkbox
+                    *ngIf="(userType === 'student' && viewMode == 'exam') || (userType === 'admin' && !showAnswer)"
+                    [(ngModel)]="optionItem.userSelectedAnswer"
+                  ></nb-checkbox>
+
+                  <!-- When student is seeing this in the report section -->
+                  <nb-checkbox
+                    *ngIf="userType === 'student' && viewMode === 'report'"
+                    disabled
+                    [(ngModel)]="optionItem.userSelectedAnswer"
+                  ></nb-checkbox>
+
+                  <!-- When admin is seeing with show answer -->
+                  <nb-checkbox
+                    disabled
+                    *ngIf="userType === 'admin' && showAnswer"
+                    [value]="optionItem.isCorrect"
+                  ></nb-checkbox>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

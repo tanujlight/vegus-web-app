@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12 highlighted-question-description text-justify">
+    <span class="lh-1-5" *ngFor="let item of content; let contentIndex = index">
+      <ng-container *ngIf="item.type === 'fillup'">
+        <span *ngIf="userType === 'student' && viewMode === 'report'">
+          <nb-icon *ngIf="item.correct" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+          <nb-icon
+            *ngIf="item.userSelectedAnswer && !item.correct"
+            [status]="'danger'"
+            [icon]="'close-circle-outline'"
+          ></nb-icon>
+        </span>
+        <span *ngIf="!((userType === 'student' && viewMode === 'report') || (userType === 'admin' && showAnswer))">
+          <span
+            class="highlighted"
+            role="button"
+            [ngClass]="item.userSelectedAnswer ? 'selected' : ''"
+            (click)="fillupClicked(item.value, contentIndex)"
+          >
+            {{ item.value }}
+          </span>
+        </span>
+        <span *ngIf="userType === 'admin' && showAnswer">
+          <span class="highlighted" [ngClass]="item.correct ? 'selected' : ''">{{ item.value }}</span>
+        </span>
+        <span *ngIf="userType === 'student' && viewMode === 'report'">
+          <span
+            class="highlighted"
+            [ngClass]="item.userSelectedAnswer ? 'selected' : item.correct ? 'highlighted-option' : ''"
+            >{{ item.value }}1</span
+          >
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'text'">
+        <span>{{ item.value }}</span>
+      </ng-container>
+    </span>
+  </div>
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>

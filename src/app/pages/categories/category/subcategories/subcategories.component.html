@@ -1,0 +1,12 @@
+<div>
+  <app-smart-table
+    [title]="'Sub Categories'"
+    [tableSettings]="tableSettings"
+    [columns]="tableColumns"
+    [data]="subCategories"
+    (removeEvent)="removeSubcategory($event)"
+    (updateEvent)="updateSubcategory($event)"
+    (createEvent)="addSubCategory($event)"
+  >
+  </app-smart-table>
+</div>

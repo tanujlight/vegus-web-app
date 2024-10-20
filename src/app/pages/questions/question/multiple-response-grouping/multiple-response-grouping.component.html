@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="rowsCount">No of rows</label>
+      <input
+        nbInput
+        type="number"
+        id="rowsCount"
+        fullWidth
+        [(ngModel)]="question.rowsCount"
+        class="form-control"
+        (change)="rowsCountChange()"
+        placeholder="No of rows"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="columnsCount">No of options in a row</label>
+      <input
+        nbInput
+        type="number"
+        id="columnsCount"
+        fullWidth
+        [(ngModel)]="question.columnsCount"
+        class="form-control"
+        (change)="rowsCountChange()"
+        placeholder="No of options in a row"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6"></div>
+
+  <div class="col-sm-12" *ngIf="question.optionsArray && question.optionsArray.length">
+    <table class="table table-bordered table-sm multiple-response-grouping-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            <input nbInput fullWidth class="form-control" placeholder="Heading" [(ngModel)]="question.heading1" />
+          </th>
+          <th scope="col">
+            <input nbInput fullWidth class="form-control" placeholder="Heading" [(ngModel)]="question.heading2" />
+          </th>
+          <th scope="col">Answer (selected)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of question.optionsArray; let i = index">
+          <td>
+            <textarea nbInput [(ngModel)]="item.value" fullWidth></textarea>
+          </td>
+          <td>
+            <div class="form-group" *ngFor="let optionItem of item.options; let optionIndex = index">
+              <input nbInput class="form-control" [(ngModel)]="optionItem.value" />
+            </div>
+          </td>
+          <td>
+            <nb-select fullWidth multiple placeholder="Select Multiple answers" [(ngModel)]="item.correct">
+              <nb-option [value]="item.value" *ngFor="let item of item.options">{{ item.value }}</nb-option>
+            </nb-select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

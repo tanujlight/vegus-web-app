@@ -1,0 +1,45 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam -->
+  <div *ngIf="!question?.showAnswer" lass="col-6">
+    <div class="form-group">
+      <label for="fillInTheBlankAnswer">Answer</label>
+      <input
+        [disabled]="question.isAttempted"
+        nbInput
+        fullWidth
+        [(ngModel)]="userSelectedAnswer"
+        class="form-control"
+      />
+    </div>
+  </div>
+
+  <!-- Question view for student when they are checking the report -->
+  <div *ngIf="question?.showAnswer" class="col-12">
+    <div class="d-flex align-items-center">
+      <div class="mr-2">
+        <nb-icon
+          [status]="question.userSelectedAnswer === question.fillInTheBlankAnswer ? 'success' : 'danger'"
+          [icon]="
+            question.userSelectedAnswer === question.fillInTheBlankAnswer
+              ? 'checkmark-circle-2-outline'
+              : 'close-circle-outline'
+          "
+        ></nb-icon>
+      </div>
+
+      <div class="form-group mr-2">
+        <label for="fillInTheBlankAnswer">Your Answer</label>
+        <input disabled nbInput fullWidth [(ngModel)]="question.userSelectedAnswer" class="form-control" />
+      </div>
+
+      <div *ngIf="question.userSelectedAnswer !== question.fillInTheBlankAnswer" class="form-group">
+        <label for="fillInTheBlankAnswer">Correct Answer</label>
+        <input disabled nbInput fullWidth [(ngModel)]="question.fillInTheBlankAnswer" class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

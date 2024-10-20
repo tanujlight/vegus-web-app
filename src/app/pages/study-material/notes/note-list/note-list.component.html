@@ -1,0 +1,77 @@
+<div class="note-list-page">
+  <nb-card>
+    <nb-card-header class="d-flex justify-content-between align-items-center">
+      <h5>Study Guides</h5>
+      <button
+        nbButton
+        matRipple
+        [status]="'primary'"
+        (click)="onCustomAction({action: 'add'})"
+        *ngIf="user?.role === 'admin' || user?.role === 'Admin'"
+      >
+        New Note
+      </button>
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="!showList">
+        <category-accordian-view
+          [type]="'Guides'"
+          (submitItems)="itemClicked($event)"
+          [openAccordianCategoryId]="openAccordianCategoryId"
+        ></category-accordian-view>
+      </div>
+      <div class="mb-2" *ngIf="showList">
+        <div>
+          <category-subcategory-breadcrumbs
+            [category]="category"
+            [subCategory]="subCategory"
+            (onSelectBreadcrumb)="onSelectBreadcrumb($event)"
+          ></category-subcategory-breadcrumbs>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-6 col-sm-4 col-md-4 col-lg-3" *ngFor="let item of notes">
+              <nb-card class="guide-card-item" status="info">
+                <nb-card-body (click)="onCustomAction({action: 'view', data: item})">
+                  <div class="pdf-thumbnail">
+                    <img [src]="item.thumbnailUrl ? item.thumbnailUrl : 'assets/images/notes-icon.jpg'" />
+                  </div>
+                  <div>
+                    <h6 class="unique-identifier">{{ item.uniqueIdentifier }}</h6>
+                  </div>
+                  <div class="details">
+                    <h6>{{ item.title }}</h6>
+                    <!-- <p class="desc">{{ item.instructions }}</p> -->
+                  </div>
+                </nb-card-body>
+                <nb-card-footer padding="" *ngIf="user?.role === 'admin' || user?.role === 'Admin'">
+                  <button
+                    outline
+                    size="tiny"
+                    nbButton
+                    (click)="onCustomAction({action: 'edit', data: item})"
+                    status="secondary"
+                  >
+                    Edit</button
+                  >&nbsp;
+                  <button
+                    outline
+                    size="tiny"
+                    nbButton
+                    (click)="onCustomAction({action: 'delete', data: item})"
+                    status="danger"
+                  >
+                    Delete
+                  </button>
+                </nb-card-footer>
+              </nb-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+</div>

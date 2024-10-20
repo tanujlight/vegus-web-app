@@ -1,0 +1,49 @@
+.create-test-page {
+  nb-checkbox {
+    flex: 0 0 calc(50% - 10px);
+    margin: 3px 5px;
+  }
+
+  .custom-hr {
+    width: 100%;
+  }
+
+  .category-selectAll {
+    margin-left: 15px;
+  }
+
+  .question-type-box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .question-mode-box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  nb-badge {
+    position: relative;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .muted-text {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px;
+    margin-left: 10px;
+  }
+
+  nb-icon {
+    cursor: pointer;
+  }
+
+  .question-count {
+    max-width: 70px;
+  }
+
+  nb-accordion-item-header {
+    padding: 8px 15px 3px;
+  }
+}

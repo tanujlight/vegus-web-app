@@ -1,0 +1,9 @@
+.breadcrumb-item {
+  .breadcrumb-link {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

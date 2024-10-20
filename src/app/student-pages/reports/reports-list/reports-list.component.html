@@ -1,0 +1,13 @@
+<div class="reports-table">
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+
+  <app-smart-table
+    [title]="'Reports'"
+    [tableSettings]="tableSettings"
+    [columns]="tableColumns"
+    [data]="reports"
+    (onCustomAction)="onCustomAction($event)"
+  >
+  </app-smart-table>
+</div>

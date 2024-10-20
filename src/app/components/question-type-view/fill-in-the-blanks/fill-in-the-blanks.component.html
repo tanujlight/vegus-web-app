@@ -1,0 +1,63 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam -->
+  <div *ngIf="userType == 'student' && viewMode == 'exam'" class="col-6">
+    <div class="form-group">
+      <label for="fillInTheBlankAnswer">Answer</label>
+      <input nbInput fullWidth [(ngModel)]="userSelectedAnswer" class="form-control" />
+    </div>
+  </div>
+
+  <!-- Question view for student when they are checking the report -->
+  <div *ngIf="userType == 'student' && viewMode == 'report'" class="col-12">
+    <div class="d-flex align-items-center">
+      <div class="mr-2">
+        <nb-icon
+          [status]="question.userSelectedAnswer === question.fillInTheBlankAnswer ? 'success' : 'danger'"
+          [icon]="
+            question.userSelectedAnswer === question.fillInTheBlankAnswer
+              ? 'checkmark-circle-2-outline'
+              : 'close-circle-outline'
+          "
+        ></nb-icon>
+      </div>
+
+      <div class="form-group mr-2">
+        <label for="fillInTheBlankAnswer">Your Answer</label>
+        <input disabled nbInput fullWidth [(ngModel)]="question.userSelectedAnswer" class="form-control" />
+      </div>
+
+      <div *ngIf="question.userSelectedAnswer !== question.fillInTheBlankAnswer" class="form-group">
+        <label for="fillInTheBlankAnswer">Correct Answer</label>
+        <input disabled nbInput fullWidth [(ngModel)]="question.fillInTheBlankAnswer" class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Question view for admin when they are viewing it on their portal -->
+  <div *ngIf="userType == 'admin'" class="col-6">
+    <div class="form-group">
+      <label for="fillInTheBlankAnswer">Answer</label>
+      <input *ngIf="!showAnswer" nbInput fullWidth [(ngModel)]="userSelectedAnswer" class="form-control" />
+      <input
+        *ngIf="showAnswer"
+        disabled
+        nbInput
+        fullWidth
+        [(ngModel)]="question.fillInTheBlankAnswer"
+        class="form-control"
+      />
+    </div>
+  </div>
+
+  <div class="col-12 mt-2">
+    <button status="primary" nbButton (click)="submit()">
+      {{ userType == 'student' && viewMode == 'exam' ? 'Submit' : 'Next' }}
+    </button>
+    &nbsp;
+
+    <button *ngIf="userType === 'admin'" nbButton outline status="primary" (click)="toggleViewAnswer()">
+      <span *ngIf="!showAnswer">View Answer</span>
+      <span *ngIf="showAnswer">Hide Answer</span>
+    </button>
+  </div>
+</div>
