@@ -26,4 +26,17 @@
   .table {
     color: nb-theme(text-basic-color) !important;
   }
+
+  // body
+  .layout .layout-container .content .columns{
+    background-color: #F5F7FA;
+  }
+  .nb-theme-material-light [_nghost-dol-c310] nb-layout-header[_ngcontent-dol-c310]{
+    background-color: #fff;
+  }
+  .nb-theme-material-light nb-layout-header nav{
+    box-shadow: none;
+    border-bottom: 1px solid #E5E5E5;
+  }
+  
 }

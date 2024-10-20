@@ -1,19 +1,45 @@
 <div class="student-dashboard-page">
-  <nb-card>
-    <nb-card-header>Welcome!</nb-card-header>
-
-    <nb-card-body class="dashboard-page-content">
-      <button nbButton size="giant" status="primary" (click)="routeTo('student-pages/exams/list')">
-        <nb-icon icon="book-outline"></nb-icon> &nbsp; <span>Scheduled Exams</span>
+  <div class="banner-container">
+    <div class="flex-box">
+      <div class="col box-1">
+        <h2 class="sub-heading">
+          - Welcom TO vegus
+        </h2>
+        <h1 class="title">
+          Join the Thousands Who Trust Our Expert Instructors
+        </h1>
+        <button class="cta-btn">Browse Courses</button>
+      </div>
+      <div class="col box-2">
+        <img src="/assets/images/girl.png" alt="" width="100%">
+      </div>
+    </div>
+  </div>
+  <div class="section-container">
+    <h2 class="title">Quick Action</h2>
+    <div class="flex-box">
+      <button class="big-card-btn bg-ac-2" (click)="routeTo('student-pages/exams/list')">
+        <nb-icon icon="book"></nb-icon><br>
+        <div class="flex-label">
+          <div class="title">Scheduled Exams</div>
+          <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
+        </div>
       </button>
-
-      <button nbButton size="giant" status="info" (click)="routeTo('student-pages/reports/list')">
-        <nb-icon icon="file-text-outline"></nb-icon> &nbsp; <span>Exam Reports</span>
+      <button class="big-card-btn bg-ac-1" (click)="routeTo('student-pages/reports/list')">
+        <nb-icon icon="file-text-outline"></nb-icon><br>
+        <div class="flex-label">
+          <div class="title">Exam Reports</div>
+          <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
+        </div>
       </button>
-
-      <button nbButton size="giant" status="primary" (click)="routeTo('student-pages/flash-cards/list')">
-        <nb-icon icon="flash-outline"></nb-icon> &nbsp; <span>Flash Cards</span>
+      <button class="big-card-btn bg-ac-3" (click)="routeTo('student-pages/flash-cards/list')">
+        <nb-icon icon="flash-outline"></nb-icon><br>
+        <div class="flex-label">
+          <div class="title">Flash Cards</div>
+          <nb-icon icon="flash-outline"></nb-icon>
+        </div>
       </button>
-    </nb-card-body>
-  </nb-card>
+    </div>
+  </div>
+
 </div>
