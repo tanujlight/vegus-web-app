@@ -17,7 +17,8 @@ import {Router} from '@angular/router'
   selector: 'ngx-student-pages',
   styleUrls: ['student-pages.component.scss'],
   template: `
-    <div class="no-print" (copy)="onCopy($event)" (contextmenu)="onContextMenu($event)">
+    <!-- <div class="no-print" (copy)="onCopy($event)" (contextmenu)="onContextMenu($event)"> -->
+    <div class="no-print" (copy)="onCopy($event)">
       <ngx-one-column-layout>
         <nb-menu [items]="menu"></nb-menu>
         <router-outlet></router-outlet>
