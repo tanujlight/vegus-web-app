@@ -44,10 +44,12 @@
     .user-container {
       .user-picture.initials {
         color: white;
+        border-radius: 100px;
+        background-color: nb-theme(color-primary-500);
       }
 
       .user-title {
-        color: #fff;
+        color: #000;
       }
     }
   }
