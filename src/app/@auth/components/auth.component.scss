@@ -15,7 +15,7 @@
   }
 
   .auth-container {
-    background-image: #fff;
+    background-image: url('/assets/images/auth-bg.jpg');
 
     position: fixed;
     left: 0;
@@ -31,9 +31,6 @@
     nb-card {
       max-width: 600px;
       width: 96%;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 4px 10px 15px -3px #0087bd1c;
 
       nb-card-header {
         background-color: #fff;

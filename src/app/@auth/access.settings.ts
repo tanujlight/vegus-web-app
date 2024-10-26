@@ -11,6 +11,11 @@ export const authSettings = {
     view: ['current-user'],
     edit: ['current-user']
   },
+  subscriber: {
+    parent: 'guest',
+    view: ['current-user'],
+    edit: ['current-user']
+  },
   admin: {
     parent: 'user',
     view: ['current-user', 'users'],

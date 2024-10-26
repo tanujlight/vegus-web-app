@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {NbToastrService} from '@nebular/theme'
-import {MultipleChoiceQuestion} from 'app/pages/questions/questions.interface'
+import {MultipleChoiceQuestion} from 'app/admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-view-multiple-choice',

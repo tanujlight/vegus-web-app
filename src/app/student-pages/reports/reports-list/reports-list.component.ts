@@ -41,8 +41,7 @@ export class ReportsListComponent implements OnInit {
       uniqueIdentifier: {
         title: 'ID',
         type: 'string',
-        editable: false,
-        hidden: true
+        editable: false
       },
       examTitle: {
         title: 'Exam title',
@@ -81,7 +80,7 @@ export class ReportsListComponent implements OnInit {
   onCustomAction(event): void {
     switch (event.action) {
       case 'view':
-        this.routeTo(`student-pages/reports/view/${event.data.id}`)
+        this.routeTo(`student/reports/view/${event.data.id}`)
         break
 
       default:

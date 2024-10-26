@@ -6,7 +6,7 @@
 
 import {RouterModule, Routes} from '@angular/router'
 import {NgModule} from '@angular/core'
-
+import {RoleGuard} from '../@auth/role.guard'
 import {StudentPagesComponent} from './student-pages.component'
 import {NotFoundComponent} from './miscellaneous/not-found/not-found.component'
 import {DashboardComponent} from './dashboard/dashboard.component'
@@ -22,23 +22,34 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        loadChildren: () => import('../pages/users/users.module').then(m => m.UsersModule)
+        loadChildren: () => import('../admin-pages/users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: 'subscription',
+        canActivate: [RoleGuard],
+        data: {roles: ['subscriber']},
+        loadChildren: () => import('./subscription/subscription.module').then(m => m.SubscriptionModule)
       },
       {
         path: 'exams',
+        canActivate: [RoleGuard],
+        data: {roles: ['user']},
         loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)
       },
       {
         path: 'reports',
+        canActivate: [RoleGuard],
+        data: {roles: ['user']},
         loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)
       },
       {
         path: 'flash-cards',
-        loadChildren: () => import('../pages/flash-cards/flash-cards.module').then(m => m.FlashCardsModule)
+        loadChildren: () => import('../admin-pages/flash-cards/flash-cards.module').then(m => m.FlashCardsModule)
       },
       {
         path: 'study-material',
-        loadChildren: () => import('../pages/study-material/study-material.module').then(m => m.StudyMaterialModule)
+        loadChildren: () =>
+          import('../admin-pages/study-material/study-material.module').then(m => m.StudyMaterialModule)
       },
       {
         path: 'tutor',
@@ -46,7 +57,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'exams/list',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       },
       {

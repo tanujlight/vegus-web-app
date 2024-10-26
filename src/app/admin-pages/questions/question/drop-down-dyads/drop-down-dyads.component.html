@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="optionsCount">Body</label>
+      <textarea rows="6" nbInput [(ngModel)]="question.content" fullWidth placeholder="Write here"></textarea>
+      <p>Please use this syntax to add the fillups b/w the text: [[Cause]], [[Effect]]</p>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Fillup</th>
+          <th scope="col">Options</th>
+          <th scope="col">Correct Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Cause -->
+        <tr>
+          <td>{{ question.cause.label }}</td>
+          <td>
+            <div class="mt-2 mb-2">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let itemOption of question.cause.options"
+                  [removable]="true"
+                  (removed)="remove(itemOption, 'cause')"
+                >
+                  {{ itemOption }}
+                  <nb-icon icon="close-outline" matChipRemove></nb-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <input nbInput class="form-control" (change)="addOption($event, 'cause')" />
+          </td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.cause.correct"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of question.cause.options">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+
+        <!-- Effect -->
+        <tr>
+          <td>{{ question.effect.label }}</td>
+          <td>
+            <div class="mt-2 mb-2">
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let itemOption of question.effect.options"
+                  [removable]="true"
+                  (removed)="remove(itemOption, 'effect')"
+                >
+                  {{ itemOption }}
+                  <nb-icon icon="close-outline" matChipRemove></nb-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <input nbInput class="form-control" (change)="addOption($event, 'effect')" />
+          </td>
+          <td>
+            <select
+              nbSelect
+              id="correct"
+              fullWidth
+              [(ngModel)]="question.effect.correct"
+              class="form-control"
+              placeholder="Select answer"
+            >
+              <option value="">Select answer</option>
+              <option [value]="item" *ngFor="let item of question.effect.options">{{ item }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

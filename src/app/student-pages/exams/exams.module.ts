@@ -18,8 +18,8 @@ import {
   NbDatepickerModule,
   NbPopoverModule
 } from '@nebular/theme'
-import {QuestionsModule} from '../../pages/questions/questions.module'
-import {CaseStudiesModule} from '../../pages/case-studies/case-studies.module'
+import {QuestionsModule} from '../../admin-pages/questions/questions.module'
+import {CaseStudiesModule} from '../../admin-pages/case-studies/case-studies.module'
 import {CalculatorModule} from '../../components/calculator/calculator.module'
 import {QuestionTypeViewModule} from 'app/components/question-type-view/question-type-view.module'
 

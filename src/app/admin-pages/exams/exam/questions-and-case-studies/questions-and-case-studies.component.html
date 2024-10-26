@@ -1,0 +1,96 @@
+<div class="questions-and-case-studies">
+  <nb-card>
+    <nb-card-header>
+      <div class="buttons row">
+        <div class="p-1">
+          <button [size]="'small'" nbButton matRipple [status]="'primary'" (click)="addNewQuestion()">
+            Add new question
+          </button>
+        </div>
+        <div class="p-1">
+          <button
+            [size]="'small'"
+            nbButton
+            matRipple
+            [status]="'info'"
+            (click)="openAddQuestionAndCaseStudyDialog('question')"
+          >
+            Select questions from bank
+          </button>
+        </div>
+        <!-- <div class="p-1">
+          <button nbButton matRipple [status]="'info'" (click)="addNewCaseStudy()">Add new case study</button>
+        </div> -->
+        <div class="p-1">
+          <button
+            [size]="'small'"
+            nbButton
+            matRipple
+            [status]="'primary'"
+            (click)="openAddQuestionAndCaseStudyDialog('caseStudy')"
+          >
+            Select case studies from bank
+          </button>
+        </div>
+      </div>
+    </nb-card-header>
+
+    <nb-card-body>
+      <nb-card *ngFor="let item of questionsAndCaseStudies; let itemIndex = index">
+        <nb-card-header id="item-{{ itemIndex }}">
+          <div class="d-flex justify-content-between">
+            <div>
+              <span>No: {{ itemIndex + 1 }} (Type: {{ item.type }})</span>
+              &nbsp;
+              <button [size]="'small'" nbButton matRipple (click)="redirectToQuestionOrCaseStudyEditPage(item)">
+                Go to {{ item.type }}
+              </button>
+            </div>
+
+            <div>
+              <nb-icon
+                (click)="onDeleteConfirm(item)"
+                status="danger"
+                role="button"
+                icon="trash-2-outline"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Remove"
+              ></nb-icon>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <!-- Renders Case study -->
+          <ngx-case-study-view-renderer
+            *ngIf="item.type == 'caseStudy'"
+            [caseStudy]="item.caseStudy"
+            [userType]="'admin'"
+            [viewMode]="'exam'"
+            (submitAnswer)="scrollToQuestionCaseStudiesContainer(itemIndex)"
+          ></ngx-case-study-view-renderer>
+
+          <!-- Renders Question -->
+          <ngx-question-view-renderer
+            *ngIf="item.type == 'question'"
+            [question]="item.question"
+            [userType]="'admin'"
+            [viewMode]="'exam'"
+            (submitAnswer)="scrollToQuestionCaseStudiesContainer(itemIndex)"
+          ></ngx-question-view-renderer>
+        </nb-card-body>
+      </nb-card>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- <h6>Total Exam Marks: {{ totalMarks }}</h6> -->
+  <!-- <app-smart-table
+    [title]="'Questions and Case Studies (' + questionsAndCaseStudies.length + ')'"
+    [tableSettings]="tableSettings"
+    [columns]="tableColumns"
+    [addButton]="'Question or Case Study'"
+    [data]="questionsAndCaseStudies"
+    (onCustomAction)="onCustomAction($event)"
+  >
+  </app-smart-table> -->
+</div>

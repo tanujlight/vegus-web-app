@@ -1,0 +1,19 @@
+::ng-deep {
+  .row-item {
+    margin-bottom: 10px;
+
+    .label {
+      width: 100%;
+
+      .text {
+        display: flex;
+        width: -webkit-fill-available;
+
+        .nb-trash {
+          font-size: 30px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

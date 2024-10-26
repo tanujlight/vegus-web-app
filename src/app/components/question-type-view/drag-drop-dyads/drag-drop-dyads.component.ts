@@ -2,7 +2,7 @@ import {CdkDragDrop, transferArrayItem, moveItemInArray} from '@angular/cdk/drag
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {NbToastrService} from '@nebular/theme'
 import {FILLUP_PATTERN} from '../constants'
-import {DragDropDyadsQuestion} from '../../../pages/questions/questions.interface'
+import {DragDropDyadsQuestion} from '../../../admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-view-drag-drop-dyads',

@@ -10,7 +10,7 @@ import {Observable, of} from 'rxjs'
 import {HttpService} from '../../@core/backend/common/api/http.service'
 import {map} from 'rxjs/operators'
 import {DataSource} from 'ng2-smart-table/lib/lib/data-source/data-source'
-import {Category} from 'app/pages/categories/categories.interface'
+import {Category} from 'app/admin-pages/categories/categories.interface'
 import {CategoriesStore} from 'app/@core/stores/categories.store'
 
 @Injectable()

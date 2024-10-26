@@ -17,8 +17,8 @@ import {
 } from '@nebular/theme'
 
 import {PipesModule} from '../../pipes/pipes.module'
-import {QuestionsModule} from '../../pages/questions/questions.module'
-import {CaseStudiesModule} from '../../pages/case-studies/case-studies.module'
+import {QuestionsModule} from '../../admin-pages/questions/questions.module'
+import {CaseStudiesModule} from '../../admin-pages/case-studies/case-studies.module'
 import {QuestionTypeViewModule} from 'app/components/question-type-view/question-type-view.module'
 
 import {ReportsRoutingModule, routedComponents} from './reports-routing.module'

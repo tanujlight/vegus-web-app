@@ -7,7 +7,7 @@
 import {Injectable} from '@angular/core'
 import {BehaviorSubject} from 'rxjs'
 import {share} from 'rxjs/operators'
-import {Category} from '../../pages/categories/categories.interface'
+import {Category} from '../../admin-pages/categories/categories.interface'
 
 @Injectable({
   providedIn: 'root'

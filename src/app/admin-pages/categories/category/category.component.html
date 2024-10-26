@@ -1,0 +1,67 @@
+<!--
+  ~ Copyright (c) Akveo 2019. All Rights Reserved.
+  ~ Licensed under the Single Application / Multi Application License.
+  ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+  -->
+<div>
+  <nb-card>
+    <nb-card-header>
+      <button type="button" size="small" (click)="back()" nbButton>Back</button>&nbsp;
+      <span> {{ mode }} Category </span>
+      <span *ngIf="categoryForm.value.uniqueIdentifier">({{categoryForm.value.uniqueIdentifier}})</span>
+    </nb-card-header>
+    <nb-card-body>
+      <div [formGroup]="categoryForm" class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <nb-checkbox formControlName="isActive">Active</nb-checkbox>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                nbInput
+                id="name"
+                fullWidth
+                formControlName="name"
+                [status]="name.dirty ? (name.invalid ? 'danger' : 'success') : ''"
+                [attr.aria-invalid]="name.invalid && name.touched ? true : null"
+                class="form-control"
+                placeholder="Name"
+              />
+              <ngx-validation-message label="Name" [showRequired]="name?.errors?.required && name.touched">
+              </ngx-validation-message>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input
+                nbInput
+                id="description"
+                fullWidth
+                formControlName="description"
+                class="form-control"
+                placeholder="Description"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="primary" [disabled]="!categoryForm.valid" (click)="save()" hero>Submit</button>
+      <!-- <button nbButton status="info" (click)="back()" hero>Back</button> -->
+    </nb-card-footer>
+  </nb-card>
+
+  <!-- Scroll to top button on the page -->
+  <ngx-scroll-to-top></ngx-scroll-to-top>
+
+  <div *ngIf="categoryId">
+    <ngx-subcategories [categoryId]="categoryId" [subCategories]="subCategories"></ngx-subcategories>
+  </div>
+</div>

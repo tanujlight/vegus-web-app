@@ -47,4 +47,12 @@ export class PlansApi {
   update(item: any): Observable<any> {
     return this.api.put(`${this.apiController}/${item.id}`, item)
   }
+
+  initializePayment(params: {planId: string; via: string}): Observable<any> {
+    return this.api.post(`${this.apiController}/initialize-payment`, params)
+  }
+
+  verifyStripeSession(params: {sessionId: string}): Observable<any> {
+    return this.api.post(`${this.apiController}/verify-stripe-session`, params)
+  }
 }

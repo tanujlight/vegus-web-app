@@ -7,6 +7,7 @@ import {NbToastrService} from '@nebular/theme'
 import {ReportsApi} from 'app/services/apis/reports.service'
 import {NbSidebarService} from '@nebular/theme'
 import {NbIconLibraries} from '@nebular/theme'
+import {STUDENT_ROUTES} from 'app/constants/routes'
 
 @Component({
   selector: 'ngx-exam',
@@ -56,7 +57,7 @@ export class ExamComponent implements OnInit {
         // )
       },
       () => {
-        this.routeTo('student-pages/exams/list')
+        this.routeTo(STUDENT_ROUTES.EXAMS.LIST)
       }
     )
   }

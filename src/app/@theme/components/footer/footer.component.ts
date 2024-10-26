@@ -10,15 +10,18 @@ import {Component} from '@angular/core'
   selector: 'ngx-footer',
   styleUrls: ['./footer.component.scss'],
   template: `
-    <!-- <span class="created-by">Created with ♥ by <b>Tanuj</b> {{ currentYear }}</span> -->
-    <!-- <span class="created-by">Copyright All Rights Reserved ©  Vegus</span> -->
-    <span class="created-by">Vegus © {{ currentYear }} All Rights Reserved</span>
-    <!-- <div class="socials">
-      <a href="#" target="_blank" class="ion ion-social-github"></a>
-      <a href="#" target="_blank" class="ion ion-social-facebook"></a>
-      <a href="#" target="_blank" class="ion ion-social-twitter"></a>
-      <a href="#" target="_blank" class="ion ion-social-linkedin"></a>
-    </div> -->
+    <div class="footer-container">
+      <!-- <span class="created-by">Created with ♥ by <b>Tanuj</b> {{ currentYear }}</span> -->
+      <!-- <span class="created-by">Copyright All Rights Reserved ©  Vegus</span> -->
+      <span class="created-by">Vegus © {{ currentYear }} All Rights Reserved</span>
+      <!-- <div class="links">
+        <a [routerLink]="['/home']">Home</a>
+        <a [routerLink]="['/about-us']">About Us</a>
+        <a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a>
+        <a [routerLink]="['/privacy-policy']">Privacy Policy</a>
+        <a [routerLink]="['/refund-policy']">Refund Policy</a>
+      </div> -->
+    </div>
   `
 })
 export class FooterComponent {

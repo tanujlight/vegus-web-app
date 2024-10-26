@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {NbToastrService} from '@nebular/theme'
 import {FILLUP_PATTERN} from '../../constants'
-import {DropDownDyadsQuestion} from '../../../../../pages/questions/questions.interface'
-
+import {DropDownDyadsQuestion} from '../../../../../admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-view-drop-down-dyads',
@@ -84,7 +83,10 @@ export class ViewDropDownDyadsComponent implements OnInit {
   }
 
   submit() {
-    if (this.question && (this.question.isAttempted || this.question.status === 'incorrect' || this.question.status === 'correct')) {
+    if (
+      this.question &&
+      (this.question.isAttempted || this.question.status === 'incorrect' || this.question.status === 'correct')
+    ) {
       if (!this.validateCorrectOptions()) return
 
       this.question.isAttempted = true

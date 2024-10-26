@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CategoriesApi } from '../../services/apis/categories.service';
-import {Category} from './../../pages/categories/categories.interface'
-import { NotesApi } from 'app/services/apis/notes.service';
-import { VideosApi } from 'app/services/apis/videos.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
+import {CategoriesApi} from '../../services/apis/categories.service'
+import {Category} from './../../admin-pages/categories/categories.interface'
+import {NotesApi} from 'app/services/apis/notes.service'
+import {VideosApi} from 'app/services/apis/videos.service'
 
 @Component({
   selector: 'category-accordian-view',
@@ -14,30 +14,27 @@ export class CategoryAccordianViewComponent implements OnInit {
   @Input() openAccordianCategoryId: any
   @Output() submitItems = new EventEmitter<any>()
   categories
-  constructor(
-    private notesService: NotesApi,
-    private videosService: VideosApi,
-  ) {}
+  constructor(private notesService: NotesApi, private videosService: VideosApi) {}
 
   ngOnInit(): void {
-    this.getDashboardCategoires();
+    this.getDashboardCategoires()
   }
 
   private getDashboardCategoires() {
     if (this.type === 'Guides') {
       this.notesService.getDashboardCategoires().subscribe((categoires: Category[]) => {
-        this.assignCategories(categoires);
+        this.assignCategories(categoires)
       })
     } else {
       this.videosService.getDashboardCategoires().subscribe((categoires: Category[]) => {
-        this.assignCategories(categoires);
+        this.assignCategories(categoires)
       })
     }
   }
 
   assignCategories(categoires) {
-    this.categories = [];
-    categoires.map((item) => {
+    this.categories = []
+    categoires.map(item => {
       this.categories.push({...item, ...{expanded: this.openAccordianCategoryId === item.id ? true : false}})
     })
   }
@@ -49,5 +46,4 @@ export class CategoryAccordianViewComponent implements OnInit {
     }
     this.submitItems.emit(sendData)
   }
-
 }

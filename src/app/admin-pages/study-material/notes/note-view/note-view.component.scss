@@ -1,0 +1,16 @@
+@import './../../../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+  ::ng-deep .note-view-dialog {
+    width: 95vw;
+    margin: 0 auto;
+
+    nb-card.note-view-dialog-card {
+      height: calc(100vh - 50px);
+
+      nb-card-body {
+        height: calc(100vh - 250px);
+      }
+    }
+  }
+}

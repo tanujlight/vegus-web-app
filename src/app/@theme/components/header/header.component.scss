@@ -20,7 +20,7 @@
 
     .logo {
       display: block;
-      width: 180px;
+      width: 160px;
 
       img {
         width: 100%;
@@ -28,7 +28,7 @@
       }
     }
   }
-  
+
   nb-action {
     height: auto;
     display: flex;
@@ -37,7 +37,7 @@
 
   nb-user {
     cursor: pointer;
-    color: #000 !important;
+    color: #fff !important;
   }
 
   ::ng-deep nb-search button {

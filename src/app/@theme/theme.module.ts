@@ -7,6 +7,8 @@
 import {ModuleWithProviders, NgModule} from '@angular/core'
 import {CommonModule} from '@angular/common'
 import {MatRippleModule} from '@angular/material/core'
+import {RouterModule} from '@angular/router'
+
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -27,7 +29,12 @@ import {AuthModule} from '../@auth/auth.module'
 
 import {FooterComponent, HeaderComponent, SearchInputComponent} from './components'
 import {MeasureConverterPipe, CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, NumberWithCommasPipe} from './pipes'
-import {OneColumnLayoutComponent, ThreeColumnsLayoutComponent, TwoColumnsLayoutComponent} from './layouts'
+import {
+  OneColumnLayoutComponent,
+  ThreeColumnsLayoutComponent,
+  TwoColumnsLayoutComponent,
+  FullWidthLayoutComponent
+} from './layouts'
 import {InitUserService} from './services/init-user.service'
 
 import {MATERIAL_LIGHT_THEME} from './styles/material/theme.material-light'
@@ -54,12 +61,13 @@ const COMPONENTS = [
   SearchInputComponent,
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent
+  TwoColumnsLayoutComponent,
+  FullWidthLayoutComponent
 ]
 const PIPES = [CapitalizePipe, MeasureConverterPipe, PluralPipe, RoundPipe, TimingPipe, NumberWithCommasPipe]
 
 @NgModule({
-  imports: [CommonModule, MatRippleModule, AuthModule, ...NB_MODULES],
+  imports: [CommonModule, RouterModule, MatRippleModule, AuthModule, ...NB_MODULES],
   exports: [CommonModule, MatRippleModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES]
 })

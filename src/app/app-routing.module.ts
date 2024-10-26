@@ -10,12 +10,12 @@ import {AuthGuard} from './@auth/auth.guard'
 
 const routes: Routes = [
   {
-    path: 'pages',
+    path: 'admin',
     canActivate: [AuthGuard],
-    loadChildren: () => import('app/pages/pages.module').then(m => m.PagesModule)
+    loadChildren: () => import('app/admin-pages/admin-pages.module').then(m => m.PagesModule)
   },
   {
-    path: 'student-pages',
+    path: 'student',
     canActivate: [AuthGuard],
     loadChildren: () => import('app/student-pages/student-pages.module').then(m => m.StudentPagesModule)
   },
@@ -24,11 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('app/@auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'pricing',
-    loadChildren: () => import('app/pricing/pricing.module').then(m => m.PricingModule)
+    path: '',
+    loadChildren: () => import('app/website/website.module').then(m => m.WebsiteModule)
   },
-  {path: '', redirectTo: 'pages', pathMatch: 'full'},
-  {path: '**', redirectTo: 'pages'}
+  {path: '**', redirectTo: ''}
 ]
 
 const config: ExtraOptions = {

@@ -5,13 +5,14 @@ import {Observable, Subject, firstValueFrom} from 'rxjs'
 import {NbDialogService} from '@nebular/theme'
 import {takeUntil} from 'rxjs/operators'
 import {NbToastrService} from '@nebular/theme'
-import {Exam} from '../../../../pages/exams/exams.interface'
+import {Exam} from '../../../../admin-pages/exams/exams.interface'
 import {CategoriesApi} from '../../../../services/apis/categories.service'
 import {TutuorService} from '../../../../services/apis/tutuor.service'
 import {QuestionModeEnum} from '../../tutor.interface'
 import {prepareQuestionsForTest} from './helper-methods'
 import {LoaderService} from '../../../../services/loader.service'
 import {TakeTestComponent} from '../take-test/take-test.component'
+import {STUDENT_ROUTES} from 'app/constants/routes'
 @Component({
   selector: 'ngx-create-test',
   templateUrl: './create-test.component.html',
@@ -283,7 +284,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
         closeOnEsc: false
       })
       .onClose.subscribe(data => {
-        this.routeTo(`student-pages/tutor/tests/list`)
+        this.routeTo(STUDENT_ROUTES.TUTOR.TESTS_LIST)
       })
   }
 

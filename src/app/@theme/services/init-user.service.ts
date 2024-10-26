@@ -5,7 +5,7 @@
  */
 
 import {Observable} from 'rxjs'
-import {User, UserData} from '../../@core/interfaces/common/users'
+import {User, UserData, UserTypeEnum} from '../../@core/interfaces/common/users'
 import {Router} from '@angular/router'
 import {MyToastService} from 'app/services/my-toast.service'
 import {tap} from 'rxjs/operators'
@@ -28,9 +28,15 @@ export class InitUserService {
     return this.usersService.getCurrentUser().pipe(
       tap((user: User) => {
         if (user) {
-          if (user.status === 'inactive') {
+          if (user.role === UserTypeEnum.Class && user.status === 'inactive') {
             this.router.navigate(['auth/logout'])
             return
+          } else if (user.role === UserTypeEnum.Subscriber && user.status === 'inactive') {
+            const checkoutUrlRegex = /subscription\/checkout\/success\?session_id=/
+
+            if (!checkoutUrlRegex.test(this.router.url)) {
+              this.router.navigateByUrl('/student/subscription/plans')
+            }
           }
 
           this.userStore.setUser(user)

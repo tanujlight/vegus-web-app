@@ -11,6 +11,7 @@ import {MyToastService} from 'app/services/my-toast.service'
 import {NbThemeService} from '@nebular/theme'
 import {getDeepFromObject} from '../../helpers'
 import {EMAIL_PATTERN} from '../constants'
+import {InitUserService} from '../../../@theme/services/init-user.service'
 
 @Component({
   selector: 'ngx-register',
@@ -43,7 +44,8 @@ export class NgxRegisterComponent implements OnInit {
     protected themeService: NbThemeService,
     private fb: FormBuilder,
     protected router: Router,
-    private toastService: MyToastService
+    private toastService: MyToastService,
+    protected initUserService: InitUserService
   ) {}
 
   get firstName() {
@@ -65,6 +67,10 @@ export class NgxRegisterComponent implements OnInit {
     return this.registerForm.get('terms')
   }
 
+  get alreadyClassEnrolled() {
+    return this.registerForm.get('alreadyClassEnrolled')
+  }
+
   ngOnInit(): void {
     const firstNameValidators = []
     this.isFirstNameRequired && firstNameValidators.push(Validators.required)
@@ -84,7 +90,8 @@ export class NgxRegisterComponent implements OnInit {
       email: this.fb.control('', [...emailValidators]),
       password: this.fb.control('', [...passwordValidators]),
       confirmPassword: this.fb.control('', [...passwordValidators]),
-      terms: this.fb.control('')
+      terms: this.fb.control(''),
+      alreadyClassEnrolled: this.fb.control(false)
     })
   }
 
@@ -99,15 +106,23 @@ export class NgxRegisterComponent implements OnInit {
     this.errors = this.messages = []
     this.submitted = true
 
+    this.user.role = !this.user.alreadyClassEnrolled ? 'subscriber' : 'user'
+
     this.service.register(this.strategy, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false
       if (result.isSuccess()) {
         this.messages = result.getMessages()
 
-        setTimeout(() => {
-          this.toastService.showToast(`Registration successful. Let's wait for admin approval.`)
-          return this.router.navigate(['auth/login'])
-        }, this.redirectDelay)
+        if (this.user.role === 'user') {
+          setTimeout(() => {
+            this.toastService.showToast(`Registration successful. Let's wait for admin approval.`)
+            return this.router.navigate(['auth/login'])
+          }, this.redirectDelay)
+        } else {
+          this.initUserService.initCurrentUser().subscribe((data: any) => {
+            this.router.navigate(['student/subscription/plans'])
+          })
+        }
       } else {
         this.errors = result.getErrors()
       }

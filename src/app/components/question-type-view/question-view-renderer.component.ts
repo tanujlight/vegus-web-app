@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {User} from '../../@core/interfaces/common/users'
 import {UserStore} from '../../@core/stores/user.store'
-import {EQuestionType} from 'app/pages/questions/questions.interface'
+import {EQuestionType} from 'app/admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-question-view-renderer',

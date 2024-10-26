@@ -1,0 +1,54 @@
+<div class="plans-container">
+  <nb-card>
+    <nb-card-body>
+      <div class="d-flex">
+        <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+          <h6 class="title">Flexible Pricing Options to Meet Your Needs</h6>
+          <small class="sub-title">All Subscriptions Include Next Generation NCLEX Practice Questions</small>
+        </div>
+      </div>
+      <nb-tabset (changeTab)="changeTab($event)">
+        <nb-tab tabTitle="Subscription" tabId="subscription">
+          <div class="plans-cards-container">
+            <nb-card class="plan-card" *ngFor="let item of plans">
+              <nb-card-body>
+                <div class="mb-3">{{ item.name }}</div>
+                <div class="mb-3">({{ item.duration }}-Day Access)</div>
+                <div class="price" *ngIf="item.hasDiscount">
+                  ${{ item.finalPrice }} <span class="old-price">${{ item.price }}</span>
+                </div>
+                <div class="price" *ngIf="!item.hasDiscount">${{ item.price }}</div>
+                <button nbButton status="primary" (click)="buyPlan(item)">Buy</button>
+                <ul>
+                  <li>2,300+ Practice Questions</li>
+                  <li>500+ NGN Questions</li>
+                  <li>High-Yield Review Videos</li>
+                  <li>Adaptive (CAT) Practice Tests</li>
+                  <li>Digital Flashcards</li>
+                  <li>
+                    <span class="highlight">{{ item?.features?.assessments }} Self-Assessment</span>
+                  </li>
+                </ul>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Renewal" tabId="renewal">
+          <div class="plans-cards-container">
+            <nb-card class="plan-card" *ngFor="let item of plans">
+              <nb-card-body>
+                <div class="mb-4">{{ item.name }}</div>
+                <div class="mb-4">({{ item.duration }}-Day Access)</div>
+                <div class="price mb-4" *ngIf="item.discount">
+                  ${{ item.discount }} <span class="old-price">${{ item.price }}</span>
+                </div>
+                <div class="price mb-4" *ngIf="!item.discount">${{ item.price }}</div>
+                <button nbButton status="primary" (click)="buyPlan(item)" class="mb-4">Buy</button>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
+</div>

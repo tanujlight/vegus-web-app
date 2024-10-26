@@ -8,27 +8,35 @@ import {Component, OnDestroy, OnInit, HostListener} from '@angular/core'
 import {takeWhile} from 'rxjs/operators'
 import {NbTokenService} from '@nebular/auth'
 import {NbMenuItem} from '@nebular/theme'
+import {Router, NavigationEnd} from '@angular/router'
 import {StudentPagesMenu} from './student-pages-menu'
 import {InitUserService} from '../@theme/services/init-user.service'
 import {UserStore} from 'app/@core/stores/user.store'
-import {Router} from '@angular/router'
+import {ADMIN_ROUTES} from 'app/constants/routes'
 
 @Component({
   selector: 'ngx-student-pages',
   styleUrls: ['student-pages.component.scss'],
   template: `
-    <!-- <div class="no-print" (copy)="onCopy($event)" (contextmenu)="onContextMenu($event)"> -->
-    <div class="no-print" (copy)="onCopy($event)">
-      <ngx-one-column-layout>
+    <div class="no-print" (copy)="onCopy($event)" (contextmenu)="onContextMenu($event)">
+      <!-- Conditionally use the layout -->
+
+      <ngx-one-column-layout *ngIf="showSidebar">
         <nb-menu [items]="menu"></nb-menu>
         <router-outlet></router-outlet>
       </ngx-one-column-layout>
+
+      <ngx-full-width-layout *ngIf="!showSidebar">
+        <router-outlet></router-outlet>
+      </ngx-full-width-layout>
     </div>
   `
 })
 export class StudentPagesComponent implements OnDestroy, OnInit {
   menu: NbMenuItem[]
   alive: boolean = true
+
+  showSidebar: boolean = true
 
   constructor(
     private pagesMenu: StudentPagesMenu,
@@ -48,12 +56,28 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
       })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.checkRouteForSidebar(event.urlAfterRedirects)
+      }
+    })
+
+    // Handle direct link (initial load)
+    this.checkRouteForSidebar(this.router.url) // This will get the current URL on initial load
+  }
+
+  // Function to check the current route and update the sidebar visibility
+  private checkRouteForSidebar(url: string): void {
+    const hideSidebarRoutes = ['/subscription']
+
+    this.showSidebar = !hideSidebarRoutes.some(route => url.includes(route))
+  }
 
   redirectToPathBasedOnRole() {
     const userRole = this.userStore.getUser().role
     if (userRole === 'admin') {
-      this.router.navigateByUrl('/pages/dashboard')
+      this.router.navigateByUrl(ADMIN_ROUTES.DASHBOARD)
     }
   }
 

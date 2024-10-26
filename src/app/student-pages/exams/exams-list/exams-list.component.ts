@@ -29,7 +29,7 @@ export class ExamsListComponent implements OnInit {
   }
 
   takeExam(examItem) {
-    this.routeTo('student-pages/exams/' + examItem.id)
+    this.routeTo('student/exams/' + examItem.id)
   }
 
   private routeTo(path): void {

@@ -7,6 +7,7 @@
 import {NbMenuItem} from '@nebular/theme'
 import {Observable, of} from 'rxjs'
 import {Injectable} from '@angular/core'
+import {STUDENT_ROUTES} from 'app/constants/routes'
 
 @Injectable()
 export class StudentPagesMenu {
@@ -17,70 +18,70 @@ export class StudentPagesMenu {
       {
         title: 'Dashboard',
         icon: 'home-outline',
-        link: '/student-pages/dashboard',
-        home: false,
+        link: STUDENT_ROUTES.DASHBOARD,
+        home: true,
         children: undefined,
-        data: {roles: ['user']}
+        data: {roles: ['user', 'subscriber']}
       },
       {
         title: 'Exams',
         icon: 'book-outline',
-        link: '/student-pages/exams/list',
+        link: STUDENT_ROUTES.EXAMS.LIST,
         data: {roles: ['user']},
-        home: true
+        home: false
       },
       {
         title: 'Reports',
         icon: 'file-text-outline',
-        link: '/student-pages/reports/list',
+        link: STUDENT_ROUTES.REPORTS.LIST,
         data: {roles: ['user']},
         home: false
       },
       {
         title: 'Flash Cards',
         icon: 'flash-outline',
-        link: '/student-pages/flash-cards/list',
-        data: {roles: ['user']},
+        link: STUDENT_ROUTES.FLASH_CARDS.LIST,
+        data: {roles: ['user', 'subscriber']},
         home: false
       },
       {
         title: 'Study Material',
         icon: 'book-open-outline',
-        data: {roles: ['user']},
+        data: {roles: ['user', 'subscriber']},
         home: false,
         children: [
           {
             title: 'Notes',
             icon: 'file-text-outline',
-            link: '/student-pages/study-material/notes/list'
+            link: STUDENT_ROUTES.STUDY_MATERIAL.NOTES_LIST
           },
           {
             title: 'Videos',
             icon: 'video-outline',
-            link: '/student-pages/study-material/videos/list'
+            link: STUDENT_ROUTES.STUDY_MATERIAL.VIDEOS_LIST
           }
         ]
       },
       {
         title: 'Qbank',
         icon: 'hard-drive-outline',
-        data: {roles: ['user']},
+        data: {roles: ['user', 'subscriber']},
         home: false,
         children: [
           {
             title: 'Create test',
             icon: 'edit-2-outline',
-            link: '/student-pages/tutor/tests/new'
+            link: STUDENT_ROUTES.TUTOR.TESTS_NEW
           },
           {
             title: 'Previous Tests',
             icon: 'list-outline',
-            link: '/student-pages/tutor/tests/list'
+            link: STUDENT_ROUTES.TUTOR.TESTS_LIST
           },
           {
             title: 'Performance',
             icon: 'award-outline',
-            link: '/student-pages/tutor/performance'
+            link: STUDENT_ROUTES.TUTOR.PERFORMANCE
           }
         ]
       }

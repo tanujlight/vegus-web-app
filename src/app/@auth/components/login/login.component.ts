@@ -11,6 +11,7 @@ import {getDeepFromObject} from '../../helpers'
 import {NbThemeService} from '@nebular/theme'
 import {EMAIL_PATTERN} from '../constants'
 import {InitUserService} from '../../../@theme/services/init-user.service'
+import {ADMIN_ROUTES, STUDENT_ROUTES} from '../../../constants/routes'
 
 @Component({
   selector: 'ngx-login',
@@ -83,10 +84,10 @@ export class NgxLoginComponent implements OnInit {
       if (result.isSuccess()) {
         this.messages = result.getMessages()
         this.initUserService.initCurrentUser().subscribe((data: any) => {
-          if (data && data.role === 'user') {
-            this.router.navigateByUrl('/student-pages/dashboard')
-          } else {
-            this.router.navigateByUrl('/pages/dashboard')
+          if (data && data.role !== 'admin' && data.status === 'active') {
+            this.router.navigateByUrl(STUDENT_ROUTES.DASHBOARD)
+          } else if (data && data.role === 'admin') {
+            this.router.navigateByUrl(ADMIN_ROUTES.DASHBOARD)
           }
         })
       } else {

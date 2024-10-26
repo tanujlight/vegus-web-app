@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {NbToastrService} from '@nebular/theme'
 import {FILLUP_PATTERN} from '../constants'
-import {DropDownDyadsQuestion} from '../../../pages/questions/questions.interface'
+import {DropDownDyadsQuestion} from '../../../admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-view-drop-down-dyads',

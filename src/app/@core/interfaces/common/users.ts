@@ -25,6 +25,13 @@ export interface User {
   picture: string
   address: Address
   settings: Settings
+  subscription?: any
+  paymentDetails?: any
+}
+
+export enum UserTypeEnum {
+  Class = 'user',
+  Subscriber = 'subscriber'
 }
 
 export interface Address {

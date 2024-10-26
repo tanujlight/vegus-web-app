@@ -10,9 +10,35 @@
 
 @include nb-install-component() {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  .footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .links {
+      display: flex;
+
+      a {
+        text-decoration: none;
+        transition: ease-out 0.1s;
+        border-right: 1px solid #fff;
+        padding: 0 10px;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+    }
+  }
 
   .socials {
     font-size: 2rem;

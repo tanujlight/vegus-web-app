@@ -123,6 +123,10 @@
     </p>
   </div>
 
+  <div class="form-control-group accept-group">
+    <nb-checkbox formControlName="alreadyClassEnrolled"> Are you already enrolled in the class? </nb-checkbox>
+  </div>
+
   <div class="form-control-group accept-group" *ngIf="getConfigValue('forms.register.terms')">
     <nb-checkbox formControlName="terms" [required]="getConfigValue('forms.register.terms')">
       Agree to <a href="#" target="_blank"><strong>Terms & Conditions</strong></a>

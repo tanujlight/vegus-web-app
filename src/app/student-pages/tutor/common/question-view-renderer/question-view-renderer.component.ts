@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges} from '@angular/core'
-import {EQuestionType} from 'app/pages/questions/questions.interface'
+import {EQuestionType} from 'app/admin-pages/questions/questions.interface'
 
 @Component({
   selector: 'ngx-tutor-question-view-renderer',

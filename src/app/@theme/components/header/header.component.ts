@@ -63,8 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   getMenuItems() {
     const userLink = this.user
       ? this.user.role.toLowerCase() === 'admin'
-        ? '/pages/users/current/'
-        : '/student-pages/users/current/'
+        ? '/admin/users/current/'
+        : '/student/users/current/'
       : ''
     return [
       {title: 'Profile', link: userLink, queryParams: {profile: true}},
@@ -83,7 +83,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (user) {
           this.user = user
           this.user.name = user.firstName + ' ' + user.lastName
-          this.user.role = user.role === 'admin' ? 'Admin' : 'Student'
           this.userMenu = this.getMenuItems()
         }
       })

@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="uploadFile">Upload audio</label>
+      <input
+        nbInput
+        type="file"
+        id="uploadFile"
+        fullWidth
+        class="form-control"
+        (change)="onFileSelected($event)"
+        accept=".mp3,audio/*"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6 d-flex align-items-center">
+    <audio #figAudio controls>
+      <source [src]="question.audioUrl | sanitizeUrl" type="audio/ogg" />
+      <source [src]="question.audioUrl | sanitizeUrl" type="audio/mpeg" />
+      <source [src]="question.audioUrl | sanitizeUrl" type="audio/wav" />
+    </audio>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="optionsCount">No of options</label>
+      <input
+        nbInput
+        type="number"
+        id="optionsCount"
+        fullWidth
+        [(ngModel)]="question.optionsCount"
+        class="form-control"
+        (change)="optionCountChange()"
+        placeholder="No of options"
+      />
+    </div>
+  </div>
+  <div class="col-sm-6"></div>
+  <div class="col-sm-6" *ngFor="let item of question.optionsArray; let i = index">
+    <div class="form-group">
+      <label for="type"
+        >Option {{ i + 1 }} <input type="radio" name="options" [value]="i" [(ngModel)]="question.correctOption"
+      /></label>
+      <input nbInput fullWidth class="form-control" [(ngModel)]="item.value" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="plans-list">
+  <nb-card>
+    <nb-card-body class="table-outer-container">
+      <nb-tabset (changeTab)="changeTab($event)">
+        <nb-tab tabTitle="Subscription" tabId="subscription">
+          <app-smart-table
+            [tableSettings]="tableSettings"
+            [columns]="tableColumns"
+            [data]="plans"
+            (removeEvent)="removePlan($event)"
+            (updateEvent)="updatePlan($event)"
+            (createEvent)="addPlan($event)"
+          >
+          </app-smart-table>
+        </nb-tab>
+        <nb-tab tabTitle="Renewal" tabId="renewal">
+          <app-smart-table
+            [tableSettings]="tableSettings"
+            [columns]="tableColumns"
+            [data]="plans"
+            (removeEvent)="removePlan($event)"
+            (updateEvent)="updatePlan($event)"
+            (createEvent)="addPlan($event)"
+          >
+          </app-smart-table>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
+</div>
