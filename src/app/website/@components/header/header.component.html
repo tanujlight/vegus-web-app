@@ -10,13 +10,12 @@
       </div>
       <div class="navbar-middle"> 
           <ul>
-              <li><a href="#" class="active">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a [routerLink]="['']" class="active">Home</a></li>
+              <li><a [routerLink]="['/about-us']">About</a></li>
+              <li><a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a></li>
           </ul>
       </div>
       <div class="navbar-right">
-          <button>Sign In</button>
+          <button [routerLink]="['admin']">Sign In</button>
       </div>
   </div>
