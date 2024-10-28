@@ -1,12 +1,40 @@
-<div class="footer-container">
-  <!-- <span class="created-by">Created with ♥ by <b>Tanuj</b> {{ currentYear }}</span> -->
-  <!-- <span class="created-by">Copyright All Rights Reserved ©  Vegus</span> -->
-  <span class="created-by">Vegus © {{ currentYear }} All Rights Reserved</span>
-  <div class="links">
-    <!-- <a [routerLink]="['/home']">Home</a> -->
-    <!-- <a [routerLink]="['/about-us']">About Us</a> -->
-    <a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a>
-    <a [routerLink]="['/privacy-policy']">Privacy Policy</a>
-    <a [routerLink]="['/refund-policy']">Refund Policy</a>
+<footer>
+  <div class="footer-container">
+      <div class="footer-column">
+          <img src="assets/images/logo-black.png" alt="Logo" class="footer-logo">
+          <p>
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
+              Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+          </p>
+          <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+      </div>
+
+      <div class="footer-column">
+          <h3>Our Company</h3>
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">Contact</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-column">
+          <h3>Subscribe</h3>
+          <form>
+              <input type="email" placeholder="Email" required>
+              <button type="submit">Subscribe</button>
+          </form>
+      </div>
   </div>
-</div>
+
+  <div class="footer-bottom">
+      <p>All Copyrights are reserved by Mamdou Ghaneemy</p>
+  </div>
+</footer>

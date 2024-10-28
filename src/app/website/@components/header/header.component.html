@@ -4,17 +4,19 @@
   ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
   -->
 
-<div class="header-container">
-  <div class="logo-container">
-    <a class="logo" [routerLink]="''">
-      <img src="assets/images/logo-white.png" alt="Vegus" />
-    </a>
+  <div class="navbar">
+      <div class="navbar-left">
+          <img src="assets/images/logo-black.png" width="100px" alt="Logo">
+      </div>
+      <div class="navbar-middle"> 
+          <ul>
+              <li><a href="#" class="active">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+          </ul>
+      </div>
+      <div class="navbar-right">
+          <button>Sign In</button>
+      </div>
   </div>
-</div>
-
-<div class="header-container">
-  <nb-actions size="small">
-    <nb-action [routerLink]="'about-us'">About Us</nb-action>
-    <nb-action [routerLink]="'admin'">Login</nb-action>
-  </nb-actions>
-</div>
