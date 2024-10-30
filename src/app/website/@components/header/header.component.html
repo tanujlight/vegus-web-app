@@ -4,18 +4,20 @@
   ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
   -->
 
-  <div class="navbar">
-      <div class="navbar-left">
-          <img src="assets/images/logo-black.png" width="100px" alt="Logo">
-      </div>
-      <div class="navbar-middle"> 
-          <ul>
-              <li><a [routerLink]="['']" class="active">Home</a></li>
-              <li><a [routerLink]="['/about-us']">About</a></li>
-              <li><a [routerLink]="['/terms-and-conditions']">Terms & Conditions</a></li>
-          </ul>
-      </div>
-      <div class="navbar-right">
-          <button [routerLink]="['admin']">Sign In</button>
-      </div>
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="assets/images/logo-black.png" width="100px" alt="Logo" />
   </div>
+  <div class="navbar-middle">
+    <ul>
+      <li><a [routerLink]="['']" [ngClass]="{active: isActive('/')}">Home</a></li>
+      <li><a [routerLink]="['/about-us']" [ngClass]="{active: isActive('/about-us')}">About</a></li>
+      <li>
+        <a (click)="navigateToSection('features')">Features</a>
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-right">
+    <button (click)="goToSignIn()">Sign In</button>
+  </div>
+</div>

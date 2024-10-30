@@ -4,336 +4,376 @@
  * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
  */
 
- @import '../../@theme/styles/themes.scss';
- @import '~@nebular/theme/styles/global/breakpoints';
- @import '~bootstrap/scss/mixins/breakpoints';
- 
- @include nb-install-component() {
-   .home-page-container {
-     :root {
-       --primary-color: #0067A9;
-     }
- 
-     // Typography
-     a {
-       text-decoration: none;
-       color: #333;
-     }
- 
-     p {
-       font-size: 18px;
-       line-height: 140%;
-     }
- 
-     h2 {
-       font-size: 28px;
-       font-weight: 700;
-       color: #333;
-       margin-bottom: 40px;
- 
-       @media (max-width: 768px) {
-         font-size: 24px;
-       }
-     }
- 
-     h3 {
-       font-size: 20px;
-       color: #333;
-       margin-bottom: 10px;
-     }
- 
-     h4 {
-       color: #4a90e2;
-       font-weight: 600;
-       margin-bottom: 10px;
-       text-transform: uppercase;
-     }
- 
-     .main-heading {
-       font-size: 48px !important;
-       font-weight: bold;
-       color: #111;
-       line-height: 125%;
- 
-       @media (max-width: 768px) {
-         font-size: 36px !important;
-       }
-     }
- 
-     .secondary-heading {
-       font-size: 14px !important;
-       font-weight: bold;
-       color: #005bb5 !important;
-       margin-top: 80px;
-       margin-bottom: -20px;
-       @media (max-width: 768px) {
-          margin-top: 50px;
-        }
-     }
- 
-     // Buttons
-     .btn.cta-button {
-       padding: 12px 18px;
-       border: 0;
-       border-radius: 100px;
-       background: #005bb5;
-       color: #fff;
-     }
- 
-     button {
-       padding: 8px 15px;
-       border: 0;
-       border-radius: 100px;
-       border: 1px solid #005bb5;
-       color: #005bb5;
-       background: transparent;
- 
-       &:hover {
-         background: #005bb5;
-         border-color: #005bb5;
-         color: #fff;
-       }
-     }
- 
-     .btn.circle a {
-       color: #fff;
-     }
- 
-     // Layout Utility Classes
-     .h-100 {
-       height: 100%;
-     }
- 
-     .d-flex,
-     nav {
-       display: flex;
-       align-items: center;
-       justify-content: space-around;
-     }
- 
-     .d-grid.half-col {
-       display: grid;
-       grid-template-columns: 1fr 1fr;
- 
-       @media (max-width: 768px) {
-         grid-template-columns: 1fr;
-       }
-     }
- 
-     // Padding and Margin Utilities
-     .p-4 { padding: 1rem; }
-     .p-5 { padding: 1.5rem; }
-     .p-6 { padding: 2rem; }
- 
-     .m-4 { margin: 1rem; }
-     .m-5 { margin: 1.5rem; }
-     .m-6 { margin: 2rem; }
- 
-     .mt-4 { margin-top: 1rem; }
-     .mt-5 { margin-top: 1.5rem; }
-     .mt-6 { margin-top: 2rem; }
-     @media (max-width: 768px) {
-      .p-6 { padding: 1rem; }
-     }
-     // Colors
-     .bg-blue { background: #D6E7FF !important; }
-     .bg-white { background: #ffffff !important; }
-     .bg-dark-blue { background: #0067A9; }
- 
-     .text-white { color: #fff !important; }
-     .text-blue { color: #D6E7FF !important; }
-     .text-dark-blue { color: #0067A9 !important; }
- 
-     // Sections
-     .section-area {
-       max-width: 1200px;
-       margin: 0 auto;
- 
-       @media (max-width: 768px) {
-         padding: 2rem;
- 
-         img {
-           width: 100%;
-         }
-       }
-     }
- 
-     .banner-section {
-       background-color: #DCDCE9;
- 
-       .text-box {
-         height: auto;
-         padding-top: 0;
-         @media (max-width: 768px) {
-          .p-6 { padding: 0; }
-         }
-       }
- 
-       .banner-img img {
-         width: 400px;
-         @media (max-width: 768px) {
-          width: 100%;
-         }
-       }
-     }
- 
-     .services-section {
-       padding: 4rem;
- 
-       @media (max-width: 768px) {
-         padding: 2rem;
-       }
- 
-       .text-center {
-         text-align: center;
-       }
-     }
- 
-     .faq-section {
-       max-width: 800px;
-       margin: 0 auto;
-       padding: 40px 20px;
-     }
- 
-     .subscription-section {
-       max-width: 1200px;
-       margin: 0 auto;
-       text-align: center;
-       padding: 4rem 0;
- 
-       h2 {
-         color: #0056b3;
-         margin-bottom: 20px;
-       }
-     }
- 
-     // Grids
-     .services-grid {
-       display: grid;
-       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-       gap: 20px;
- 
-       @media (max-width: 768px) {
-         grid-template-columns: 1fr;
-       }
- 
-       .service-card {
-         background-color: #fff;
-         padding: 20px;
-         border-radius: 8px;
-         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-         transition: transform 0.2s ease;
- 
-         &:hover {
-           transform: translateY(-5px);
-         }
- 
-         .service-icon {
-           font-size: 24px;
-           color: #4a90e2;
-           margin-bottom: 15px;
-         }
-       }
-     }
- 
-     .plans-container {
-       display: flex;
-       justify-content: space-around;
-       flex-wrap: wrap;
-       gap: 20px;
- 
-       .plan-card {
-         background-color: white;
-         border-radius: 10px;
-         width: 100%;
-         max-width: 300px;
-         padding: 20px;
-         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-         transition: transform 0.3s;
- 
-         &:hover {
-           transform: translateY(-10px);
-         }
- 
-         .price {
-           font-size: 32px;
-           font-weight: bold;
-           color: #0056b3;
-           margin: 15px 0;
-         }
- 
-         ul {
-           list-style: none;
-           padding: 0;
-           margin: 0;
-           color: #333;
- 
-           li {
-             padding: 10px 0;
-           }
-         }
-       }
-     }
- 
-     .number-section {
-       position: relative;
-       z-index: 9;
-       max-width: 800px;
-       margin: auto;
-       background: #FFFAF1;
-       margin-top: -60px;
-       padding: 40px;
-       text-align: center;
- 
-       h3 {
-         font-weight: bold;
-         font-size: 30px;
-       }
-     }
-     .join-us-section{
+@import '../../@theme/styles/themes.scss';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+  .home-page-container {
+    :root {
+      --primary-color: #0067a9;
+    }
+
+    // Typography
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 140%;
+    }
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 40px;
+
       @media (max-width: 768px) {
-        .d-grid .text-box{
+        font-size: 24px;
+      }
+    }
+
+    h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      color: #4a90e2;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .main-heading {
+      font-size: 48px !important;
+      font-weight: bold;
+      color: #111;
+      line-height: 125%;
+
+      @media (max-width: 768px) {
+        font-size: 36px !important;
+      }
+    }
+
+    .secondary-heading {
+      font-size: 14px !important;
+      font-weight: bold;
+      color: #005bb5 !important;
+      margin-top: 80px;
+      margin-bottom: -20px;
+      @media (max-width: 768px) {
+        margin-top: 50px;
+      }
+    }
+
+    // Buttons
+    .btn.cta-button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 100px;
+      background: #005bb5;
+      color: #fff;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: 0;
+      border-radius: 100px;
+      border: 1px solid #005bb5;
+      color: #005bb5;
+      background: transparent;
+
+      &:hover {
+        background: #005bb5;
+        border-color: #005bb5;
+        color: #fff;
+      }
+    }
+
+    .btn.circle a {
+      color: #fff;
+    }
+
+    // Layout Utility Classes
+    .h-100 {
+      height: 100%;
+    }
+
+    .d-flex,
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .d-grid.half-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    // Padding and Margin Utilities
+    .p-4 {
+      padding: 1rem;
+    }
+    .p-5 {
+      padding: 1.5rem;
+    }
+    .p-6 {
+      padding: 2rem;
+    }
+
+    .m-4 {
+      margin: 1rem;
+    }
+    .m-5 {
+      margin: 1.5rem;
+    }
+    .m-6 {
+      margin: 2rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+    .mt-5 {
+      margin-top: 1.5rem;
+    }
+    .mt-6 {
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .p-6 {
+        padding: 1rem;
+      }
+    }
+    // Colors
+    .bg-blue {
+      background: #d6e7ff !important;
+    }
+    .bg-white {
+      background: #ffffff !important;
+    }
+    .bg-dark-blue {
+      background: #0067a9;
+    }
+
+    .text-white {
+      color: #fff !important;
+    }
+    .text-blue {
+      color: #d6e7ff !important;
+    }
+    .text-dark-blue {
+      color: #0067a9 !important;
+    }
+
+    // Sections
+    .section-area {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      @media (max-width: 768px) {
+        padding: 2rem;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .banner-section {
+      background-color: #dcdce9;
+
+      .text-box {
+        height: auto;
+        padding-top: 0;
+        @media (max-width: 768px) {
+          .p-6 {
+            padding: 0;
+          }
+        }
+      }
+
+      .banner-img img {
+        width: 400px;
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+
+    .services-section {
+      padding: 4rem;
+
+      @media (max-width: 768px) {
+        padding: 2rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+    }
+
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .subscription-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 4rem 0;
+
+      h2 {
+        color: #0056b3;
+        margin-bottom: 20px;
+      }
+    }
+
+    // Grids
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        .service-icon {
+          font-size: 24px;
+          color: #4a90e2;
+          margin-bottom: 15px;
+        }
+      }
+    }
+
+    .plans-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .plan-card {
+        background-color: white;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 300px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: translateY(-10px);
+        }
+
+        .price {
+          font-size: 32px;
+          font-weight: bold;
+          color: #0056b3;
+          margin: 15px 0;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          color: #333;
+
+          li {
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+
+    .number-section {
+      position: relative;
+      z-index: 9;
+      max-width: 800px;
+      margin: auto;
+      background: #fffaf1;
+      margin-top: -60px;
+      padding: 40px;
+      text-align: center;
+
+      .d-flex {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    }
+    .join-us-section {
+      @media (max-width: 768px) {
+        .d-grid .text-box {
           order: 2;
         }
       }
-     }
- 
-     // FAQ Section
-     .faq-item {
-       border-bottom: 1px solid #e1e1e1;
-       margin-bottom: 20px;
- 
-       .faq-question {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         padding: 20px 0;
-         font-size: 18px;
-         font-weight: 600;
-         cursor: pointer;
- 
-         &:hover {
-           color: #4a90e2;
-         }
-       }
- 
-       .faq-answer {
-         padding: 10px 0;
-         font-size: 16px;
-         line-height: 1.6;
- 
-         p { margin: 0; }
- 
-         a {
-           color: #4a90e2;
-           text-decoration: none;
-         }
-       }
- 
-       &:first-of-type .faq-answer {
-         display: block;
-       }
-     }
-   }
- }
- 
+    }
+
+    // FAQ Section
+    .faq-item {
+      border-bottom: 1px solid #e1e1e1;
+      margin-bottom: 20px;
+
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+          color: #4a90e2;
+        }
+      }
+
+      .faq-answer {
+        padding: 10px 0;
+        font-size: 16px;
+        line-height: 1.6;
+
+        p {
+          margin: 0;
+        }
+
+        a {
+          color: #4a90e2;
+          text-decoration: none;
+        }
+      }
+
+      &:first-of-type .faq-answer {
+        display: block;
+      }
+    }
+  }
+}
