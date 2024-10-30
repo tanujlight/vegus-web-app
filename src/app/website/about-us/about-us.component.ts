@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core'
 
 @Component({
   selector: 'ngx-about-us',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({behavior: 'smooth'})
+    }
   }
-
 }

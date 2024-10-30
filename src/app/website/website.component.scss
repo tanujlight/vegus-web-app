@@ -9,7 +9,35 @@
 @import '../@theme/styles/themes.scss';
 
 @include nb-install-component() {
-  nb-layout-header {
-    background-color: nb-theme(color-info-500) !important;
+
+  // Wrap the styles within ::ng-deep to ensure they affect Nebular components
+  ::ng-deep {
+
+    nb-layout .layout .layout-container .content .columns nb-layout-column {
+      padding: 0px !important;
+    }
+
+    nb-layout-header {
+      background-color: #DCDCE9 !important;
+
+      ngx-website-header {
+        width: 100%;
+      }
+
+      nav {
+        box-shadow: none !important;
+      }
+
+      .layout-container {
+        padding: 0 !important;
+      }
+    }
+
+    nb-layout-footer nav {
+      background-color: #f4f4f4 !important;
+      padding: 0px !important;
+      display: contents !important;
+    }
   }
+
 }

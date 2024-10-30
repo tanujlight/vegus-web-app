@@ -10,7 +10,8 @@ import {HomeComponent} from './home/home.component'
 import {AboutUsComponent} from './about-us/about-us.component'
 import {HeaderComponent} from './@components/header/header.component'
 import {FooterComponent} from './@components/footer/footer.component'
-import {NbLayoutModule, NbActionsModule, NbCardModule} from '@nebular/theme'
+import {NbLayoutModule, NbActionsModule, NbCardModule} from '@nebular/theme';
+import { JoinUsSectionComponent } from './@components/join-us-section/join-us-section.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {NbLayoutModule, NbActionsModule, NbCardModule} from '@nebular/theme'
     HomeComponent,
     AboutUsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    JoinUsSectionComponent
   ],
   imports: [WebsiteRoutingModule, CommonModule, ThemeModule, NbLayoutModule, NbActionsModule, NbCardModule]
 })
