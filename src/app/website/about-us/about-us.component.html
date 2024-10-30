@@ -1,44 +1,56 @@
 <div class="about-us-page">
-  <div class="wrapper">
-    <h1 class="main-heading">Instructor</h1>
-    <div class="container-text">
-      <nb-card>
-        <nb-card-header>About Instructor</nb-card-header>
-        <nb-card-body>
-          <div class="row">
-            <div class="col-3">
-              <div class="banner-image">
-                <img src="assets/images/instructor.png.webp" alt="nclex" />
-              </div>
-            </div>
-            <div class="col-9">
-              <p>
-                Rudraa Academy is solely run by Sneha Patel. She graduated her B.sc Nursing program from Srinivas
-                Institute of Nursing, Mangalore, Karnataka, India. She received her Master in Nursing in Community
-                Health Nursing from Gujarat Institute of Nursing Education and Research, Ahmedabad, Gujarat, India in
-                2014. Her curiosity to operate Dialysis machines drove her to receive diploma certificate of Dialysis
-                technician from IKDRTC kidney hospital, Ahmedabad, Gujarat, India. She has been Nurse for more than 12
-                years. She has received nursing experience in almost all the fields like Renal Transplant unit, Dialysis
-                unit, Gastro intestinal unit, Medical surgical ICU. She also has worked as a Community heath home
-                visiting nurse and she also has worked as a clinical instructor and lecturer in some nursing colleges in
-                India. This was not enough for her. Her knowledge seeking attitude, enthusiasm encouraged her to get
-                more experience outside of country and so she pursued her MSN in Family Nurse Practitioner in 2020 from
-                United state University, California USA. She keeps encouraging and motivating her students to do their
-                best in their field. She is very friendly with her students and so students find themselves very
-                comfortable and satisfied with her while studying. Students who have language barrier to understand the
-                review get extra assistance from Instructor to get pass Nclex. Her leadership, outstanding clinical
-                performance has achieved her many honors. She attends many National and International conferences
-                related to nursing education and Nclex and keep her knowledge updated to give more better and better to
-                her students.
-              </p>
-            </div>
+  <section class="banner-section">
+    <div class="section-area">
+      <div class="d-grid half-col">
+        <div class="col">
+          <div class="banner-img d-flex h-100">
+            <img src="assets/images/instructor.png.webp" alt="nclex" srcset="" />
           </div>
-        </nb-card-body>
-
-        <nb-card-footer>
-          We believe that every one has born to succeed. It is just the matter of choosing right path of ground work.
-        </nb-card-footer>
-      </nb-card>
+        </div>
+        <div class="col text-box">
+          <div class="p-6">
+            <p class="secondary-heading">About Us</p>
+            <h1 class="main-heading">
+              Guiding Future Nurses with Over 12 Years of Expertise and International Training
+            </h1>
+            <p class="sub-heading">
+              Sneha Patel's dedication empowers students to excel, with personalized support and a passion for
+              excellence.
+            </p>
+            <br /><br />
+            <a (click)="scrollToSection('section1')" class="btn cta-button mb-5"> Read More </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+  <section id="section1" class="services-section">
+    <div class="section-area p-6">
+      <p class="mt-6">
+        Rudraa Academy is solely run by Sneha Patel. She graduated her B.sc Nursing program from Srinivas Institute of
+        Nursing, Mangalore, Karnataka, India. She received her Master in Nursing in Community Health Nursing from
+        Gujarat Institute of Nursing Education and Research, Ahmedabad, Gujarat, India in 2014. Her curiosity to operate
+        Dialysis machines drove her to receive diploma certificate of Dialysis technician from IKDRTC kidney hospital,
+        Ahmedabad, Gujarat, India. She has been Nurse for more than 12 years. She has received nursing experience in
+        almost all the fields like Renal Transplant unit, Dialysis unit, Gastro intestinal unit, Medical surgical ICU.
+        She also has worked as a Community heath home visiting nurse and she also has worked as a clinical instructor
+        and lecturer in some nursing colleges in India. This was not enough for her. Her knowledge seeking attitude,
+        enthusiasm encouraged her to get more experience outside of country and so she pursued her MSN in Family Nurse
+        Practitioner in 2020 from United state University, California USA. She keeps encouraging and motivating her
+        students to do their best in their field. She is very friendly with her students and so students find themselves
+        very comfortable and satisfied with her while studying. Students who have language barrier to understand the
+        review get extra assistance from Instructor to get pass Nclex. Her leadership, outstanding clinical performance
+        has achieved her many honors. She attends many National and International conferences related to nursing
+        education and Nclex and keep her knowledge updated to give more better and better to her students. <br /><br />
+        <mark
+          >We believe that every one has born to succeed. It is just the matter of choosing right path of ground
+          work.</mark
+        >
+      </p>
+    </div>
+  </section>
+
+  <ngx-website-join-us-section
+    text="Join us at the Medical Institute for cutting-edge research and patient-centered care."
+  ></ngx-website-join-us-section>
 </div>

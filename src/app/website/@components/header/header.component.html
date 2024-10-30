@@ -4,17 +4,20 @@
   ~ See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
   -->
 
-<div class="header-container">
-  <div class="logo-container">
-    <a class="logo" [routerLink]="''">
-      <img src="assets/images/logo-white.png" alt="Vegus" />
-    </a>
+<div class="navbar">
+  <div class="navbar-left">
+    <img src="assets/images/logo-black.png" width="100px" alt="Logo" />
   </div>
-</div>
-
-<div class="header-container">
-  <nb-actions size="small">
-    <nb-action [routerLink]="'about-us'">About Us</nb-action>
-    <nb-action [routerLink]="'admin'">Login</nb-action>
-  </nb-actions>
+  <div class="navbar-middle">
+    <ul>
+      <li><a [routerLink]="['']" [ngClass]="{active: isActive('/')}">Home</a></li>
+      <li><a [routerLink]="['/about-us']" [ngClass]="{active: isActive('/about-us')}">About</a></li>
+      <li>
+        <a (click)="navigateToSection('features')">Features</a>
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-right">
+    <button (click)="goToSignIn()">Sign In</button>
+  </div>
 </div>
