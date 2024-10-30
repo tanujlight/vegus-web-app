@@ -9,47 +9,49 @@
 @import '../../../@theme//styles/themes.scss';
 
 @include nb-install-component() {
-    nav{
-      box-shadow: none !important;
-    }
-    .navbar{
+  nav {
+    box-shadow: none !important;
+  }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: auto 40px;
+    box-shadow: none !important;
+    .navbar-middle ul {
+      margin-bottom: -10px;
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding:auto 40px;
-      box-shadow: none !important;
-      .navbar-middle ul {
-        margin-bottom: -10px;
-        list-style: none;
-        display: flex;
-        gap: 10px 20px;
-        padding: 15px;
-        @media (max-width: 768px) {
-          display: none;
-        }
-        a {
-          text-decoration: none;
-          color: #0067A9;
-        }
-        a.active,a:hover {
-          padding-bottom: 5px;
-          border-bottom: 2px solid #0067A9;
-          color: #0067A9;
-          font-weight: 600;
-        }
+      gap: 10px 20px;
+      padding: 15px;
+      @media (max-width: 768px) {
+        display: none;
       }
-      button{
-        padding:8px 15px;
-        border:0;
-        border-radius:100px;
-        border:1px solid #005bb5;
-        color: #005bb5;
-        background: transparent;
+      a {
+        text-decoration: none;
+        color: #0067a9;
+        cursor: pointer;
       }
-      button:hover{
-        background: #005bb5;
-        border-color: #005bb5;
-        color: #fff;
+      a.active,
+      a:hover {
+        padding-bottom: 5px;
+        border-bottom: 2px solid #0067a9;
+        color: #0067a9;
+        font-weight: 600;
       }
     }
+    button {
+      padding: 8px 15px;
+      border: 0;
+      border-radius: 100px;
+      border: 1px solid #005bb5;
+      color: #005bb5;
+      background: transparent;
+    }
+    button:hover {
+      background: #005bb5;
+      border-color: #005bb5;
+      color: #fff;
+    }
+  }
 }

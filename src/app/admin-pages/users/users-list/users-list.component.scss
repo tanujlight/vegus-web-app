@@ -16,6 +16,13 @@
       padding: 1rem 0.1rem;
     }
 
+    .table-outer-container {
+      padding: 0;
+      nb-tab {
+        padding: 0;
+      }
+    }
+
     td.ng2-smart-actions {
       ng2-st-tbody-custom {
         display: flex;

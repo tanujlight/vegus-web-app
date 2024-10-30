@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 import {UserStore} from 'app/@core/stores/user.store'
+import {PlansApi} from 'app/services/apis/plans.service'
 
 @Component({
   selector: 'ngx-home',
@@ -8,6 +9,7 @@ import {UserStore} from 'app/@core/stores/user.store'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  plans = []
   openItemIndex: number | null = null
   faqItems = [
     {
@@ -27,13 +29,35 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  constructor(protected userStore: UserStore, private router: Router) {}
+  constructor(protected userStore: UserStore, private router: Router, private plansApi: PlansApi) {}
 
   // faq section
   toggleItem(index: number): void {
     this.openItemIndex = this.openItemIndex === index ? null : index
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPlans()
+  }
+
+  getPlans() {
+    const query = {
+      type: 'subscription'
+    }
+    this.plansApi.list(query).subscribe((plans: any[]) => {
+      this.plans = plans.map(p => {
+        p.hasDiscount = false
+
+        if (p.discount) {
+          p.hasDiscount = true
+          const discountAmount = (p.discount / 100) * p.price
+
+          p.finalPrice = p.price - discountAmount
+        }
+
+        return p
+      })
+    })
+  }
 
   goToSignUp() {
     const userRole = this.userStore.getUser()?.role || ''

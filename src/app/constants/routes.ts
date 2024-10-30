@@ -1,5 +1,3 @@
-import {V} from '@angular/cdk/keycodes'
-
 export const ADMIN_ROUTES = {
   DASHBOARD: '/admin/dashboard',
   USERS: '/admin/users/list',

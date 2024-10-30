@@ -14,6 +14,8 @@ export class UsersListComponent implements OnInit {
   tableColumns: any = {}
   dataSource
 
+  activeTab: 'user' | 'subscriber' = 'user'
+
   tableSettings = {
     actions: {
       columnTitle: 'Actions',
@@ -39,6 +41,27 @@ export class UsersListComponent implements OnInit {
   ngOnInit(): void {
     this.initializeTableColumns()
     this.dataSource = this.usersService.gridDataSource
+
+    setTimeout(() => {
+      this.dataSource.setFilter([
+        {
+          field: 'role',
+          search: this.activeTab
+        }
+      ])
+    })
+  }
+
+  changeTab(data) {
+    if (this.activeTab !== data.tabId) {
+      this.activeTab = data.tabId
+      this.dataSource.setFilter([
+        {
+          field: 'role',
+          search: this.activeTab
+        }
+      ])
+    }
   }
 
   private initializeTableColumns() {
@@ -67,6 +90,12 @@ export class UsersListComponent implements OnInit {
         title: 'Phone',
         type: 'string',
         editable: false
+      },
+      role: {
+        title: 'Role',
+        type: 'string',
+        editable: false,
+        hide: true
       },
       status: {
         title: 'Status',

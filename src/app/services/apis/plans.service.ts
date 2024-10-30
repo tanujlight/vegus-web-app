@@ -55,4 +55,8 @@ export class PlansApi {
   verifyStripeSession(params: {sessionId: string}): Observable<any> {
     return this.api.post(`${this.apiController}/verify-stripe-session`, params)
   }
+
+  getPlans(): Observable<any[]> {
+    return this.api.get(`${this.apiController}/get-plans`).pipe(map(data => data))
+  }
 }

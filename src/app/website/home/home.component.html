@@ -129,46 +129,31 @@
     </div>
   </section>
 
-  <!-- <section class="subscription-section">
-    <h2>Choose Your Plan</h2>
+  <section *ngIf="this.plans.length > 0" id="subscription-plans" class="subscription-section">
+    <h2>Flexible Pricing Options to Meet Your Needs</h2>
     <div class="plans-container">
-      <div class="plan-card">
-        <h3 class="secondary-heading">Basic Plan</h3>
-        <div class="price">$9.99/month</div>
-        <ul>
-          <li>1 Test</li>
-          <li>Basic Support</li>
-          <li>Community Access</li>
+      <div class="plan-card" *ngFor="let plan of plans">
+        <h3>{{ plan.name }}</h3>
+        <div class="price" *ngIf="plan.hasDiscount">
+          ${{ plan.finalPrice }} <span class="old-price">${{ plan.price }}</span>
+        </div>
+        <div class="price" *ngIf="!plan.hasDiscount">${{ plan.price }}</div>
+        <ul class="features-list">
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 2,300+ Practice Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 500+ NGN Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> High-Yield Review Videos</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Adaptive (CAT) Practice Tests</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Digital Flashcards</li>
+          <li>
+            <nb-icon icon="arrow-circle-right-outline"></nb-icon>
+            <span class="highlight">{{ plan?.features?.assessments }} Self-Assessment</span>
+          </li>
         </ul>
         <br />
-        <button>Select Plan</button>
-      </div>
-
-      <div class="plan-card">
-        <h3 class="secondary-heading">Standard Plan</h3>
-        <div class="price">$19.99/month</div>
-        <ul>
-          <li>5 Test</li>
-          <li>Priority Support</li>
-          <li>Access to Pro Features</li>
-        </ul>
-        <br />
-        <button>Select Plan</button>
-      </div>
-
-      <div class="plan-card">
-        <h3 class="secondary-heading">Premium Plan</h3>
-        <div class="price">$29.99/month</div>
-        <ul>
-          <li>10 Test</li>
-          <li>Dedicated Support</li>
-          <li>All Features Access</li>
-        </ul>
-        <br />
-        <button>Select Plan</button>
+        <button [routerLink]="['auth/register']">Select Plan</button>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <section class="faq-section">
     <h2>FAQs</h2>
