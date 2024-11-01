@@ -11,7 +11,8 @@ import {AboutUsComponent} from './about-us/about-us.component'
 import {HeaderComponent} from './@components/header/header.component'
 import {FooterComponent} from './@components/footer/footer.component'
 import {NbLayoutModule, NbActionsModule, NbCardModule, NbIconModule} from '@nebular/theme'
-import {JoinUsSectionComponent} from './@components/join-us-section/join-us-section.component'
+import {JoinUsSectionComponent} from './@components/join-us-section/join-us-section.component';
+import { CheckoutComponent } from './checkout/checkout.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {JoinUsSectionComponent} from './@components/join-us-section/join-us-sect
     AboutUsComponent,
     HeaderComponent,
     FooterComponent,
-    JoinUsSectionComponent
+    JoinUsSectionComponent,
+    CheckoutComponent
   ],
   imports: [
     WebsiteRoutingModule,

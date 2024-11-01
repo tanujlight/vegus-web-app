@@ -1,0 +1,51 @@
+<div class="checkout-container">
+    <h2>Course Checkout</h2>
+    <form class="checkout-form">
+      
+      <!-- Personal Information -->
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <!-- Course Selection -->
+      <div class="form-group">
+        <label for="course">Select Course</label>
+        <select id="course" name="course" required>
+          <option value="" disabled selected>Select a course</option>
+          <option value="course1">Digital Marketing Essentials</option>
+          <option value="course2">Advanced JavaScript Techniques</option>
+          <option value="course3">UI/UX Design Fundamentals</option>
+        </select>
+      </div>
+
+      <!-- Payment Information -->
+      <div class="form-group">
+        <label for="card">Credit Card Number</label>
+        <input type="text" id="card" name="card" required>
+      </div>
+
+      <div class="form-group half-width">
+        <label for="expiry">Expiry Date</label>
+        <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+      </div>
+
+      <div class="form-group half-width">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" required>
+      </div>
+
+      <!-- Discount Code -->
+      <div class="form-group">
+        <label for="discount">Discount Code (optional)</label>
+        <input type="text" id="discount" name="discount" placeholder="Enter code if available">
+      </div>
+
+      <button type="submit" class="btn-submit">Complete Purchase</button>
+    </form>
+  </div>

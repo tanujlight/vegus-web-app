@@ -13,12 +13,17 @@ import {TermsAndConditionsComponent} from './terms-and-conditions/terms-and-cond
 import {PrivacyPolicyComponent} from './privacy-policy/privacy-policy.component'
 import {AboutUsComponent} from './about-us/about-us.component'
 import {HomeComponent} from './home/home.component'
+import { CheckoutComponent } from './checkout/checkout.component'
 
 const routes: Routes = [
   {
     path: '',
     component: WebsiteComponent,
     children: [
+      {
+        path: 'checkout',
+        component: CheckoutComponent
+      },
       {
         path: 'refund-policy',
         component: RefundPolicyComponent
