@@ -6,6 +6,15 @@
     display: grid;
     grid-template-columns:3fr 1fr;
     gap:30px;
+    @media (max-width: 1000px) {
+      grid-template-columns:1fr;
+      .sidebar{
+        order: 1;
+      }
+      .main{
+        order: 2;
+      }
+    }
     .bg-white{
       background-color: #fff;
       color: #000;
@@ -57,6 +66,7 @@
   
     .half-width {
       width: 48%;
+      @media (max-width: 768px) { width: 100%;}
       display: inline-block;
       margin-right: 4%;
   
