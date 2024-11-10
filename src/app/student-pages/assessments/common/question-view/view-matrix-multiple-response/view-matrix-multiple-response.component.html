@@ -1,0 +1,54 @@
+<div class="row">
+  <!-- Question view for student when they are taking the exam & Admin When they are viewing on their portal -->
+  <div class="col-12 mt-2">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th scope="col" [ngClass]="actionColumnWidth">{{ question?.actionTitle }}</th>
+          <th
+            scope="col"
+            [ngClass]="questionColumnWidth"
+            *ngFor="let headingItem of question.columns; let columnIndex = index"
+          >
+            {{ headingItem?.value }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of question.optionsArray; let i = index">
+          <td>
+            {{ item.value }}
+          </td>
+          <td *ngFor="let optionItem of item.options; let optionIndex = index">
+            <div class="row">
+              <div *ngIf="question?.showAnswer" class="col-2">
+                <nb-icon
+                  *ngIf="optionItem.isCorrect"
+                  [status]="'success'"
+                  [icon]="'checkmark-circle-2-outline'"
+                ></nb-icon>
+                <nb-icon
+                  *ngIf="optionItem.userSelectedAnswer && !optionItem.isCorrect"
+                  [status]="'danger'"
+                  [icon]="'close-circle-outline'"
+                ></nb-icon>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <nb-checkbox
+                    [disabled]="question?.isAttempted"
+                    [(ngModel)]="optionItem.userSelectedAnswer"
+                  ></nb-checkbox>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

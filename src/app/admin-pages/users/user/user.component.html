@@ -17,7 +17,7 @@
             <!-- Role in user edit or add  -->
             <div class="form-group">
               <label for="role">Role</label>
-              <nb-select fullWidth id="role" formControlName="role" matRipple class="select-field">
+              <nb-select disabled fullWidth id="role" formControlName="role" matRipple class="select-field">
                 <nb-option matRipple *ngFor="let r of rolesList" [value]="r.value">{{ r.name }} </nb-option>
               </nb-select>
             </div>
@@ -33,243 +33,327 @@
                 formControlName="status"
                 matRipple
                 class="select-field"
-                disabled="mode == 'EditSelf'"
+                [disabled]="mode == 'EditSelf'"
               >
                 <nb-option matRipple *ngFor="let r of statusList" [value]="r.value">{{ r.name }} </nb-option>
               </nb-select>
             </div>
           </div>
 
-          <div *ngIf="mode != 'EditSelf'" class="col-sm-6">
-            <div class="form-group">
-              <label for="dateOfEnrollment">Date of Enrollment</label>
+          <!-- Basic Details -->
+          <div class="col-12">
+            <nb-card>
+              <nb-card-header>Basic Details</nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="firstName">First Name</label>
+                      <input
+                        nbInput
+                        id="firstName"
+                        fullWidth
+                        formControlName="firstName"
+                        [status]="firstName.dirty ? (firstName.invalid ? 'danger' : 'success') : ''"
+                        [attr.aria-invalid]="firstName.invalid && firstName.touched ? true : null"
+                        class="form-control"
+                        placeholder="First Name"
+                      />
+                      <ngx-validation-message
+                        label="First Name"
+                        [showRequired]="firstName?.errors?.required && firstName.touched"
+                      >
+                      </ngx-validation-message>
+                    </div>
+                  </div>
 
-              <input
-                nbInput
-                id="dateOfEnrollment"
-                formControlName="dateOfEnrollment"
-                fullWidth
-                class="form-control"
-                placeholder="Date of Enrollment"
-                [nbDatepicker]="dateOfEnrollment"
-              />
-              <nb-datepicker #dateOfEnrollment></nb-datepicker>
-            </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="lastName">Last Name</label>
+                      <input
+                        nbInput
+                        id="lastName"
+                        fullWidth
+                        formControlName="lastName"
+                        [status]="lastName.dirty ? (lastName.invalid ? 'danger' : 'success') : ''"
+                        [attr.aria-invalid]="lastName.invalid && lastName.touched ? true : null"
+                        class="form-control"
+                        placeholder="Last Name"
+                      />
+                      <ngx-validation-message
+                        label="Last Name"
+                        [showRequired]="lastName?.errors?.required && lastName.touched"
+                      >
+                      </ngx-validation-message>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputDob">Date of Birth</label>
+                      <input
+                        nbInput
+                        id="dob"
+                        formControlName="dob"
+                        fullWidth
+                        class="form-control"
+                        placeholder="Date of Birth"
+                        [nbDatepicker]="dobPicker"
+                      />
+                      <nb-datepicker #dobPicker></nb-datepicker>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputEmail">Email</label>
+                      <input
+                        nbInput
+                        id="inputEmail"
+                        fullWidth
+                        formControlName="email"
+                        (input)="onEmailInput($event)"
+                        [status]="
+                          (email?.errors?.required || email?.hasError('pattern')) && email.touched ? 'danger' : ''
+                        "
+                        class="form-control"
+                        placeholder="Email"
+                      />
+                      <ngx-validation-message
+                        label="Email"
+                        [showPattern]="email?.hasError('pattern') && email.touched"
+                        [showRequired]="email?.errors?.required && email.touched"
+                        min="1"
+                        max="120"
+                      ></ngx-validation-message>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="countryCode">Country Code (i.e +1)</label>
+                      <input
+                        nbInput
+                        id="countryCode"
+                        fullWidth
+                        formControlName="countryCode"
+                        [status]="
+                          (countryCode?.errors?.required || countryCode?.hasError('pattern')) && countryCode.touched
+                            ? 'danger'
+                            : ''
+                        "
+                        class="form-control"
+                        placeholder="Country Code"
+                      />
+                      <ngx-validation-message
+                        label="Country Code"
+                        [showPattern]="countryCode?.hasError('pattern') && countryCode.touched"
+                        [showRequired]="countryCode?.errors?.required && countryCode.touched"
+                        min="2"
+                        max="4"
+                      ></ngx-validation-message>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputPhone">Phone</label>
+                      <input
+                        nbInput
+                        id="inputPhone"
+                        fullWidth
+                        formControlName="phone"
+                        [status]="
+                          (phone?.errors?.required || phone?.hasError('pattern')) && phone.touched ? 'danger' : ''
+                        "
+                        class="form-control"
+                        placeholder="Phone"
+                      />
+                      <ngx-validation-message
+                        label="Phone"
+                        [showPattern]="phone?.hasError('pattern') && phone.touched"
+                        [showRequired]="phone?.errors?.required && phone.touched"
+                        min="10"
+                        max="10"
+                      ></ngx-validation-message>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="inputPhone">Whatsapp Phone (if any)</label>
+                      <input
+                        nbInput
+                        id="whatsappPhone"
+                        fullWidth
+                        formControlName="whatsappPhone"
+                        [status]="
+                          (whatsappPhone?.errors?.required || whatsappPhone?.hasError('pattern')) &&
+                          whatsappPhone.touched
+                            ? 'danger'
+                            : ''
+                        "
+                        class="form-control"
+                        placeholder="Whatsapp Phone"
+                      />
+                      <ngx-validation-message
+                        label="Phone"
+                        [showPattern]="whatsappPhone?.hasError('pattern') && whatsappPhone.touched"
+                        [showRequired]="whatsappPhone?.errors?.required && whatsappPhone.touched"
+                        min="10"
+                        max="10"
+                      ></ngx-validation-message>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card>
           </div>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input
-                nbInput
-                id="firstName"
-                fullWidth
-                formControlName="firstName"
-                [status]="firstName.dirty ? (firstName.invalid ? 'danger' : 'success') : ''"
-                [attr.aria-invalid]="firstName.invalid && firstName.touched ? true : null"
-                class="form-control"
-                placeholder="First Name"
-              />
-              <ngx-validation-message
-                label="First Name"
-                [showRequired]="firstName?.errors?.required && firstName.touched"
-              >
-              </ngx-validation-message>
-            </div>
+          <!-- Address -->
+          <div class="col-12">
+            <nb-card>
+              <nb-card-header>Address</nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group" formGroupName="address">
+                      <input
+                        fullWidth
+                        nbInput
+                        class="form-control"
+                        id="inputStreet"
+                        placeholder="Address"
+                        formControlName="street"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="address">
+                      <label for="inputCity">City</label>
+                      <input
+                        fullWidth
+                        nbInput
+                        class="form-control"
+                        id="inputCity"
+                        placeholder="City"
+                        formControlName="city"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="address">
+                      <label for="inputState">State</label>
+                      <input
+                        fullWidth
+                        nbInput
+                        class="form-control"
+                        id="inputState"
+                        placeholder="State"
+                        formControlName="state"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="address">
+                      <label for="inputCountry">Country</label>
+                      <input
+                        fullWidth
+                        nbInput
+                        class="form-control"
+                        id="inputCountry"
+                        placeholder="Country"
+                        formControlName="country"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="address">
+                      <label for="inputZipCode">Postal Code</label>
+                      <input
+                        fullWidth
+                        nbInput
+                        class="form-control"
+                        id="inputZipCode"
+                        placeholder="Postal Code"
+                        formControlName="zipCode"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card>
           </div>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input
-                nbInput
-                id="lastName"
-                fullWidth
-                formControlName="lastName"
-                [status]="lastName.dirty ? (lastName.invalid ? 'danger' : 'success') : ''"
-                [attr.aria-invalid]="lastName.invalid && lastName.touched ? true : null"
-                class="form-control"
-                placeholder="Last Name"
-              />
-              <ngx-validation-message label="Last Name" [showRequired]="lastName?.errors?.required && lastName.touched">
-              </ngx-validation-message>
-            </div>
-          </div>
+          <!-- Class Details -->
+          <div *ngIf="user?.role === 'user'" class="col-12">
+            <nb-card>
+              <nb-card-header>Class Details</nb-card-header>
+              <nb-card-body>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="classDetails">
+                      <nb-checkbox formControlName="assessmentsEnabled"> Self Assessments </nb-checkbox>
+                    </div>
+                  </div>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputDob">Date of Birth</label>
-              <input
-                nbInput
-                id="dob"
-                formControlName="dob"
-                fullWidth
-                class="form-control"
-                placeholder="Date of Birth"
-                [nbDatepicker]="dobPicker"
-              />
-              <nb-datepicker #dobPicker></nb-datepicker>
-            </div>
-          </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="dateOfEnrollment">Date of Enrollment</label>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputEmail">Email</label>
-              <input
-                nbInput
-                id="inputEmail"
-                fullWidth
-                formControlName="email"
-                (input)="onEmailInput($event)"
-                [status]="(email?.errors?.required || email?.hasError('pattern')) && email.touched ? 'danger' : ''"
-                class="form-control"
-                placeholder="Email"
-              />
-              <ngx-validation-message
-                label="Email"
-                [showPattern]="email?.hasError('pattern') && email.touched"
-                [showRequired]="email?.errors?.required && email.touched"
-                min="1"
-                max="120"
-              ></ngx-validation-message>
-            </div>
-          </div>
+                      <input
+                        nbInput
+                        id="dateOfEnrollment"
+                        formControlName="dateOfEnrollment"
+                        fullWidth
+                        class="form-control"
+                        placeholder="Date of Enrollment"
+                        [nbDatepicker]="dateOfEnrollment"
+                      />
+                      <nb-datepicker #dateOfEnrollment></nb-datepicker>
+                    </div>
+                  </div>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="countryCode">Country Code (i.e +1)</label>
-              <input
-                nbInput
-                id="countryCode"
-                fullWidth
-                formControlName="countryCode"
-                [status]="
-                  (countryCode?.errors?.required || countryCode?.hasError('pattern')) && countryCode.touched
-                    ? 'danger'
-                    : ''
-                "
-                class="form-control"
-                placeholder="Country Code"
-              />
-              <ngx-validation-message
-                label="Country Code"
-                [showPattern]="countryCode?.hasError('pattern') && countryCode.touched"
-                [showRequired]="countryCode?.errors?.required && countryCode.touched"
-                min="2"
-                max="4"
-              ></ngx-validation-message>
-            </div>
-          </div>
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="classDetails">
+                      <label for="classStartDate">Class Start Date</label>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputPhone">Phone</label>
-              <input
-                nbInput
-                id="inputPhone"
-                fullWidth
-                formControlName="phone"
-                [status]="(phone?.errors?.required || phone?.hasError('pattern')) && phone.touched ? 'danger' : ''"
-                class="form-control"
-                placeholder="Phone"
-              />
-              <ngx-validation-message
-                label="Phone"
-                [showPattern]="phone?.hasError('pattern') && phone.touched"
-                [showRequired]="phone?.errors?.required && phone.touched"
-                min="10"
-                max="10"
-              ></ngx-validation-message>
-            </div>
-          </div>
+                      <input
+                        nbInput
+                        id="classStartDate"
+                        formControlName="startDate"
+                        fullWidth
+                        class="form-control"
+                        placeholder="Start Date"
+                        [nbDatepicker]="classStartDate"
+                      />
+                      <nb-datepicker #classStartDate></nb-datepicker>
+                    </div>
+                  </div>
 
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="inputPhone">Whatsapp Phone (if any)</label>
-              <input
-                nbInput
-                id="whatsappPhone"
-                fullWidth
-                formControlName="whatsappPhone"
-                [status]="
-                  (whatsappPhone?.errors?.required || whatsappPhone?.hasError('pattern')) && whatsappPhone.touched
-                    ? 'danger'
-                    : ''
-                "
-                class="form-control"
-                placeholder="Whatsapp Phone"
-              />
-              <ngx-validation-message
-                label="Phone"
-                [showPattern]="whatsappPhone?.hasError('pattern') && whatsappPhone.touched"
-                [showRequired]="whatsappPhone?.errors?.required && whatsappPhone.touched"
-                min="10"
-                max="10"
-              ></ngx-validation-message>
-            </div>
-          </div>
+                  <div class="col-sm-6">
+                    <div class="form-group" formGroupName="classDetails">
+                      <label for="classEndDate">Class End Date</label>
 
-          <div class="col-sm-6">
-            <div class="form-group" formGroupName="address">
-              <label for="inputStreet">Address</label>
-              <input
-                fullWidth
-                nbInput
-                class="form-control"
-                id="inputStreet"
-                placeholder="Address"
-                formControlName="street"
-              />
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group" formGroupName="address">
-              <label for="inputCity">City</label>
-              <input fullWidth nbInput class="form-control" id="inputCity" placeholder="City" formControlName="city" />
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group" formGroupName="address">
-              <label for="inputState">State</label>
-              <input
-                fullWidth
-                nbInput
-                class="form-control"
-                id="inputState"
-                placeholder="State"
-                formControlName="state"
-              />
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group" formGroupName="address">
-              <label for="inputCountry">Country</label>
-              <input
-                fullWidth
-                nbInput
-                class="form-control"
-                id="inputCountry"
-                placeholder="Country"
-                formControlName="country"
-              />
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group" formGroupName="address">
-              <label for="inputZipCode">Postal Code</label>
-              <input
-                fullWidth
-                nbInput
-                class="form-control"
-                id="inputZipCode"
-                placeholder="Postal Code"
-                formControlName="zipCode"
-              />
-            </div>
+                      <input
+                        nbInput
+                        id="classEndDate"
+                        formControlName="endDate"
+                        fullWidth
+                        class="form-control"
+                        placeholder="End Date"
+                        [nbDatepicker]="classEndDate"
+                      />
+                      <nb-datepicker #classEndDate></nb-datepicker>
+                    </div>
+                  </div>
+                </div>
+              </nb-card-body>
+            </nb-card>
           </div>
         </div>
       </div>

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-12 highlighted-question-description text-justify">
+    <span class="lh-1-5" *ngFor="let item of content; let contentIndex = index">
+      <ng-container *ngIf="item.type === 'fillup'">
+        <span *ngIf="question?.showAnswer">
+          <nb-icon *ngIf="item.correct" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+          <nb-icon
+            *ngIf="item.userSelectedAnswer && !item.correct"
+            [status]="'danger'"
+            [icon]="'close-circle-outline'"
+          ></nb-icon>
+        </span>
+        <span *ngIf="!question?.isAttempted">
+          <span
+            class="highlighted"
+            role="button"
+            [ngClass]="item.userSelectedAnswer ? 'selected' : ''"
+            (click)="fillupClicked(item.value, contentIndex)"
+          >
+            {{ item.value }}
+          </span>
+        </span>
+        <span *ngIf="question?.isAttempted">
+          <span
+            class="highlighted"
+            [ngClass]="item.userSelectedAnswer ? 'selected' : item.correct ? 'highlighted-option' : ''"
+            >{{ item.value }}1</span
+          >
+        </span>
+      </ng-container>
+
+      <ng-container *ngIf="item.type === 'text'">
+        <span>{{ item.value }}</span>
+      </ng-container>
+    </span>
+  </div>
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

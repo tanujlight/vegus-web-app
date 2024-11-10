@@ -26,7 +26,8 @@ export enum CaseStudyFormMode {
 @Component({
   selector: 'ngx-case-study',
   templateUrl: './case-study.component.html',
-  styleUrls: ['./case-study.component.scss']
+  styleUrls: ['./case-study.component.scss'],
+  providers: [CaseStudiesApi, UploadAdapter]
 })
 export class CaseStudyComponent implements OnInit, OnDestroy {
   @Input() isDialog?: boolean = false

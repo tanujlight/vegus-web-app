@@ -41,8 +41,8 @@ const routes: Routes = [
         loadChildren: () => import('./exams/exams.module').then(m => m.ExamsModule)
       },
       {
-        path: 'assesments',
-        loadChildren: () => import('./assesments/assesments.module').then(m => m.AssesmentsModule)
+        path: 'assessments',
+        loadChildren: () => import('./assessments/assessments.module').then(m => m.AssessmentsModule)
       },
       {
         path: 'reports',

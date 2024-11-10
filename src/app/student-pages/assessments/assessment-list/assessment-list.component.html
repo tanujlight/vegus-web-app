@@ -1,0 +1,130 @@
+<div>
+  <nb-card>
+    <nb-card-header>
+      <span> Assessments </span>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- NO ASSESSMENTS -->
+      <div *ngIf="noAssessments" class="row">
+        <div class="col-12">
+          <h6 class="text-center">No assessment is available!</h6>
+        </div>
+      </div>
+
+      <div *ngIf="!noAssessments" class="row">
+        <!-- USER Started ASSESSMENT -->
+        <div class="col-lg-4 col-md-6 col-12" *ngFor="let assessmentItem of userStartedAssessments">
+          <nb-card>
+            <nb-card-header class="text-center">
+              <span> {{ assessmentItem.title }} </span>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-12">
+                  <p>STARTED ON: {{ assessmentItem.startDate | date : 'mediumDate' }}</p>
+                  <p>END ON: {{ assessmentItem.endDate | date : 'mediumDate' }}</p>
+                  <p>Total Marks: {{ assessmentItem.totalMarks }}</p>
+                  <p>
+                    <span *ngIf="assessmentItem.type == 'time-based'"
+                      >Time Limit: {{ assessmentItem.timeLimit }} min(s)</span
+                    >
+                    <span *ngIf="assessmentItem.type == 'tutorial'">No Time Limit</span>
+                  </p>
+                </div>
+
+                <div class="col-12 text-right">
+                  <button nbButton status="info" (click)="takeUserAssessment(assessmentItem)" hero>
+                    <span>Take assessment</span>
+                  </button>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+        <!-- User Expired Assessments -->
+        <div class="col-lg-4 col-md-6 col-12" *ngFor="let assessmentItem of userExpiredAssessments">
+          <nb-card>
+            <nb-card-header class="text-center">
+              <span> {{ assessmentItem.title }} </span>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-12">
+                  <p>STARTED ON: {{ assessmentItem.startDate | date : 'mediumDate' }}</p>
+                  <p>Expired ON: {{ assessmentItem.endDate | date : 'mediumDate' }}</p>
+                </div>
+
+                <div class="col-12 text-right">
+                  <button nbButton status="success" disabled hero>
+                    <span>Expired</span>
+                  </button>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+        <!-- User Completed Assessments -->
+        <div class="col-lg-4 col-md-6 col-12" *ngFor="let assessmentItem of userCompletedAssessments">
+          <nb-card>
+            <nb-card-header class="text-center">
+              <span> {{ assessmentItem.title }} </span>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-12">
+                  <p>STARTED ON: {{ assessmentItem.startDate | date : 'mediumDate' }}</p>
+                  <p>COMPLETED ON: {{ assessmentItem.completedAt | date : 'mediumDate' }}</p>
+                  <p>Total Marks: {{ assessmentItem.totalMarks }}</p>
+                  <p>Scored Marks: {{ assessmentItem.scoredMarks }}</p>
+                </div>
+
+                <div class="col-12 text-right">
+                  <button nbButton status="warning" (click)="viewUserAssessment(assessmentItem)" hero>
+                    <span>View</span>
+                  </button>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+        <!-- AVAILABLE ASSESSMENTS -->
+        <div class="col-lg-4 col-md-6 col-12" *ngFor="let assessmentItem of availableAssessments">
+          <nb-card>
+            <nb-card-header class="text-center">
+              <span> {{ assessmentItem.title }} </span>
+            </nb-card-header>
+            <nb-card-body>
+              <div class="row">
+                <div class="col-12">
+                  <p>Total Marks: {{ assessmentItem.totalMarks }}</p>
+                </div>
+                <div class="col-12">
+                  <p>
+                    <span *ngIf="assessmentItem.type == 'time-based'"
+                      >Time Limit: {{ assessmentItem.timeLimit }} min(s)</span
+                    >
+                    <span *ngIf="assessmentItem.type == 'tutorial'">No Time Limit</span>
+                  </p>
+                </div>
+                <div class="col-12 text-right">
+                  <button
+                    nbButton
+                    status="primary"
+                    [disabled]="assessmentItem.disabled"
+                    (click)="activateUserAssessment(assessmentItem)"
+                    hero
+                  >
+                    Activate Assessment
+                  </button>
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

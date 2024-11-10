@@ -8,7 +8,7 @@
     <nb-card-header>
       <button type="button" size="small" (click)="back()" nbButton>Back</button>&nbsp;
       <span> {{ mode }} Case study </span>
-      <span *ngIf="caseStudyForm.value.uniqueIdentifier">({{caseStudyForm.value.uniqueIdentifier}})</span>
+      <span *ngIf="caseStudyForm.value.uniqueIdentifier">({{ caseStudyForm.value.uniqueIdentifier }})</span>
     </nb-card-header>
     <nb-card-body>
       <div [formGroup]="caseStudyForm" class="container">
@@ -68,13 +68,31 @@
               <label for="usage">Usage Type</label>
               <div class="row">
                 <div class="col-sm-4">
-                  <input type="checkbox" name="options" [(ngModel)]="examUsage.practice" [ngModelOptions]="{standalone: true}"/> Practice
+                  <input
+                    type="checkbox"
+                    name="options"
+                    [(ngModel)]="examUsage.practice"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  Practice
                 </div>
                 <div class="col-sm-4">
-                  <input type="checkbox" name="options" [(ngModel)]="examUsage.exam" [ngModelOptions]="{standalone: true}"/> Exam
+                  <input
+                    type="checkbox"
+                    name="options"
+                    [(ngModel)]="examUsage.exam"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  Exam
                 </div>
                 <div class="col-sm-4">
-                  <input type="checkbox" name="options" [(ngModel)]="examUsage.assessment" [ngModelOptions]="{standalone: true}"/> Assessment
+                  <input
+                    type="checkbox"
+                    name="options"
+                    [(ngModel)]="examUsage.assessment"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  Assessment
                 </div>
               </div>
             </div>

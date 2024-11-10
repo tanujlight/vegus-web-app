@@ -27,6 +27,7 @@ export class CalculatorComponent {
 
   evaluateExpression() {
     try {
+      // eslint-disable-next-line no-eval
       this.expression = eval(this.expression)
     } catch (error) {
       this.expression = 'Error'

@@ -5,6 +5,7 @@ import {ThemeModule} from '../../@theme/theme.module'
 import {AuthModule} from '../../@auth/auth.module'
 import {ComponentsModule} from '../../@components/components.module'
 import {MatTabsModule} from '@angular/material/tabs'
+import {CaseStudiesApi} from '../../services/apis/case-studies.service'
 
 import {
   NbButtonModule,
@@ -28,9 +29,9 @@ import {QuestionsModule} from '../questions/questions.module'
 import {CaseStudyViewComponent} from './case-study-view/case-study-view.component'
 import {CaseStudyViewRendererComponent} from './case-study-view-renderer/case-study-view-renderer.component'
 import {QuestionTypeViewModule} from '../../components/question-type-view/question-type-view.module'
-import {ScrollToTopModule} from 'app/components/scroll-to-top/scroll-to-top.module';
-import { CaseStudiesListViewComponent } from './case-studies-list-view/case-studies-list-view.component'
-import { CaseStudyComponent } from './case-study/case-study.component'
+import {ScrollToTopModule} from 'app/components/scroll-to-top/scroll-to-top.module'
+import {CaseStudiesListViewComponent} from './case-studies-list-view/case-studies-list-view.component'
+import {CaseStudyComponent} from './case-study/case-study.component'
 
 const NB_MODULES = [
   NbButtonModule,
@@ -47,7 +48,12 @@ const NB_MODULES = [
 ]
 
 @NgModule({
-  declarations: [...routedComponents, CaseStudyViewComponent, CaseStudyViewRendererComponent, CaseStudiesListViewComponent],
+  declarations: [
+    ...routedComponents,
+    CaseStudyViewComponent,
+    CaseStudyViewRendererComponent,
+    CaseStudiesListViewComponent
+  ],
   imports: [
     CommonModule,
     CaseStudiesRoutingModule,
@@ -66,7 +72,7 @@ const NB_MODULES = [
     ...NB_MODULES
   ],
   entryComponents: [CaseStudyViewComponent, CaseStudyComponent],
-  providers: [UploadAdapter],
+  providers: [UploadAdapter, CaseStudiesApi],
   exports: [CaseStudyViewComponent, CaseStudyViewRendererComponent]
 })
 export class CaseStudiesModule {}

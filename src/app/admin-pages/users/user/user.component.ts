@@ -40,6 +40,10 @@ export class UserComponent implements OnInit, OnDestroy {
     {
       name: 'Student',
       value: 'user'
+    },
+    {
+      name: 'Subscriber',
+      value: 'subscriber'
     }
   ]
 
@@ -117,6 +121,18 @@ export class UserComponent implements OnInit, OnDestroy {
     return this.userForm.get('address').get('country')
   }
 
+  get startDate() {
+    return this.userForm.get('classDetails').get('startDate')
+  }
+
+  get endDate() {
+    return this.userForm.get('classDetails').get('endDate')
+  }
+
+  get assessmentsEnabled() {
+    return this.userForm.get('classDetails').get('assessmentsEnabled')
+  }
+
   mode: UserFormMode
   setViewMode(viewMode: UserFormMode) {
     this.mode = viewMode
@@ -158,6 +174,11 @@ export class UserComponent implements OnInit, OnDestroy {
         state: this.fb.control(''),
         country: this.fb.control(''),
         zipCode: this.fb.control('')
+      }),
+      classDetails: this.fb.group({
+        startDate: this.fb.control(null),
+        endDate: this.fb.control(null),
+        assessmentsEnabled: this.fb.control(false)
       })
     })
   }
@@ -209,8 +230,23 @@ export class UserComponent implements OnInit, OnDestroy {
           state: user.address && user.address.state ? user.address.state : '',
           country: user.address && user.address.country ? user.address.country : '',
           zipCode: user.address && user.address.zipCode ? user.address.zipCode : ''
+        },
+        classDetails: {
+          startDate:
+            (user.classDetails && user.classDetails.startDate && moment(user.classDetails.startDate).toDate()) || null,
+          endDate:
+            (user.classDetails && user.classDetails.endDate && moment(user.classDetails.endDate).toDate()) || null,
+          assessmentsEnabled:
+            user.classDetails && user.classDetails.assessmentsEnabled ? user.classDetails.assessmentsEnabled : false
         }
       })
+
+      if (this.mode === UserFormMode.EDIT_SELF) {
+        this.userForm.get('classDetails').disable()
+        this.userForm.get('role').disable()
+        this.userForm.get('status').disable()
+        this.userForm.get('dateOfEnrollment').disable()
+      }
 
       // this is a place for value changes handling
       // this.userForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {   });

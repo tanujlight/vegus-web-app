@@ -8,8 +8,15 @@
         <div class="col-6">
           <div class="form-group">
             <label for="category">Category</label>
-            <select nbSelect id="category" fullWidth [(ngModel)]="category" class="form-control"
-              placeholder="Select Category" (change)="categoryChange()">
+            <select
+              nbSelect
+              id="category"
+              fullWidth
+              [(ngModel)]="category"
+              class="form-control"
+              placeholder="Select Category"
+              (change)="categoryChange()"
+            >
               <option value="">Select Category</option>
               <option [value]="item.id" *ngFor="let item of allCategories">{{ item.name }}</option>
             </select>
@@ -18,8 +25,15 @@
         <div class="col-6">
           <div class="form-group">
             <label for="subCategory">Sub Category</label>
-            <select nbSelect id="subCategory" fullWidth [(ngModel)]="subCategory" class="form-control"
-              placeholder="Select Sub Category" (change)="subCategoryChange()">
+            <select
+              nbSelect
+              id="subCategory"
+              fullWidth
+              [(ngModel)]="subCategory"
+              class="form-control"
+              placeholder="Select Sub Category"
+              (change)="subCategoryChange()"
+            >
               <option value="">Select Sub Category</option>
               <option [value]="item.id" *ngFor="let item of allSubCategories">{{ item.name }}</option>
             </select>
@@ -31,21 +45,40 @@
   <nb-card>
     <nb-card-header class="d-flex align-items-center justify-content-between">
       <div>
-        <button [size]="'tiny'" outline nbButton status="info" [disabled]="!totalCaseStudyCount || pageNumber === 1"
-          (click)="prevBtnClicked()">
+        <button
+          [size]="'tiny'"
+          outline
+          nbButton
+          status="info"
+          [disabled]="!totalCaseStudyCount || pageNumber === 1"
+          (click)="prevBtnClicked()"
+        >
           <nb-icon icon="arrow-back-outline"></nb-icon>Previous
         </button>
 
         &nbsp;
-        <button [size]="'tiny'" outline status="info" nbButton
-          [disabled]="!totalCaseStudyCount || pageNumber === totalCaseStudyCount" (click)="nextBtnClicked()">
+        <button
+          [size]="'tiny'"
+          outline
+          status="info"
+          nbButton
+          [disabled]="!totalCaseStudyCount || pageNumber === totalCaseStudyCount"
+          (click)="nextBtnClicked()"
+        >
           Next<nb-icon icon="arrow-forward-outline"></nb-icon>
         </button>
       </div>
       <div>
         Go To
-        <input class="go-to-index" fieldSize="tiny" shape="round" nbInput type="number" [(ngModel)]="pageNumber"
-          (change)="getCaseStudy()" />
+        <input
+          class="go-to-index"
+          fieldSize="tiny"
+          shape="round"
+          nbInput
+          type="number"
+          [(ngModel)]="pageNumber"
+          (change)="getCaseStudy()"
+        />
         &nbsp; <span *ngIf="caseStudy">{{ pageNumber }}/{{ totalCaseStudyCount }}</span>
       </div>
       <div>
@@ -56,8 +89,11 @@
       </div>
     </nb-card-header>
     <nb-card-body>
-      <ngx-case-study-view-renderer [caseStudy]="caseStudy" [userType]="'admin'"
-        [viewMode]="'exam'"></ngx-case-study-view-renderer>
+      <ngx-case-study-view-renderer
+        [caseStudy]="caseStudy"
+        [userType]="'admin'"
+        [viewMode]="'exam'"
+      ></ngx-case-study-view-renderer>
     </nb-card-body>
   </nb-card>
 </div>

@@ -45,6 +45,13 @@ export class StudentPagesMenu {
         home: false
       },
       {
+        title: 'Self Assessments',
+        icon: 'award-outline',
+        link: STUDENT_ROUTES.ASSESSMENTS.LIST,
+        data: {roles: ['user', 'subscriber']},
+        home: false
+      },
+      {
         title: 'Study Material',
         icon: 'book-open-outline',
         data: {roles: ['user', 'subscriber']},

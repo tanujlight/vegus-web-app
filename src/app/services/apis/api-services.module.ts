@@ -8,6 +8,7 @@ import {NgModule} from '@angular/core'
 import {CaseStudiesApi} from './case-studies.service'
 import {CategoriesApi} from './categories.service'
 import {ExamsApi} from './exams.service'
+import {AssessmentsApi} from './assessments.service'
 import {ReportsApi} from './reports.service'
 import {QuestionsApi} from './questions.service'
 import {FlashCardsApi} from './flash-cards.service'
@@ -16,6 +17,15 @@ import {PlansApi} from './plans.service'
 @NgModule({
   imports: [],
   declarations: [],
-  providers: [CaseStudiesApi, CategoriesApi, ExamsApi, QuestionsApi, ReportsApi, FlashCardsApi, PlansApi]
+  providers: [
+    CaseStudiesApi,
+    CategoriesApi,
+    ExamsApi,
+    AssessmentsApi,
+    QuestionsApi,
+    ReportsApi,
+    FlashCardsApi,
+    PlansApi
+  ]
 })
 export class ApiServicesModule {}

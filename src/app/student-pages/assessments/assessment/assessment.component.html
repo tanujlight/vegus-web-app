@@ -1,0 +1,103 @@
+<div class="exam-view-dialog">
+  <nb-card class="exam-view-dialog-card">
+    <nb-card-header class="d-flex align-items-center justify-content-between">
+      <span>{{ preparedAssessmentForUser?.title }}</span> &nbsp;
+      <div>
+        <button
+          *ngIf="preparedAssessmentForUser?.type == 'time-based' && assessmentStarted"
+          nbButton
+          size="small"
+          status="secondary"
+        >
+          {{ timerDisplayText || 'starting' }}
+        </button>
+        &nbsp;
+
+        <button
+          *ngIf="assessmentStarted"
+          nbButton
+          size="small"
+          status="primary"
+          [nbPopover]="calculatorPopover"
+          nbPopoverPlacement="bottom"
+        >
+          <nb-icon icon="calculator" pack="ion"></nb-icon>
+        </button>
+        &nbsp;
+        <button *ngIf="assessmentStarted" nbButton size="small" status="primary">
+          Question {{ examStepper?.selectedIndex + 1 }}
+        </button>
+        &nbsp;
+        <button *ngIf="assessmentStarted" nbButton size="small" status="primary">
+          Total {{ preparedAssessmentForUser?.questionsAndCaseStudies.length }}
+        </button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row" *ngIf="!assessmentStarted">
+        <div class="col-sm-6 col-12">
+          <p>Start Date: {{ preparedAssessmentForUser?.startDate | date : 'medium' }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p>End Date: {{ preparedAssessmentForUser?.endDate | date : 'medium' }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p>Total Marks: {{ preparedAssessmentForUser?.totalMarks }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p>Total Questions: {{ preparedAssessmentForUser?.questionsAndCaseStudies.length }}</p>
+        </div>
+        <div class="col-sm-6 col-12">
+          <p>Assessment Type: {{ preparedAssessmentForUser?.type }}</p>
+        </div>
+        <div *ngIf="preparedAssessmentForUser?.type == 'time-based'" class="col-sm-6 col-12">
+          <p>Time Limit: {{ preparedAssessmentForUser?.timeLimit }} min(s)</p>
+        </div>
+
+        <div *ngIf="preparedAssessmentForUser?.specialInstructions" class="col-sm-12">
+          <h6>Instructions</h6>
+          <ngx-sanatize-html-string [htmlString]="preparedAssessmentForUser?.specialInstructions"></ngx-sanatize-html-string>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="text-center">
+            <button nbButton status="primary" (click)="startAssessment()" hero [disabled]="assessment?.status === 'completed'">Start Assessment</button>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="assessmentStarted">
+        <div class="col-sm-12">
+          <nb-stepper #examStepper orientation="horizontal" disableStepNavigation="true">
+            <nb-step
+              *ngFor="let exam of preparedAssessmentForUser?.questionsAndCaseStudies; let questionsAndCaseStudyIndex = index"
+            >
+              <!-- Renders Case study -->
+              <ngx-case-study-view-renderer
+                *ngIf="exam.type == 'caseStudy'"
+                [caseStudy]="exam.caseStudy"
+                [userType]="'student'"
+                [viewMode]="'exam'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-case-study-view-renderer>
+
+              <!-- Renders Question -->
+              <ngx-question-view-renderer
+                *ngIf="exam.type == 'question'"
+                [question]="exam.question"
+                [userType]="'student'"
+                [viewMode]="'exam'"
+                (submitAnswer)="nextQuestion()"
+              ></ngx-question-view-renderer>
+
+            </nb-step>
+          </nb-stepper>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+  <!-- Calculator component -->
+  <ng-template #calculatorPopover>
+    <ngx-calculator></ngx-calculator>
+  </ng-template>
+</div>

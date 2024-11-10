@@ -61,6 +61,13 @@ export class AdminPagesMenu {
         home: false
       },
       {
+        title: 'Assessments',
+        icon: 'award-outline',
+        link: ADMIN_ROUTES.ASSESSMENTS,
+        data: {roles: ['admin']},
+        home: false
+      },
+      {
         title: 'Flash Cards',
         icon: 'flash-outline',
         link: ADMIN_ROUTES.FLASH_CARDS,

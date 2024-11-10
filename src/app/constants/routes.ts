@@ -5,7 +5,7 @@ export const ADMIN_ROUTES = {
   QUESTIONS: '/admin/questions/list',
   CASE_STUDIES: '/admin/case-studies/list',
   EXAMS: '/admin/exams/list',
-  ASSESMENTS: '/admin/assesments/list',
+  ASSESSMENTS: '/admin/assessments/list',
   FLASH_CARDS: '/admin/flash-cards/list',
   PLANS: '/admin/plans/list',
   STUDY_MATERIAL: {
@@ -19,6 +19,10 @@ export const STUDENT_ROUTES = {
   EXAMS: {
     LIST: '/student/exams/list',
     VIEW: '/student/exams/view'
+  },
+  ASSESSMENTS: {
+    LIST: '/student/assessments/list',
+    VIEW: '/student/assessments/view'
   },
   REPORTS: {
     LIST: '/student/reports/list',

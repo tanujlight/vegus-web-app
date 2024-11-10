@@ -1,0 +1,44 @@
+<div class="row">
+  <nb-accordion style="width: 100%">
+    <nb-accordion-item>
+      <nb-accordion-item-header>{{ question?.chartExhibitTitle }}</nb-accordion-item-header>
+      <nb-accordion-item-body>
+        <div class="col-sm-12" [innerHtml]="question?.chartExhibit"></div>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+  </nb-accordion>
+
+  <!-- Question view for student when they are taking the exam -->
+  <div *ngIf="!question?.showAnswer" lass="col-sm-12">
+    <nb-radio-group [(ngModel)]="question.userSelectedAnswer">
+      <nb-radio
+        [disabled]="question?.isAttempted"
+        [value]="i"
+        *ngFor="let item of question?.optionsArray; let i = index"
+      >
+        <span>({{ i + 1 }}) </span>
+        {{ item.value }}
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+
+  <!-- Question view for student when they are checking the report -->
+  <div *ngIf="question?.showAnswer" class="col-sm-12">
+    <nb-radio-group [(ngModel)]="question.userSelectedAnswer">
+      <nb-radio disabled [value]="i" *ngFor="let item of question?.optionsArray; let i = index">
+        <span>({{ i + 1 }}) </span>
+        <nb-icon *ngIf="correctOption == i" [status]="'success'" [icon]="'checkmark-circle-2-outline'"></nb-icon>
+        <nb-icon
+          *ngIf="question.userSelectedAnswer == i && question.userSelectedAnswer != correctOption"
+          [status]="'danger'"
+          [icon]="'close-circle-outline'"
+        ></nb-icon>
+        <span> {{ item.value }}</span>
+      </nb-radio>
+    </nb-radio-group>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

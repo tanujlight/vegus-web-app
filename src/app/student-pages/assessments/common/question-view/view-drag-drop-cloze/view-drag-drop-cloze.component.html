@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row" cdkDropListGroup>
+      <div class="col-sm-12 question-description text-justify">
+        <span class="lh-1-5" *ngFor="let item of content; let contentIndex = index">
+          <ng-container *ngIf="item.type === 'fillup'">
+            <span *ngIf="question?.showAnswer">
+              <nb-icon
+                [status]="item.correct.includes(item.userSelectedAnswer[0]) ? 'success' : 'danger'"
+                [icon]="
+                  item.correct.includes(item.userSelectedAnswer[0])
+                    ? 'checkmark-circle-2-outline'
+                    : 'close-circle-outline'
+                "
+              ></nb-icon>
+            </span>
+            <span
+              class="example-list-fillup"
+              cdkDropList
+              [cdkDropListDisabled]="question?.isAttempted"
+              [cdkDropListData]="item.userSelectedAnswer"
+              (cdkDropListDropped)="onDrop($event)"
+            >
+              <span *ngIf="item.userSelectedAnswer && item.userSelectedAnswer.length" cdkDrag>
+                {{ item.userSelectedAnswer[0] }}
+              </span>
+              <span *ngIf="!(item.userSelectedAnswer && item.userSelectedAnswer.length)"></span>
+            </span>
+          </ng-container>
+
+          <ng-container *ngIf="item.type === 'newline'">
+            <br />
+          </ng-container>
+
+          <ng-container *ngIf="item.type === 'text'">
+            <span>{{ item.value }}</span>
+          </ng-container>
+        </span>
+
+        <br />
+
+        <!-- Render the correct answer -->
+        <span *ngIf="question?.showAnswer">
+          <span>Corrected Answers: </span>
+          <button *ngFor="let item of question.fillups" class="ml-1" size="tiny" nbButton outline status="info">
+            {{ item.value }}
+          </button>
+        </span>
+      </div>
+
+      <div class="example-container col-sm-12">
+        <div
+          cdkDropList
+          [cdkDropListData]="question?.allOptions"
+          [cdkDropListDisabled]="question?.isAttempted"
+          class="example-list"
+          (cdkDropListDropped)="droptoList($event)"
+        >
+          <div class="example-box-parent" *ngFor="let item of question?.allOptions" cdkDrag>
+            <div class="example-box">{{ item }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 mt-2" *ngIf="!question?.isAttempted">
+    <button status="primary" nbButton (click)="submit()">Submit</button>
+  </div>
+</div>

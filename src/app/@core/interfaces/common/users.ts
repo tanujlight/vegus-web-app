@@ -19,6 +19,11 @@ export interface User {
   countryCode?: string
   whatsappPhone?: string
   dateOfEnrollment?: Date
+  classDetails?: {
+    startDate: Date
+    endDate: Date
+    assessmentsEnabled: boolean
+  }
   name?: string
   dob?: Date
   login: string

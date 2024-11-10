@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 import {UserStore} from 'app/@core/stores/user.store'
 import {PlansApi} from 'app/services/apis/plans.service'
+import {LoaderService} from 'app/services/loader.service'
 
 @Component({
   selector: 'ngx-home',
@@ -29,7 +30,12 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  constructor(protected userStore: UserStore, private router: Router, private plansApi: PlansApi) {}
+  constructor(
+    protected userStore: UserStore,
+    private loaderService: LoaderService,
+    private router: Router,
+    private plansApi: PlansApi
+  ) {}
 
   // faq section
   toggleItem(index: number): void {
@@ -40,9 +46,12 @@ export class HomeComponent implements OnInit {
   }
 
   getPlans() {
+    this.loaderService.showLoader.next(false)
+
     const query = {
       type: 'subscription'
     }
+
     this.plansApi.list(query).subscribe((plans: any[]) => {
       this.plans = plans.map(p => {
         p.hasDiscount = false
@@ -56,6 +65,8 @@ export class HomeComponent implements OnInit {
 
         return p
       })
+
+      this.setShowLoaderToTrue()
     })
   }
 
@@ -69,5 +80,11 @@ export class HomeComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/auth/register')
     }
+  }
+
+  private setShowLoaderToTrue() {
+    setTimeout(() => {
+      this.loaderService.showLoader.next(true)
+    }, 200)
   }
 }

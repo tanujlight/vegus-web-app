@@ -30,7 +30,8 @@ import {
   NbListModule,
   NbIconModule,
   NbSpinnerModule,
-  NbDatepickerModule
+  NbDatepickerModule,
+  NbCheckboxModule
 } from '@nebular/theme'
 import {ScrollToTopModule} from 'app/components/scroll-to-top/scroll-to-top.module'
 
@@ -43,6 +44,7 @@ const NB_MODULES = [
   NbUserModule,
   NbRadioModule,
   NbSelectModule,
+  NbCheckboxModule,
   NbListModule,
   NbIconModule,
   NbSpinnerModule,

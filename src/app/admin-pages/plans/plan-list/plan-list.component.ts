@@ -191,7 +191,7 @@ export class PlanListComponent implements OnInit {
     </div>
   `
 })
-export class CustomNumberEditorComponent extends DefaultEditor {
+export class CustomNumberEditorComponent extends DefaultEditor implements OnInit {
   minValue: number = 0 // Set default min value
   maxValue: number = 10000 // Set default max value
   showError: boolean = false
