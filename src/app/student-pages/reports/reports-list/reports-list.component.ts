@@ -38,12 +38,12 @@ export class ReportsListComponent implements OnInit {
 
   private initializeTableColumns() {
     this.tableColumns = {
-      uniqueIdentifier: {
-        title: 'ID',
-        type: 'string',
-        editable: false,
-        hidden: true
-      },
+      // uniqueIdentifier: {
+      //   title: 'ID',
+      //   type: 'string',
+      //   editable: false,
+      //   hidden: true
+      // },
       examTitle: {
         title: 'Exam title',
         valuePrepareFunction: (cell, row) => {

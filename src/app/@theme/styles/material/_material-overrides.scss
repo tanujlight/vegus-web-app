@@ -9,8 +9,15 @@
       nb-actions,
       .logo-container {
         nb-icon,
-        .user-name {
-          color: #000 !important;
+        .user-container{
+          .info-container{
+            .user-name {
+              color: #000 !important;
+            }
+            @media (max-width: 768px) {
+              display: none;
+            }
+          }
         }
         
       }
@@ -115,46 +122,46 @@
         }
       }
     }
-    .banner-container{
-      background-color: nb-theme(color-primary-500);
-      border-radius: 1rem;
-      color: #fff;
-      .flex-box{
-        display: flex;
-        flex-direction: row;
-        .box-1{
-          padding:0 4rem;
-          display: flex;
-          // gap: 15px;
-          flex-direction: column;
-          justify-content: center;
-          // align-items: center;
-          .sub-heading{
-            font-size:18px;
-            font-weight: 400;
-            color: #fff;
-          }
-          .title{
-            margin-top: 0px !important;
-            margin-bottom:15px;
-            font-size:34px;
-            font-weight: bold;
-            color: #fff;
-          }
-          .cta-btn{
-            background: #fff;
-            border-radius: 100px;
-            padding:0.75rem 1.25rem;
-            font-weight: 500;
-            border: none;
-            width: fit-content;
-          }
-        }
-        .box-2{
-          background: url('/assets/images/s-patterns.png');
-        }
-      }
-    }
+    // .banner-container{
+    //   background-color: nb-theme(color-primary-500);
+    //   border-radius: 1rem;
+    //   color: #fff;
+    //   .flex-box{
+    //     display: flex;
+    //     flex-direction: row;
+    //     .box-1{
+    //       padding:0 4rem;
+    //       display: flex;
+    //       // gap: 15px;
+    //       flex-direction: column;
+    //       justify-content: center;
+    //       // align-items: center;
+    //       .sub-heading{
+    //         font-size:18px;
+    //         font-weight: 400;
+    //         color: #fff;
+    //       }
+    //       .title{
+    //         margin-top: 0px !important;
+    //         margin-bottom:15px;
+    //         font-size:34px;
+    //         font-weight: bold;
+    //         color: #fff;
+    //       }
+    //       .cta-btn{
+    //         background: #fff;
+    //         border-radius: 100px;
+    //         padding:0.75rem 1.25rem;
+    //         font-weight: 500;
+    //         border: none;
+    //         width: fit-content;
+    //       }
+    //     }
+    //     .box-2{
+    //       background: url('/assets/images/s-patterns.png');
+    //     }
+    //   }
+    // }
     .section-container{
       padding:10px 0;
       display: flex;
