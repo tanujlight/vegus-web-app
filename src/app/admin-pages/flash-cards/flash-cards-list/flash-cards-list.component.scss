@@ -62,7 +62,14 @@
       background-size: cover;
       background-position: center;
     }
-
+    .breadcrumb{
+      padding: 0;
+      background-color: transparent !important;
+      li{
+        color: nb-theme(color-primary-500) !important;
+        font-weight: normal;
+      }
+    }
     .breadcrumb-link {
       cursor: pointer;
 
