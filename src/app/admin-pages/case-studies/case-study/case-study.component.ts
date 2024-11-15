@@ -195,6 +195,11 @@ export class CaseStudyComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    if (!this.examUsage.assessment && !this.examUsage.exam && !this.examUsage.practice) {
+      this.toasterService.warning('', 'Please select usage type!')
+      return
+    }
+
     const caseStudy = this.convertToCaseStudy(this.caseStudyForm.value)
     let observable = new Observable()
 

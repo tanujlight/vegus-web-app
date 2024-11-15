@@ -41,8 +41,7 @@ export class ReportsListComponent implements OnInit {
       // uniqueIdentifier: {
       //   title: 'ID',
       //   type: 'string',
-      //   editable: false,
-      //   hidden: true
+      //   editable: false
       // },
       examTitle: {
         title: 'Exam title',

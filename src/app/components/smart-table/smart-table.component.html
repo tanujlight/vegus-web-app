@@ -29,10 +29,18 @@
 
   <nb-card-body>
     <div class="buttons-row custom-new-button">
-      <button nbButton matRipple [status]="'primary'" (click)="this.onCustomAction.emit({action: 'add'})" *ngIf="addButton">
+      <button
+        nbButton
+        matRipple
+        [status]="'primary'"
+        (click)="this.onCustomAction.emit({action: 'add'})"
+        *ngIf="addButton"
+      >
         New {{ addButton }}
       </button>
-      <button class="more-action-button" [nbContextMenu]="tableActions" *ngIf="tableActions && tableActions.length">⋮</button>
+      <button class="more-action-button" [nbContextMenu]="tableActions" *ngIf="tableActions && tableActions.length">
+        ⋮
+      </button>
     </div>
 
     <ng2-smart-table

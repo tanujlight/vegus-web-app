@@ -19,7 +19,9 @@ import {ADMIN_ROUTES} from 'app/constants/routes'
   styleUrls: ['student-pages.component.scss'],
   template: `
     <div class="no-print" (copy)="onCopy($event)" (contextmenu)="onContextMenu($event)">
-      <ngx-one-column-layout>
+      <!-- Conditionally use the layout -->
+
+      <ngx-one-column-layout *ngIf="showSidebar">
         <nb-menu [items]="menu"></nb-menu>
         <router-outlet></router-outlet>
       </ngx-one-column-layout>
