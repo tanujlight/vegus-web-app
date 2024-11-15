@@ -45,11 +45,11 @@ export class ReportsListComponent implements OnInit {
 
   private initializeTableColumns() {
     this.tableColumns = {
-      uniqueIdentifier: {
-        title: 'ID',
-        type: 'string',
-        editable: false
-      },
+      // uniqueIdentifier: {
+      //   title: 'ID',
+      //   type: 'string',
+      //   editable: false
+      // },
       name: {
         title: 'Name',
         editable: false
