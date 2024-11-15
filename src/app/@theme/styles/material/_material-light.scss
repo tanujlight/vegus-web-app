@@ -8,6 +8,7 @@
 @import '~@nebular/theme/styles/core/mixins';
 
 $theme: (
+  // Default theme colors //
   // color-primary-100: #ccf7fe,
   // color-primary-200: #99e9fd,
   // color-primary-300: #66d3f9,
@@ -17,16 +18,32 @@ $theme: (
   // color-primary-700: #0256ab,
   // color-primary-800: #013d8a,
   // color-primary-900: #002b72,
+  // Pink color theme //
+  // color-primary-100: #f9e8f2,
+  // color-primary-200: #eebbd8,
+  // color-primary-300: #e28ebe,
+  // color-primary-400: #d661a4,
+  // color-primary-500: #cb348a,
+  // color-primary-600: #cb348a,
+  // color-primary-700: #9e296b,
+  // color-primary-800: #9e296b,
+  // color-primary-900: #9e296b,
   color-primary-100: #e5f5ff,
-  color-primary-200: #E7EDFF,
+  color-primary-200: #e7edff,
   color-primary-300: #80cdff,
   color-primary-400: #008ce6,
-  color-primary-500: #0067A9,
-  color-primary-600: #0067A9,
+  color-primary-500: #0067a9,
+  color-primary-600: #0067a9,
   color-primary-700: #004e80,
   color-primary-800: #002f4d,
   color-primary-900: #00101a,
 
+  // color-primary-transparent-100: rgba(203, 52, 138, 0.08),
+  // color-primary-transparent-200: rgba(203, 52, 138, 0.16),
+  // color-primary-transparent-300: rgba(203, 52, 138, 0.24),
+  // color-primary-transparent-400: rgba(203, 52, 138, 0.32),
+  // color-primary-transparent-500: rgba(203, 52, 138, 0.4),
+  // color-primary-transparent-600: rgba(203, 52, 138, 0.48),
   color-primary-transparent-100: rgba(0, 103, 169, 0.08),
   color-primary-transparent-200: rgba(0, 103, 169, 0.16),
   color-primary-transparent-300: rgba(0, 103, 169, 0.24),

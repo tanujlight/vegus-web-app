@@ -10,7 +10,14 @@ import {HomeComponent} from './home/home.component'
 import {AboutUsComponent} from './about-us/about-us.component'
 import {HeaderComponent} from './@components/header/header.component'
 import {FooterComponent} from './@components/footer/footer.component'
-import {NbLayoutModule, NbActionsModule, NbCardModule, NbIconModule} from '@nebular/theme'
+import {
+  NbLayoutModule,
+  NbActionsModule,
+  NbBadgeModule,
+  NbCardModule,
+  NbIconModule,
+  NbTabsetModule
+} from '@nebular/theme'
 import {JoinUsSectionComponent} from './@components/join-us-section/join-us-section.component'
 
 @NgModule({
@@ -32,7 +39,9 @@ import {JoinUsSectionComponent} from './@components/join-us-section/join-us-sect
     NbLayoutModule,
     NbIconModule,
     NbActionsModule,
-    NbCardModule
+    NbBadgeModule,
+    NbCardModule,
+    NbTabsetModule
   ]
 })
 export class WebsiteModule {}

@@ -2,74 +2,77 @@
   <div class="banner-container">
     <div class="flex-box">
       <div class="col box-1">
-        <h2 class="sub-heading">
-          - Welcom TO vegus
-        </h2>
-        <h1 class="title">
-          Join the Thousands Who Trust Our Expert Instructors
-        </h1>
-        <button class="cta-btn">Browse Courses</button>
+        <h2 class="sub-heading">- Welcom TO vegus</h2>
+        <h1 class="title">Join the Thousands Who Trust Our Expert Instructors</h1>
+        <button (click)="routeTo('student/study-material/videos/list')" class="cta-btn">Browse Video Lectures</button>
       </div>
       <div class="col box-2">
-        <img src="/assets/images/girl.png" alt="" width="100%">
+        <img src="/assets/images/girl.png" alt="" width="100%" />
       </div>
     </div>
   </div>
   <div class="section-container">
     <h2 class="title">Quick Action</h2>
     <div class="flex-box">
-      <button class="big-card-btn bg-ac-2" (click)="routeTo('student-pages/exams/list')">
-        <nb-icon icon="book"></nb-icon><br>
+      <button class="big-card-btn bg-ac-2" (click)="routeTo('student/tutor/tests/new')">
+        <nb-icon icon="book"></nb-icon><br />
         <div class="flex-label">
-          <div class="title">Scheduled Exams</div>
+          <div class="title">Question Bank</div>
           <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
         </div>
       </button>
-      <button class="big-card-btn bg-ac-1" (click)="routeTo('student-pages/reports/list')">
-        <nb-icon icon="file-text-outline"></nb-icon><br>
+      <button class="big-card-btn bg-ac-1" (click)="routeTo('student/study-material/notes/list')">
+        <nb-icon icon="file-text-outline"></nb-icon><br />
         <div class="flex-label">
-          <div class="title">Exam Reports</div>
+          <div class="title">Notes</div>
           <nb-icon icon="diagonal-arrow-right-up-outline"></nb-icon>
         </div>
       </button>
-      <button class="big-card-btn bg-ac-3" (click)="routeTo('student-pages/flash-cards/list')">
-        <nb-icon icon="flash-outline"></nb-icon><br>
+      <button class="big-card-btn bg-ac-3" (click)="routeTo('student/flash-cards/list')">
+        <nb-icon icon="flash-outline"></nb-icon><br />
         <div class="flex-label">
           <div class="title">Flash Cards</div>
           <nb-icon icon="flash-outline"></nb-icon>
         </div>
       </button>
+
+      <button class="big-card-btn bg-ac-2" (click)="routeTo('student/tutor/performance')">
+        <nb-icon icon="award-outline"></nb-icon><br />
+        <div class="flex-label">
+          <div class="title">Overall Performance</div>
+          <nb-icon icon="award-outline"></nb-icon>
+        </div>
+      </button>
     </div>
   </div>
-  <div class="section-container">
+
+  <!-- <div class="section-container">
     <h2 class="title">Exams</h2>
     <div class="row">
       <div class="col">
         <nb-card>
           <nb-card-header class="text-center">
-            <span>  title </span>
+            <span> title </span>
           </nb-card-header>
           <nb-card-body>
             <div class="row">
               <div class="col-12">
-                <p>STARTED ON: </p>
+                <p>STARTED ON:</p>
               </div>
               <div class="col-12">
-                <p>END ON: </p>
+                <p>END ON:</p>
               </div>
               <div class="col-12">
-                <p>Total Marks: </p>
+                <p>Total Marks:</p>
               </div>
               <div class="col-12">
                 <p>
-                  <span>Time Limit:  min(s)</span>
+                  <span>Time Limit: min(s)</span>
                   <span>No Time Limit</span>
                 </p>
               </div>
               <div class="col-12 text-right">
-                <button nbButton status="primary" hero>
-                  Take Exam
-                </button>
+                <button nbButton status="primary" hero>Take Exam</button>
               </div>
             </div>
           </nb-card-body>
@@ -78,35 +81,32 @@
       <div class="col">
         <nb-card>
           <nb-card-header class="text-center">
-            <span>  title </span>
+            <span> title </span>
           </nb-card-header>
           <nb-card-body>
             <div class="row">
               <div class="col-12">
-                <p>STARTED ON: </p>
+                <p>STARTED ON:</p>
               </div>
               <div class="col-12">
-                <p>END ON: </p>
+                <p>END ON:</p>
               </div>
               <div class="col-12">
-                <p>Total Marks: </p>
+                <p>Total Marks:</p>
               </div>
               <div class="col-12">
                 <p>
-                  <span>Time Limit:  min(s)</span>
+                  <span>Time Limit: min(s)</span>
                   <span>No Time Limit</span>
                 </p>
               </div>
               <div class="col-12 text-right">
-                <button nbButton status="primary" hero>
-                  Take Exam
-                </button>
+                <button nbButton status="primary" hero>Take Exam</button>
               </div>
             </div>
           </nb-card-body>
         </nb-card>
       </div>
     </div>
-  </div>
-
+  </div> -->
 </div>

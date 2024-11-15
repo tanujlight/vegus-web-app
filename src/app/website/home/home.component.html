@@ -40,7 +40,53 @@
       </div>
     </div>
   </section>
-  <section id="features" class="services-section">
+
+  <section id="subscription-plans" class="subscription-section">
+    <h2>Flexible Options for Classes and Self-Study</h2>
+    <div class="plans-container">
+      <div class="plan-card">
+        <nb-badge text="Class Enrolled" status="warning"></nb-badge>
+        <h3>Class Enrollment</h3>
+        <ul class="features-list">
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Guided Lectures in Live Classes</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 2,300+ Practice Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 500+ NGN Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> High-Yield Review Videos</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Adaptive (CAT) Practice Tests</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Digital Flashcards</li>
+          <li>
+            <nb-icon icon="arrow-circle-right-outline"></nb-icon>
+            <span class="highlight">Self-Assessments</span>
+          </li>
+        </ul>
+        <br />
+        <button [routerLink]="['auth/register']">Sign Up for Live Classes</button>
+      </div>
+      <div class="plan-card" *ngFor="let plan of plans">
+        <nb-badge text="Self Enrolled" status="success"></nb-badge>
+        <h3>{{ plan.name }}</h3>
+        <div class="price" *ngIf="plan.hasDiscount">
+          ${{ plan.finalPrice }} <span class="old-price">${{ plan.price }}</span>
+        </div>
+        <div class="price" *ngIf="!plan.hasDiscount">${{ plan.price }}</div>
+        <ul class="features-list">
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 2,300+ Practice Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 500+ NGN Questions</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> High-Yield Review Videos</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Adaptive (CAT) Practice Tests</li>
+          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Digital Flashcards</li>
+          <li>
+            <nb-icon icon="arrow-circle-right-outline"></nb-icon>
+            <span class="highlight">{{ plan?.features?.assessments }} Self-Assessments</span>
+          </li>
+        </ul>
+        <br />
+        <button [routerLink]="['auth/register']">Buy Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section id="features" class="services-section">
     <h4 class="text-center">Features</h4>
     <h2 class="text-center">Customized study plans</h2>
 
@@ -105,7 +151,8 @@
         </p>
       </div>
     </div>
-  </section>
+  </section> -->
+
   <section class="bg-blue">
     <div class="section-area">
       <!-- <div class="d-grid half-col"> -->
@@ -126,32 +173,6 @@
           </p>
           <br /><br />
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section *ngIf="this.plans.length > 0" id="subscription-plans" class="subscription-section">
-    <h2>Flexible Pricing Options to Meet Your Needs</h2>
-    <div class="plans-container">
-      <div class="plan-card" *ngFor="let plan of plans">
-        <h3>{{ plan.name }}</h3>
-        <div class="price" *ngIf="plan.hasDiscount">
-          ${{ plan.finalPrice }} <span class="old-price">${{ plan.price }}</span>
-        </div>
-        <div class="price" *ngIf="!plan.hasDiscount">${{ plan.price }}</div>
-        <ul class="features-list">
-          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 2,300+ Practice Questions</li>
-          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> 500+ NGN Questions</li>
-          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> High-Yield Review Videos</li>
-          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Adaptive (CAT) Practice Tests</li>
-          <li><nb-icon icon="arrow-circle-right-outline"></nb-icon> Digital Flashcards</li>
-          <li>
-            <nb-icon icon="arrow-circle-right-outline"></nb-icon>
-            <span class="highlight">{{ plan?.features?.assessments }} Self-Assessment</span>
-          </li>
-        </ul>
-        <br />
-        <button [routerLink]="['auth/register']">Select Plan</button>
       </div>
     </div>
   </section>

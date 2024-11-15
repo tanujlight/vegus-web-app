@@ -10,8 +10,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:3000/api',
-  apiUrl: 'https://backend.vegus.us/api',
+  apiUrl: 'http://localhost:3000/api',
+  // apiUrl: 'https://backend.vegus.us/api',
   testUser: {
     // tslint:disable
     token: {

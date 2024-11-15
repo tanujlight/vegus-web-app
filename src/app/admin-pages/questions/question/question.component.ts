@@ -42,8 +42,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   examUsage = {
     practice: false,
     exam: false,
-    assessment: false,
-  };
+    assessment: false
+  }
   explanation = ''
   title = ''
   questionTypes: IQuestionTypeWithTitle[] = []
@@ -78,7 +78,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.getCategoires()
     this.caseStudyId = this.route.snapshot.paramMap.get('caseStudyId')
     if (!this.caseStudyId && this.caseStudyItemId) {
-      this.caseStudyId = this.caseStudyItemId;
+      this.caseStudyId = this.caseStudyItemId
     }
 
     this.initQuestionForm()
@@ -171,7 +171,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     const questionId = this.route.snapshot.paramMap.get('id')
 
     if ((questionId && questionId !== 'new') || this.questionItemId) {
-      this.questionId = this.questionItemId ? this.questionItemId : questionId;
+      this.questionId = this.questionItemId ? this.questionItemId : questionId
       this.setViewMode(QuestionFormMode.EDIT)
       this.loadQuestion(this.questionId)
       this.questionForm.get('type').disable()
@@ -191,6 +191,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   save(event) {
+    if (!this.examUsage.assessment && !this.examUsage.exam && !this.examUsage.practice) {
+      this.toasterService.danger('', `Please select the usage type!`)
+      return
+    }
+
     const sendData = {
       ...this.questionForm.value,
       ...event,
