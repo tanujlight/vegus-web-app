@@ -100,7 +100,7 @@ export class MatrixMultipleResponseComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin' && this.viewMode !== 'report') {
+    if (this.user.role.toLowerCase() !== 'admin' && this.viewMode !== 'report') {
       if (!this.validateCorrectOptions()) {
         return
       }

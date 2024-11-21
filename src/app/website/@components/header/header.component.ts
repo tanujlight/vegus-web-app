@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {Router} from '@angular/router'
+import {User} from 'app/@core/interfaces/common/users'
 import {UserStore} from 'app/@core/stores/user.store'
 
 @Component({
@@ -8,12 +9,24 @@ import {UserStore} from 'app/@core/stores/user.store'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  user: User
+
   constructor(private router: Router, protected userStore: UserStore) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.userStore.getUser()
+  }
 
   isActive(route: string): boolean {
     return this.router.url === route
+  }
+
+  goToDashboard() {
+    if (this.user.role === 'admin') {
+      this.router.navigateByUrl('/admin/dashboard')
+    } else if (this.user.role === 'user' || this.user.role === 'subscriber') {
+      this.router.navigateByUrl('/student/dashboard')
+    }
   }
 
   goToSignIn() {

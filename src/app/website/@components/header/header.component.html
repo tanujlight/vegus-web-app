@@ -21,6 +21,7 @@
     </ul>
   </div>
   <div class="navbar-right">
-    <button (click)="goToSignIn()">Sign In</button>
+    <button *ngIf="!user" (click)="goToSignIn()">Sign In</button>
+    <button *ngIf="user && user.role" (click)="goToDashboard()">Dashboard</button>
   </div>
 </div>

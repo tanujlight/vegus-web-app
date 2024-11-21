@@ -33,8 +33,9 @@ export class InitUserService {
             return
           } else if (user.role === UserTypeEnum.Subscriber && user.status === 'inactive') {
             const checkoutUrlRegex = /subscription\/checkout\/success\?session_id=/
+            const razorpayCheckoutUrlRegex = /subscription\/checkout\/success\?razorpay_payment_id=/
 
-            if (!checkoutUrlRegex.test(this.router.url)) {
+            if (!checkoutUrlRegex.test(this.router.url) && !razorpayCheckoutUrlRegex.test(this.router.url)) {
               this.router.navigateByUrl('/student/subscription/plans')
             }
           }

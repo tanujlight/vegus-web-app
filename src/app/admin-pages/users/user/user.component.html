@@ -260,14 +260,18 @@
                   <div class="col-sm-6">
                     <div class="form-group" formGroupName="address">
                       <label for="inputCountry">Country</label>
-                      <input
+                      <nb-select
+                        class="form-control select-country-field"
                         fullWidth
-                        nbInput
-                        class="form-control"
                         id="inputCountry"
                         placeholder="Country"
+                        [status]="country.dirty ? (country.invalid ? 'danger' : 'success') : ''"
                         formControlName="country"
-                      />
+                      >
+                        <nb-option *ngFor="let country of countries" [value]="country.name">
+                          {{ country.name }}
+                        </nb-option>
+                      </nb-select>
                     </div>
                   </div>
 

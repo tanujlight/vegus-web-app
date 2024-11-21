@@ -30,11 +30,16 @@
     justify-content: center;
 
     nb-card {
-      max-width: 600px;
-      width: 96%;
+      max-width: 96%;
+      min-width: 600px;
+      width: auto;
       border-radius: 1rem;
       overflow: hidden;
       box-shadow: 4px 10px 15px -3px #0087bd1c;
+
+      @media screen and (max-width: 620px) {
+        min-width: 96%;
+      }
 
       nb-card-header {
         background-color: #fff;
@@ -42,7 +47,7 @@
     }
 
     .logo {
-      width: 200px;
+      width: 150px;
       margin: 0 auto;
 
       img {
@@ -73,6 +78,7 @@
 
   nb-auth-block {
     margin: auto;
+    max-width: 60rem;
   }
 
   @include media-breakpoint-down(sm) {

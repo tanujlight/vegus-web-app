@@ -25,6 +25,16 @@
         border: none;
       }
     }
+
+    nb-select.select-country-field {
+      border-color: rgba(0, 0, 0, 0.42);
+
+      button {
+        border: none !important;
+        padding: 0 !important;
+        background: none !important;
+      }
+    }
   }
 
   button[nbButton] {

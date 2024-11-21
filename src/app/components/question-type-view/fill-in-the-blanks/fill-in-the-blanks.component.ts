@@ -39,8 +39,8 @@ export class FillInTheBlanksComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin' && this.viewMode !== 'report') {
-      if (this.user.role !== 'Admin' && !this.userSelectedAnswer) {
+    if (this.user.role.toLowerCase() !== 'admin' && this.viewMode !== 'report') {
+      if (this.user.role.toLowerCase() !== 'admin' && !this.userSelectedAnswer) {
         this.toasterService.danger('', `Please fill the answer`)
         return
       }
