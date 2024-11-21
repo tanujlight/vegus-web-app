@@ -5,13 +5,16 @@
  */
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core'
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
-import {Router} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 import {NB_AUTH_OPTIONS, NbAuthSocialLink, NbAuthService, NbAuthResult} from '@nebular/auth'
 import {MyToastService} from 'app/services/my-toast.service'
 import {NbThemeService} from '@nebular/theme'
 import {getDeepFromObject} from '../../helpers'
-import {EMAIL_PATTERN} from '../constants'
+import {EMAIL_PATTERN, PHONE_PATTERN} from '../constants'
 import {InitUserService} from '../../../@theme/services/init-user.service'
+import {LoaderService} from 'app/services/loader.service'
+import {PlansApi} from 'app/services/apis/plans.service'
+import {COUNTRIES_LIST} from '../../../../assets/data/countries'
 
 @Component({
   selector: 'ngx-register',
@@ -20,6 +23,12 @@ import {InitUserService} from '../../../@theme/services/init-user.service'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxRegisterComponent implements OnInit {
+  countries = COUNTRIES_LIST
+  plans = []
+
+  selectedPlanId: string
+  selectedPlan: any
+
   minLength: number = this.getConfigValue('forms.validation.password.minLength')
   maxLength: number = this.getConfigValue('forms.validation.password.maxLength')
   isFirstNameRequired: boolean = this.getConfigValue('forms.validation.firstName.required')
@@ -37,6 +46,7 @@ export class NgxRegisterComponent implements OnInit {
   user: any = {}
 
   registerForm: FormGroup
+
   constructor(
     protected service: NbAuthService,
     @Inject(NB_AUTH_OPTIONS) protected options = {},
@@ -44,7 +54,10 @@ export class NgxRegisterComponent implements OnInit {
     protected themeService: NbThemeService,
     private fb: FormBuilder,
     protected router: Router,
+    private loaderService: LoaderService,
     private toastService: MyToastService,
+    private route: ActivatedRoute,
+    private plansApi: PlansApi,
     protected initUserService: InitUserService
   ) {}
 
@@ -54,6 +67,10 @@ export class NgxRegisterComponent implements OnInit {
   get lastName() {
     return this.registerForm.get('lastName')
   }
+  get phone() {
+    return this.registerForm.get('phone')
+  }
+
   get email() {
     return this.registerForm.get('email')
   }
@@ -63,6 +80,26 @@ export class NgxRegisterComponent implements OnInit {
   get confirmPassword() {
     return this.registerForm.get('confirmPassword')
   }
+  get street() {
+    return this.registerForm.get('address').get('street')
+  }
+
+  get city() {
+    return this.registerForm.get('address').get('city')
+  }
+
+  get state() {
+    return this.registerForm.get('address').get('state')
+  }
+
+  get zipCode() {
+    return this.registerForm.get('address').get('zipCode')
+  }
+
+  get country() {
+    return this.registerForm.get('address').get('country')
+  }
+
   get terms() {
     return this.registerForm.get('terms')
   }
@@ -71,7 +108,13 @@ export class NgxRegisterComponent implements OnInit {
     return this.registerForm.get('alreadyClassEnrolled')
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.syncQueryParams()
+
+    if (this.selectedPlanId) {
+      this.getPlans()
+    }
+
     const firstNameValidators = []
     this.isFirstNameRequired && firstNameValidators.push(Validators.required)
 
@@ -87,11 +130,28 @@ export class NgxRegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstName: this.fb.control('', [...firstNameValidators]),
       lastName: this.fb.control('', [...lastNameValidators]),
+      phone: this.fb.control('', [Validators.pattern(PHONE_PATTERN)]),
       email: this.fb.control('', [...emailValidators]),
       password: this.fb.control('', [...passwordValidators]),
       confirmPassword: this.fb.control('', [...passwordValidators]),
       terms: this.fb.control(''),
-      alreadyClassEnrolled: this.fb.control(false)
+      alreadyClassEnrolled: this.fb.control(this.selectedPlanId ? false : true),
+      address: this.fb.group({
+        street: this.fb.control(''),
+        city: this.fb.control(''),
+        state: this.fb.control(''),
+        country: this.fb.control('', [Validators.required]),
+        zipCode: this.fb.control('')
+      })
+    })
+  }
+
+  private async syncQueryParams() {
+    return new Promise(resolve => {
+      this.route.queryParams.subscribe(params => {
+        this.selectedPlanId = params['plan'] || ''
+        resolve(true)
+      })
     })
   }
 
@@ -99,6 +159,31 @@ export class NgxRegisterComponent implements OnInit {
     if (e.target.value.length > 0) {
       e.target.value = e.target.value.toLowerCase()
     }
+  }
+
+  getPlans() {
+    const query = {
+      type: 'subscription'
+    }
+
+    this.plansApi.list(query).subscribe((plans: any[]) => {
+      this.plans = plans.map(p => {
+        p.hasDiscount = false
+
+        if (p.discount) {
+          p.hasDiscount = true
+          const discountAmount = (p.discount / 100) * p.price
+
+          p.finalPrice = p.price - discountAmount
+        }
+
+        return p
+      })
+
+      this.selectedPlan = this.plans.find(p => p._id === this.selectedPlanId)
+
+      this.cd.detectChanges()
+    })
   }
 
   register(): void {
@@ -115,12 +200,22 @@ export class NgxRegisterComponent implements OnInit {
 
         if (this.user.role === 'user') {
           setTimeout(() => {
-            this.toastService.showToast(`Registration successful. Let's wait for admin approval.`)
+            this.toastService.showToast(
+              `Registration successful. Let's wait for admin approval.`,
+              'Welcome',
+              'success',
+              10000
+            )
             return this.router.navigate(['auth/login'])
           }, this.redirectDelay)
         } else {
           this.initUserService.initCurrentUser().subscribe((data: any) => {
-            this.router.navigate(['student/subscription/plans'])
+            if (this.selectedPlanId) {
+              this.buyPlan(this.selectedPlan)
+              return
+            } else {
+              this.router.navigate(['student/subscription/plans'])
+            }
           })
         }
       } else {
@@ -137,7 +232,31 @@ export class NgxRegisterComponent implements OnInit {
     })
   }
 
+  buyPlan(plan) {
+    let via = 'stripe'
+
+    if (this.user.address.country === 'India') {
+      via = 'razorpay'
+    }
+
+    this.plansApi.initializePayment({planId: plan.id, via: via}).subscribe(data => {
+      if (via === 'razorpay') {
+        // Redirect the user to the Razorpay Checkout page
+        window.location.href = data.paymentLink.short_url
+      } else if (via === 'stripe') {
+        // Redirect the user to the Stripe Checkout page
+        window.location.href = data.url
+      }
+    })
+  }
+
   getConfigValue(key: string): any {
     return getDeepFromObject(this.options, key, null)
+  }
+
+  private setShowLoaderToTrue() {
+    setTimeout(() => {
+      this.loaderService.showLoader.next(true)
+    }, 200)
   }
 }

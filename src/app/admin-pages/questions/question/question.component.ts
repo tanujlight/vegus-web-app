@@ -191,7 +191,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   save(event) {
-    if (!this.examUsage.assessment && !this.examUsage.exam && !this.examUsage.practice) {
+    // User must select at least one usage type, if the question is not related to a case study
+    if (!this.caseStudyId && !this.examUsage.assessment && !this.examUsage.exam && !this.examUsage.practice) {
       this.toasterService.danger('', `Please select the usage type!`)
       return
     }

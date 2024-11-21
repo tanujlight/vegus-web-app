@@ -45,6 +45,16 @@ export class CheckoutSuccessComponent implements OnInit {
 
   sessionId: string
 
+  via: string
+
+  razorpayDetails = {
+    razorpay_payment_id: '',
+    razorpay_payment_link_id: '',
+    razorpay_payment_link_reference_id: '',
+    razorpay_payment_link_status: '',
+    razorpay_signature: ''
+  }
+
   constructor(
     private router: Router,
     protected initUserService: InitUserService,
@@ -56,9 +66,27 @@ export class CheckoutSuccessComponent implements OnInit {
     // Get session_id from URL
     this.route.queryParams.subscribe(params => {
       this.sessionId = params['session_id']
+      this.via = params['via']
 
-      // Verify the payment
-      this.verifyPayment()
+      if (this.sessionId) {
+        this.verifyPayment()
+      }
+
+      if (this.via === 'razorpay') {
+        this.razorpayDetails.razorpay_payment_id = params['razorpay_payment_id']
+        this.razorpayDetails.razorpay_payment_link_id = params['razorpay_payment_link_id']
+        this.razorpayDetails.razorpay_payment_link_reference_id = params['razorpay_payment_link_reference_id']
+        this.razorpayDetails.razorpay_payment_link_status = params['razorpay_payment_link_status']
+        this.razorpayDetails.razorpay_signature = params['razorpay_signature']
+
+        if (this.razorpayDetails.razorpay_payment_link_status === 'paid') {
+          this.verifyRazorpayPayment()
+        } else {
+          this.isLoading = false
+          this.paymentVerified = false
+          this.router.navigateByUrl('/student/subscription/checkout/cancel', {replaceUrl: true})
+        }
+      }
     })
   }
 
@@ -84,5 +112,23 @@ export class CheckoutSuccessComponent implements OnInit {
         this.paymentVerified = false
       }
     )
+  }
+
+  verifyRazorpayPayment() {
+    this.plansApi
+      .verifyRazorpayPayment({
+        paymentId: this.razorpayDetails.razorpay_payment_id,
+        paymentLinkId: this.razorpayDetails.razorpay_payment_link_id
+      })
+      .subscribe(
+        (data: any) => {
+          this.isLoading = false
+          this.paymentVerified = data.success
+        },
+        () => {
+          this.isLoading = false
+          this.paymentVerified = false
+        }
+      )
   }
 }

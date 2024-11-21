@@ -62,7 +62,7 @@ export class MultipleResponseComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin' && this.viewMode !== 'report') {
+    if (this.user.role.toLowerCase() !== 'admin' && this.viewMode !== 'report') {
       const correctData = this.question.optionsArray.filter(item => item.userSelectedAnswer)
       if (!correctData || !correctData.length) {
         this.toasterService.danger('', `Select atleast one correct option`)

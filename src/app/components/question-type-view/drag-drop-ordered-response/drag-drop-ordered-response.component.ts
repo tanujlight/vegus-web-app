@@ -92,7 +92,7 @@ export class DragDropOrderedResponseComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin') {
+    if (this.user.role.toLowerCase() !== 'admin') {
       if (
         this.viewMode === 'exam' &&
         (!this.userSelectedAnswer || this.userSelectedAnswer.length < this.question.optionsCount)

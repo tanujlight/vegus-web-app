@@ -177,7 +177,7 @@ export class DragDropTriadsViewComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin' && this.viewMode !== 'report') {
+    if (this.user.role.toLowerCase() !== 'admin' && this.viewMode !== 'report') {
       this.question.userSelectedAnswer = this.getSelectedOptionByUser()
 
       if (!this.validateCorrectOptions()) return

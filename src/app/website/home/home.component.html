@@ -65,6 +65,7 @@
       <div class="plan-card" *ngFor="let plan of plans">
         <nb-badge text="Self Enrolled" status="success"></nb-badge>
         <h3>{{ plan.name }}</h3>
+        <p>({{ plan.duration }}-Day Access)</p>
         <div class="price" *ngIf="plan.hasDiscount">
           ${{ plan.finalPrice }} <span class="old-price">${{ plan.price }}</span>
         </div>
@@ -81,7 +82,7 @@
           </li>
         </ul>
         <br />
-        <button [routerLink]="['auth/register']">Buy Plan</button>
+        <button [routerLink]="['auth/register']" [queryParams]="{plan: plan.id}">Buy Now</button>
       </div>
     </div>
   </section>

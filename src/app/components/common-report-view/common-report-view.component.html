@@ -1,6 +1,7 @@
 <div class="report-view">
   <nb-card>
     <nb-card-header class="d-flex align-exams-center justify-content-between">
+      <button type="button" size="small" (click)="back()" nbButton>Back</button>&nbsp;
       <span class="d-flex align-items-center">{{ finalReport?.title }}</span>
 
       <div *ngIf="showDetails">

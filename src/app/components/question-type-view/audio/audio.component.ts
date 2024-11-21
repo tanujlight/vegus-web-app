@@ -59,7 +59,7 @@ export class AudioComponent implements OnInit {
   }
 
   submit() {
-    if (this.user.role !== 'Admin') {
+    if (this.user.role.toLowerCase() !== 'admin') {
       if (this.viewMode === 'exam' && !this.question.userSelectedAnswer && this.question.userSelectedAnswer !== 0) {
         this.toasterService.danger('', `Select correct option`)
         return
