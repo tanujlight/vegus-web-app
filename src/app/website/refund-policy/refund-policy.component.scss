@@ -11,6 +11,8 @@
 @include nb-install-component() {
   ::ng-deep {
     .page-container {
+      background-color: #fff !important;
+
       :root {
         --primary-color: #0067a9;
       }
@@ -55,7 +57,7 @@
       .main-heading {
         font-size: 48px !important;
         font-weight: bold;
-        color: #111;
+        color: #0067a9;
         line-height: 125%;
 
         @media (max-width: 768px) {
@@ -195,9 +197,17 @@
       // Sections
       .section-area,
       .section-container {
-        max-width: 1200px;
         margin: 0 auto;
         width: 96%;
+        background: #fff;
+        .wrapper{
+          max-width: 1200px;
+          padding: 75px;
+          padding-top: 0;
+          @media (max-width: 768px) {
+            padding: 0;
+          }
+        }
 
         @media (max-width: 768px) {
           padding: 2rem;
@@ -209,7 +219,11 @@
       }
 
       .section-header {
-        background: #dcdce9;
+        background: #fff;
+        padding: 75px;
+        @media (max-width: 768px) {
+          padding: 2rem;
+        }
       }
     }
   }

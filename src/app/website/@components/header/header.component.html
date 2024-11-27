@@ -6,10 +6,13 @@
 
 <div class="navbar">
   <div class="navbar-left">
-    <img src="assets/images/logo-black.png" width="100px" alt="Logo" />
+    <a [routerLink]="['']"><img src="assets/images/logo-black.png" width="100px" alt="Logo" /></a>
   </div>
   <div class="navbar-middle">
-    <ul>
+    
+  </div>
+  <div class="navbar-right">
+    <ul class="navbar-link-list">
       <li><a [routerLink]="['']" [ngClass]="{active: isActive('/')}">Home</a></li>
       <li><a [routerLink]="['/about-us']" [ngClass]="{active: isActive('/about-us')}">About</a></li>
       <!-- <li>
@@ -19,8 +22,6 @@
         <a (click)="navigateToSection('subscription-plans')">Plans</a>
       </li>
     </ul>
-  </div>
-  <div class="navbar-right">
     <button *ngIf="!user" (click)="goToSignIn()">Sign In</button>
     <button *ngIf="user && user.role" (click)="goToDashboard()">Dashboard</button>
   </div>

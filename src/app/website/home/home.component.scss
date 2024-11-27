@@ -52,8 +52,9 @@
     .main-heading {
       font-size: 48px !important;
       font-weight: bold;
-      color: #111;
+      color: #0067a9;
       line-height: 125%;
+      
 
       @media (max-width: 768px) {
         font-size: 36px !important;
@@ -63,7 +64,7 @@
     .secondary-heading {
       font-size: 14px !important;
       font-weight: bold;
-      color: #005bb5 !important;
+      color: #111 !important;
       margin-top: 80px;
       margin-bottom: -20px;
       @media (max-width: 768px) {
@@ -191,7 +192,7 @@
     }
 
     .banner-section {
-      background-color: #dcdce9;
+      background-color: #fff;
 
       .text-box {
         height: auto;
@@ -334,7 +335,8 @@
       z-index: 9;
       max-width: 800px;
       margin: auto;
-      background: #fffaf1;
+      background: #0067a9;
+      color: #fff;
       margin-top: -60px;
       padding: 40px;
       text-align: center;
@@ -347,6 +349,10 @@
       h3 {
         font-weight: bold;
         font-size: 30px;
+        color: #ffffff;
+      }
+      p{
+        color: #fafafa;
       }
     }
     .join-us-section {

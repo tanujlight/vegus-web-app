@@ -10,9 +10,8 @@
 
 @include nb-install-component() {
   footer {
-    background-color: #f4f4f4;
-    padding-top: 40px;
-
+    background-color: #e5e5e5;
+    padding-top: 70px;
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -48,7 +47,7 @@
         padding: 0;
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 20px;
 
         li {
           margin-bottom: 10px;
@@ -75,7 +74,7 @@
         a {
           margin-right: 10px;
           font-size: 20px;
-          color: #333;
+          color: #0067a9;
           text-decoration: none;
 
           &:hover {
@@ -118,7 +117,7 @@
       p {
         margin: 0;
         font-size: 14px;
-        color: white;
+        color: #111;
       }
     }
   }
