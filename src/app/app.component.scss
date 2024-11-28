@@ -12,6 +12,10 @@
     text-align: justify;
   }
 
+  .spinner {
+    background-color: #fff !important;
+  }
+
   nb-card {
     nb-card-header {
       @media screen and (max-width: 468px) {

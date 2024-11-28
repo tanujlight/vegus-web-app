@@ -68,10 +68,6 @@ export class CheckoutSuccessComponent implements OnInit {
       this.sessionId = params['session_id']
       this.via = params['via']
 
-      if (this.sessionId) {
-        this.verifyPayment()
-      }
-
       if (this.via === 'razorpay') {
         this.razorpayDetails.razorpay_payment_id = params['razorpay_payment_id']
         this.razorpayDetails.razorpay_payment_link_id = params['razorpay_payment_link_id']
@@ -86,22 +82,29 @@ export class CheckoutSuccessComponent implements OnInit {
           this.paymentVerified = false
           this.router.navigateByUrl('/student/subscription/checkout/cancel', {replaceUrl: true})
         }
+      } else {
+        this.verifyStripeSession()
       }
     })
   }
 
   goToHome() {
-    this.initUserService.initCurrentUser().subscribe((data: any) => {
-      this.router.navigateByUrl(STUDENT_ROUTES.DASHBOARD, {replaceUrl: true})
+    this.router.navigateByUrl(STUDENT_ROUTES.DASHBOARD, {replaceUrl: true}).then(() => {
+      window.location.reload()
     })
   }
 
   reverify() {
     this.isLoading = true
-    this.verifyPayment()
+
+    if (this.via === 'razorpay') {
+      this.verifyRazorpayPayment()
+    } else {
+      this.verifyStripeSession()
+    }
   }
 
-  verifyPayment() {
+  verifyStripeSession() {
     this.plansApi.verifyStripeSession({sessionId: this.sessionId}).subscribe(
       (data: any) => {
         this.isLoading = false

@@ -9,16 +9,14 @@
 @import '../@theme/styles/themes.scss';
 
 @include nb-install-component() {
-
   // Wrap the styles within ::ng-deep to ensure they affect Nebular components
   ::ng-deep {
-
     nb-layout .layout .layout-container .content .columns nb-layout-column {
       padding: 0px !important;
     }
 
     nb-layout-header {
-      background-color: #DCDCE9 !important;
+      // background-color: #DCDCE9 !important;
 
       ngx-website-header {
         width: 100%;
@@ -39,5 +37,4 @@
       display: contents !important;
     }
   }
-
 }
