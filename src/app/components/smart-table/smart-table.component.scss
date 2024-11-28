@@ -10,6 +10,34 @@
   nb-card.table-card-header {
     transform: translate3d(0, 0, 0);
 
+    padding: 20px;
+
+    table {
+      tr {
+        background: transparent !important;
+        border-bottom: 1px solid #e6eff5;
+        td,
+        th {
+          border: none !important;
+          padding: 10px !important;
+        }
+        th {
+          .ng2-smart-title {
+            color: nb-theme(color-primary-500);
+            font-weight: 500;
+            a {
+              color: nb-theme(color-primary-500);
+              font-weight: 500;
+            }
+          }
+        }
+        .form-control {
+          border-color: #d6e7ff;
+          border-radius: 0.45rem;
+        }
+      }
+    }
+
     .custom-new-button {
       margin-bottom: 10px;
       display: flex;

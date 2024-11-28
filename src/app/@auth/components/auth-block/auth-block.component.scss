@@ -5,11 +5,11 @@
  */
 
 :host {
-  display: block;
-  width: 100%;
-  max-width: 35rem;
-
   ::ng-deep {
+    display: block;
+    width: 100%;
+    max-width: 60rem;
+
     form {
       width: 100%;
     }
@@ -39,18 +39,18 @@
     }
 
     .sub-title {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       text-align: center;
     }
 
     .form-control-group {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem !important;
     }
 
     .form-control-group.accept-group {
       display: flex;
       justify-content: space-between;
-      margin: 2rem 0;
+      margin: 1rem 0;
     }
 
     .label-with-link {

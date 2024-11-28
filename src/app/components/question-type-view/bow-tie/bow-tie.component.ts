@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { NbToastrService } from '@nebular/theme'
-import { CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
+import {NbToastrService} from '@nebular/theme'
+import {CdkDragDrop, transferArrayItem, moveItemInArray} from '@angular/cdk/drag-drop'
 
 @Component({
   selector: 'ngx-view-bow-tie',
@@ -19,10 +19,10 @@ export class BowTieComponent implements OnInit {
     action2: [],
     condition: [],
     param1: [],
-    param2: [],
-  };
+    param2: []
+  }
 
-  constructor(private toasterService: NbToastrService) { }
+  constructor(private toasterService: NbToastrService) {}
 
   ngOnInit(): void {
     if (this.viewMode === 'report') {
@@ -31,28 +31,28 @@ export class BowTieComponent implements OnInit {
   }
 
   setCorrectAnswer() {
-    this.userSelectedAnswer = this.question.userSelectedAnswer;
+    this.userSelectedAnswer = this.question.userSelectedAnswer
     this.question.actionsArray.map((item, index) => {
       if (item.value === this.userSelectedAnswer.action1[0].value) {
-        this.question.actionsArray[index].userSelectedAnswer = true;
+        this.question.actionsArray[index].userSelectedAnswer = true
       }
       if (item.value === this.userSelectedAnswer.action2[0].value) {
-        this.question.actionsArray[index].userSelectedAnswer = true;
+        this.question.actionsArray[index].userSelectedAnswer = true
       }
-    });
+    })
     this.question.conditionsArray.map((item, index) => {
       if (item.value === this.userSelectedAnswer.condition[0].value) {
-        this.question.conditionsArray[index].userSelectedAnswer = true;
+        this.question.conditionsArray[index].userSelectedAnswer = true
       }
-    });
+    })
     this.question.paramsArray.map((item, index) => {
       if (item.value === this.userSelectedAnswer.param1[0].value) {
-        this.question.paramsArray[index].userSelectedAnswer = true;
+        this.question.paramsArray[index].userSelectedAnswer = true
       }
       if (item.value === this.userSelectedAnswer.param2[0].value) {
-        this.question.paramsArray[index].userSelectedAnswer = true;
+        this.question.paramsArray[index].userSelectedAnswer = true
       }
-    });
+    })
   }
 
   toggleViewAnswer() {
@@ -115,12 +115,12 @@ export class BowTieComponent implements OnInit {
 
   // Get all selected option with row index which is chossed by user
   private getSelectedOptionByUser() {
-    const answers = this.userSelectedAnswer;
+    const answers = this.userSelectedAnswer
     return answers
   }
 
   submit() {
-    if (this.user.role !== 'Admin' && this.viewMode !== 'report') {
+    if (this.user.role.toLowerCase() !== 'admin' && this.viewMode !== 'report') {
       if (!this.validateCorrectOptions()) return
       this.question.userSelectedAnswer = this.getSelectedOptionByUser()
       this.question.isAttempted = true
@@ -128,5 +128,4 @@ export class BowTieComponent implements OnInit {
     }
     this.submitAnswer.emit()
   }
-
 }

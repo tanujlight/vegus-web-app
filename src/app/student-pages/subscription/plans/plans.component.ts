@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {NbToastrService} from '@nebular/theme'
+import {User} from 'app/@core/interfaces/common/users'
+import {UserStore} from 'app/@core/stores/user.store'
 import {PlansApi} from 'app/services/apis/plans.service'
 
 @Component({
@@ -11,10 +13,14 @@ export class PlansComponent implements OnInit {
   plans = []
   type = 'subscription'
 
-  constructor(private toasterService: NbToastrService, private plansApi: PlansApi) {}
+  user: User
+
+  constructor(private toasterService: NbToastrService, private plansApi: PlansApi, private userStore: UserStore) {}
 
   ngOnInit(): void {
     this.getPlans()
+
+    this.user = this.userStore.getUser()
   }
 
   changeTab(data) {
@@ -24,10 +30,18 @@ export class PlansComponent implements OnInit {
   }
 
   buyPlan(plan) {
-    const via = 'stripe'
+    let via = 'stripe'
+
+    // For Indian users we will use Razorpay
+    if (this.user.address.country === 'India') {
+      via = 'razorpay'
+    }
 
     this.plansApi.initializePayment({planId: plan.id, via: via}).subscribe(data => {
-      if (via === 'stripe') {
+      if (via === 'razorpay') {
+        // Redirect the user to the Razorpay Checkout page
+        window.location.href = data.paymentLink.short_url
+      } else if (via === 'stripe') {
         // Redirect the user to the Stripe Checkout page
         window.location.href = data.url
       }

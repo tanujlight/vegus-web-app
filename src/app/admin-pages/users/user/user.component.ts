@@ -12,6 +12,7 @@ import * as moment from 'moment'
 import {Observable, Subject} from 'rxjs'
 import {takeUntil} from 'rxjs/operators'
 
+import {COUNTRIES_LIST} from '../../../../assets/data/countries'
 import {NbToastrService} from '@nebular/theme'
 
 import {UserData, User} from '../../../@core/interfaces/common/users'
@@ -32,6 +33,7 @@ export enum UserFormMode {
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit, OnDestroy {
+  countries = COUNTRIES_LIST
   user: User
 
   isSubscriptionActive: boolean = false

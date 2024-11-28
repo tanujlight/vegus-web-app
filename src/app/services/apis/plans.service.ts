@@ -56,6 +56,10 @@ export class PlansApi {
     return this.api.post(`${this.apiController}/verify-stripe-session`, params)
   }
 
+  verifyRazorpayPayment(params: {paymentId: string; paymentLinkId: string}): Observable<any> {
+    return this.api.post(`${this.apiController}/verify-razorpay-payment`, params)
+  }
+
   getPlans(): Observable<any[]> {
     return this.api.get(`${this.apiController}/get-plans`).pipe(map(data => data))
   }

@@ -54,25 +54,25 @@ export class CategoriesListComponent implements OnInit {
         sort: true,
         sortDirection: 'asc',
         editable: false
-      },
-      description: {
-        title: 'Description',
-        type: 'string',
-        editable: false
-      },
-      isActiveString: {
-        title: 'Active',
-        filter: {
-          type: 'list',
-          config: {
-            selectText: 'Select status',
-            list: [
-              {value: 'Yes', title: 'Yes'},
-              {value: 'No', title: 'No'}
-            ]
-          }
-        }
       }
+      // description: {
+      //   title: 'Description',
+      //   type: 'string',
+      //   editable: false
+      // },
+      // isActiveString: {
+      //   title: 'Active',
+      //   filter: {
+      //     type: 'list',
+      //     config: {
+      //       selectText: 'Select status',
+      //       list: [
+      //         {value: 'Yes', title: 'Yes'},
+      //         {value: 'No', title: 'No'}
+      //       ]
+      //     }
+      //   }
+      // }
       // createdAt: {
       //   title: 'Added At',
       //   type: 'string',

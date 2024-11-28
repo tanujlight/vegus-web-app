@@ -7,6 +7,7 @@
       <nb-tabset (changeTab)="changeTab($event)">
         <nb-tab tabTitle="Students" tabId="user">
           <app-smart-table
+            *ngIf="activeTab === 'user'"
             [tableSettings]="tableSettings"
             [addButton]="'Add Student'"
             [columns]="tableColumns"
@@ -18,6 +19,7 @@
         </nb-tab>
         <nb-tab tabTitle="Subscribers" tabId="subscriber">
           <app-smart-table
+            *ngIf="activeTab === 'subscriber'"
             [tableSettings]="tableSettings"
             [columns]="tableColumns"
             [dataSource]="dataSource"

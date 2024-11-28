@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router'
 import {ReportsApi} from 'app/services/apis/reports.service'
 import {MyToastService} from 'app/services/my-toast.service'
 import {NbStepperComponent} from '@nebular/theme'
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'ngx-common-report-view',
@@ -18,7 +19,12 @@ export class CommonReportViewComponent implements OnInit {
   scoredMarksInPercentage = null
   totalQuestions = 0
 
-  constructor(public route: ActivatedRoute, public reportsApi: ReportsApi, public myToastService: MyToastService) {}
+  constructor(
+    public route: ActivatedRoute,
+    public _location: Location,
+    public reportsApi: ReportsApi,
+    public myToastService: MyToastService
+  ) {}
 
   ngOnInit() {
     this.reportId = this.route.snapshot.paramMap.get('reportId')
@@ -45,6 +51,10 @@ export class CommonReportViewComponent implements OnInit {
 
   toggleShowDetails() {
     this.showDetails = !this.showDetails
+  }
+
+  back() {
+    this._location.back()
   }
 
   nextQuestion() {
