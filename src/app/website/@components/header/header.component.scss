@@ -9,9 +9,9 @@
 @import '../../../@theme//styles/themes.scss';
 
 @include nb-install-component() {
-  nav{
-        box-shadow: none !important;
-        border-bottom: 0px !important;
+  nav {
+    box-shadow: none !important;
+    border-bottom: 0px !important;
   }
   .navbar {
     display: flex;
@@ -19,9 +19,9 @@
     justify-content: space-between;
     padding: auto 40px;
     box-shadow: none !important;
-    .navbar-right{
+    .navbar-right {
       display: flex;
-      gap: 0 10px;;
+      gap: 0 10px;
     }
     ul.navbar-link-list {
       margin-bottom: -10px;
