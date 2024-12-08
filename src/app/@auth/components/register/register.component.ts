@@ -12,7 +12,11 @@ import {NbThemeService} from '@nebular/theme'
 import {getDeepFromObject} from '../../helpers'
 import {EMAIL_PATTERN, PHONE_PATTERN} from '../constants'
 import {InitUserService} from '../../../@theme/services/init-user.service'
+import {UserData} from '../../../@core/interfaces/common/users'
+
 import {LoaderService} from 'app/services/loader.service'
+import {NbDialogService} from '@nebular/theme'
+import {OtpVerificationDialogComponent} from '../otp-verification-dialog/otp-verification-dialog.component'
 import {PlansApi} from 'app/services/apis/plans.service'
 import {COUNTRIES_LIST} from '../../../../assets/data/countries'
 
@@ -49,6 +53,8 @@ export class NgxRegisterComponent implements OnInit {
 
   constructor(
     protected service: NbAuthService,
+    private usersService: UserData,
+    private dialogService: NbDialogService,
     @Inject(NB_AUTH_OPTIONS) protected options = {},
     protected cd: ChangeDetectorRef,
     protected themeService: NbThemeService,
@@ -122,10 +128,14 @@ export class NgxRegisterComponent implements OnInit {
     this.isLastNameRequired && lastNameValidators.push(Validators.required)
 
     const emailValidators = [Validators.pattern(EMAIL_PATTERN)]
-    this.isEmailRequired && emailValidators.push(Validators.required)
+    if (this.isEmailRequired) {
+      emailValidators.push(Validators.required)
+    }
 
     const passwordValidators = [Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]
-    this.isPasswordRequired && passwordValidators.push(Validators.required)
+    if (this.isPasswordRequired) {
+      passwordValidators.push(Validators.required)
+    }
 
     this.registerForm = this.fb.group({
       firstName: this.fb.control('', [...firstNameValidators]),
@@ -161,28 +171,49 @@ export class NgxRegisterComponent implements OnInit {
     }
   }
 
-  getPlans() {
-    const query = {
-      type: 'subscription'
+  submit() {
+    if (this.registerForm.invalid) {
+      return
     }
 
-    this.plansApi.list(query).subscribe((plans: any[]) => {
-      this.plans = plans.map(p => {
-        p.hasDiscount = false
+    if (this.password.value !== this.confirmPassword.value) {
+      this.toastService.showToast('Passwords do not match', 'Error', 'danger')
+      return
+    }
 
-        if (p.discount) {
-          p.hasDiscount = true
-          const discountAmount = (p.discount / 100) * p.price
+    if (!this.terms.value) {
+      this.toastService.showToast('Please accept the terms and conditions', 'Error', 'danger')
+      return
+    }
 
-          p.finalPrice = p.price - discountAmount
-        }
+    this.initiateOtpVerification()
+  }
 
-        return p
-      })
+  private initiateOtpVerification() {
+    this.usersService.generateOTP(this.email.value).subscribe({
+      next: response => {
+        this.openOtpDialog()
+      },
+      error: error => {
+        console.error('Error generating OTP:', error)
+        this.toastService.showToast('Error generating OTP. Please try again.', 'Error', 'danger')
+      }
+    })
+  }
 
-      this.selectedPlan = this.plans.find(p => p._id === this.selectedPlanId)
+  openOtpDialog() {
+    const dialogRef = this.dialogService.open(OtpVerificationDialogComponent, {
+      context: {
+        email: this.email.value
+      },
+      closeOnBackdropClick: false,
+      closeOnEsc: false
+    })
 
-      this.cd.detectChanges()
+    dialogRef.onClose.subscribe(result => {
+      if (result === 'yes') {
+        this.register()
+      }
     })
   }
 
@@ -222,12 +253,6 @@ export class NgxRegisterComponent implements OnInit {
         this.errors = result.getErrors()
       }
 
-      // const redirect = result.getRedirect()
-      // if (redirect) {
-      //   setTimeout(() => {
-      //     return this.router.navigateByUrl(redirect)
-      //   }, this.redirectDelay)
-      // }
       this.cd.detectChanges()
     })
   }
@@ -252,6 +277,31 @@ export class NgxRegisterComponent implements OnInit {
 
   getConfigValue(key: string): any {
     return getDeepFromObject(this.options, key, null)
+  }
+
+  private getPlans() {
+    const query = {
+      type: 'subscription'
+    }
+
+    this.plansApi.list(query).subscribe((plans: any[]) => {
+      this.plans = plans.map(p => {
+        p.hasDiscount = false
+
+        if (p.discount) {
+          p.hasDiscount = true
+          const discountAmount = (p.discount / 100) * p.price
+
+          p.finalPrice = p.price - discountAmount
+        }
+
+        return p
+      })
+
+      this.selectedPlan = this.plans.find(p => p._id === this.selectedPlanId)
+
+      this.cd.detectChanges()
+    })
   }
 
   private setShowLoaderToTrue() {

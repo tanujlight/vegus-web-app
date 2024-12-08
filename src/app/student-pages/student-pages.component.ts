@@ -13,6 +13,7 @@ import {StudentPagesMenu} from './student-pages-menu'
 import {InitUserService} from '../@theme/services/init-user.service'
 import {UserStore} from 'app/@core/stores/user.store'
 import {ADMIN_ROUTES} from 'app/constants/routes'
+import * as moment from 'moment'
 
 @Component({
   selector: 'ngx-student-pages',
@@ -45,9 +46,6 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
     private router: Router,
     protected userStore: UserStore
   ) {
-    this.redirectToPathBasedOnRole()
-    this.initMenu()
-
     this.tokenService
       .tokenChange()
       .pipe(takeWhile(() => this.alive))
@@ -57,6 +55,9 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.redirectToPathBasedOnRole()
+    this.initMenu()
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.checkRouteForSidebar(event.urlAfterRedirects)
@@ -65,6 +66,19 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
 
     // Handle direct link (initial load)
     this.checkRouteForSidebar(this.router.url) // This will get the current URL on initial load
+
+    if (this.isSubscriptionExpired()) {
+      this.router.navigateByUrl('student/subscription/plans')
+    }
+  }
+
+  private isSubscriptionExpired(): boolean {
+    const user = this.userStore.getUser()
+
+    const currentDate = new Date()
+    const planEndDate = new Date(user.subscription.endDate)
+
+    return currentDate > planEndDate
   }
 
   // Function to check the current route and update the sidebar visibility
@@ -81,6 +95,24 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
     }
   }
 
+  isSubscriptionExpiringSoon(subscriptionEndDate) {
+    const today = moment() // Current date
+    const endDate = moment(subscriptionEndDate) // Subscription end date
+    return endDate.diff(today, 'days') < 7 && endDate.isAfter(today)
+  }
+
+  getPendingDays(subscriptionEndDate) {
+    const today = moment() // Current date
+    const endDate = moment(subscriptionEndDate) // Subscription end date
+    const pendingDays = endDate.diff(today, 'days') // Difference in days
+
+    if (pendingDays < 0 || pendingDays === 0) {
+      return 'Expired'
+    } else {
+      return `${pendingDays} day${pendingDays > 1 ? 's' : ''} left`
+    }
+  }
+
   initMenu() {
     this.pagesMenu
       .getMenu()
@@ -89,6 +121,24 @@ export class StudentPagesComponent implements OnDestroy, OnInit {
         this.menu = menu.filter(item => {
           return this.itemAllowed(item)
         })
+
+        const user = this.userStore.getUser()
+        if (user.role === 'subscriber') {
+          const isExpiringSoon = this.isSubscriptionExpiringSoon(user.subscription.endDate)
+          this.menu = [
+            {
+              title: isExpiringSoon ? 'Expiring Soon' : 'Subscription till',
+              badge: {
+                text: isExpiringSoon
+                  ? this.getPendingDays(user.subscription.endDate)
+                  : `${moment(user.subscription.endDate).format('Do MMM YYYY')}`,
+                status: isExpiringSoon ? 'danger' : 'info'
+              },
+              data: {roles: ['subscriber']}
+            },
+            ...this.menu
+          ]
+        }
       })
   }
 

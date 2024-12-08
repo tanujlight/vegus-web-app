@@ -172,7 +172,7 @@ export class CreateTestComponent implements OnInit, OnDestroy {
       return total + subCategoryTotal
     }, 0)
 
-    if (totalSelectedQuestionsCount > 50) this.maximumAllowedQuestions = 50
+    if (totalSelectedQuestionsCount > 85) this.maximumAllowedQuestions = 85
     else this.maximumAllowedQuestions = totalSelectedQuestionsCount
   }
 

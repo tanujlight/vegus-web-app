@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
+import {User} from 'app/@core/interfaces/common/users'
+import {NbAuthService} from '@nebular/auth'
 import {UserStore} from 'app/@core/stores/user.store'
 import {PlansApi} from 'app/services/apis/plans.service'
 import {LoaderService} from 'app/services/loader.service'
@@ -10,6 +12,7 @@ import {LoaderService} from 'app/services/loader.service'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  user: User
   plans = []
   openItemIndex: number | null = null
   faqItems = [
@@ -34,7 +37,8 @@ export class HomeComponent implements OnInit {
     protected userStore: UserStore,
     private loaderService: LoaderService,
     private router: Router,
-    private plansApi: PlansApi
+    private plansApi: PlansApi,
+    private authService: NbAuthService
   ) {}
 
   // faq section
@@ -42,6 +46,18 @@ export class HomeComponent implements OnInit {
     this.openItemIndex = this.openItemIndex === index ? null : index
   }
   ngOnInit(): void {
+    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+      if (isAuthenticated) {
+        this.user = this.userStore.getUser()
+
+        if (this.user && this.user.role === 'admin') {
+          this.router.navigateByUrl('/admin/dashboard')
+        } else if (this.user && (this.user.role === 'user' || this.user.role === 'subscriber')) {
+          this.router.navigateByUrl('/student/dashboard')
+        }
+      }
+    })
+
     this.getPlans()
   }
 

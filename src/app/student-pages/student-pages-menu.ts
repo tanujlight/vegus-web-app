@@ -24,18 +24,45 @@ export class StudentPagesMenu {
         data: {roles: ['user', 'subscriber']}
       },
       {
-        title: 'Exams',
-        icon: 'book-outline',
-        link: STUDENT_ROUTES.EXAMS.LIST,
-        data: {roles: ['user']},
-        home: false
+        title: 'Qbank',
+        icon: 'hard-drive-outline',
+        data: {roles: ['user', 'subscriber']},
+        home: false,
+        children: [
+          {
+            title: 'Create test',
+            icon: 'edit-2-outline',
+            link: STUDENT_ROUTES.TUTOR.TESTS_NEW
+          },
+          {
+            title: 'Previous Tests',
+            icon: 'list-outline',
+            link: STUDENT_ROUTES.TUTOR.TESTS_LIST
+          },
+          {
+            title: 'Performance',
+            icon: 'award-outline',
+            link: STUDENT_ROUTES.TUTOR.PERFORMANCE
+          }
+        ]
       },
       {
-        title: 'Reports',
-        icon: 'file-text-outline',
-        link: STUDENT_ROUTES.REPORTS.LIST,
+        title: 'Exams',
+        icon: 'book-outline',
         data: {roles: ['user']},
-        home: false
+        home: false,
+        children: [
+          {
+            title: 'Scheduled Exams',
+            icon: 'file-text-outline',
+            link: STUDENT_ROUTES.EXAMS.LIST
+          },
+          {
+            title: 'Reports',
+            icon: 'list-outline',
+            link: STUDENT_ROUTES.REPORTS.LIST
+          }
+        ]
       },
       {
         title: 'Flash Cards',
@@ -66,29 +93,6 @@ export class StudentPagesMenu {
             title: 'Videos',
             icon: 'video-outline',
             link: STUDENT_ROUTES.STUDY_MATERIAL.VIDEOS_LIST
-          }
-        ]
-      },
-      {
-        title: 'Qbank',
-        icon: 'hard-drive-outline',
-        data: {roles: ['user', 'subscriber']},
-        home: false,
-        children: [
-          {
-            title: 'Create test',
-            icon: 'edit-2-outline',
-            link: STUDENT_ROUTES.TUTOR.TESTS_NEW
-          },
-          {
-            title: 'Previous Tests',
-            icon: 'list-outline',
-            link: STUDENT_ROUTES.TUTOR.TESTS_LIST
-          },
-          {
-            title: 'Performance',
-            icon: 'award-outline',
-            link: STUDENT_ROUTES.TUTOR.PERFORMANCE
           }
         ]
       }

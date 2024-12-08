@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core'
+import {ActivatedRoute, Router} from '@angular/router'
 import {NbToastrService} from '@nebular/theme'
 import {User} from 'app/@core/interfaces/common/users'
 import {UserStore} from 'app/@core/stores/user.store'
@@ -11,14 +12,25 @@ import {PlansApi} from 'app/services/apis/plans.service'
 })
 export class PlansComponent implements OnInit {
   plans = []
-  type = 'subscription'
+  type: 'subscription' | 'renewal'
 
   user: User
 
-  constructor(private toasterService: NbToastrService, private plansApi: PlansApi, private userStore: UserStore) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private toasterService: NbToastrService,
+    private plansApi: PlansApi,
+    private userStore: UserStore,
+    private cdref: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
-    this.getPlans()
+  async ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.type = params?.type || 'subscription'
+      this.getPlans()
+      this.cdref.detectChanges()
+    })
 
     this.user = this.userStore.getUser()
   }

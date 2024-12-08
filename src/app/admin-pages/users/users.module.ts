@@ -14,6 +14,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker'
 
 // components
 import {ComponentsModule} from '../../@components/components.module'
+import {ProfilePhotoComponent} from './profile-photo/profile-photo.component'
 import {SmartTableModule} from '../../components/smart-table/smart-table.module'
 import {ChangeUserStatusComponent} from './users-list/change-user-status.component'
 // components
@@ -64,7 +65,7 @@ const NB_MODULES = [
     ScrollToTopModule,
     ...NB_MODULES
   ],
-  declarations: [...routedComponents, ChangeUserStatusComponent],
+  declarations: [...routedComponents, ChangeUserStatusComponent, ProfilePhotoComponent],
   entryComponents: [],
   providers: []
 })

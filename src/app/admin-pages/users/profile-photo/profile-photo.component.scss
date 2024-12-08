@@ -1,0 +1,65 @@
+.profile-photo-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+
+  .profile-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-text {
+    font-size: 36px;
+    color: #fff;
+    background-color: #0067a9;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .profile-circle:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay button {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .overlay button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}

@@ -25,7 +25,8 @@ import {
   NgxLogoutComponent,
   NgxRegisterComponent,
   NgxRequestPasswordComponent,
-  NgxResetPasswordComponent
+  NgxResetPasswordComponent,
+  OtpVerificationDialogComponent
 } from './components'
 
 import {
@@ -52,7 +53,8 @@ const COMPONENTS = [
   NgxRegisterComponent,
   NgxRequestPasswordComponent,
   NgxResetPasswordComponent,
-  NgxAuthBlockComponent
+  NgxAuthBlockComponent,
+  OtpVerificationDialogComponent
 ]
 
 const NB_MODULES = [
@@ -83,7 +85,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     ...NB_MODULES,
     NbAuthModule.forRoot(authOptions)
   ],
-  exports: [...PIPES],
+  exports: [...PIPES, OtpVerificationDialogComponent],
   providers: [
     NbSecurityModule.forRoot({
       accessControl: authSettings
