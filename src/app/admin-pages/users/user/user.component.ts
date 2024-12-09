@@ -255,6 +255,10 @@ export class UserComponent implements OnInit, OnDestroy {
     })
   }
 
+  profilePicUpdated(event) {
+    this.user.profileImage = event
+  }
+
   onEmailInput(e) {
     if (e.target.value.length > 0) {
       e.target.value = e.target.value.toLowerCase()

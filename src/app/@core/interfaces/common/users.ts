@@ -12,6 +12,7 @@ export interface User {
   id: string | number
   role: string
   status: string
+  profileImage?: string
   firstName: string
   lastName: string
   email: string
@@ -54,7 +55,10 @@ export abstract class UserData {
   abstract list(pageNumber: number, pageSize: number): Observable<User[]>
   abstract get(id: number): Observable<User>
   abstract getDashboardData(): Observable<any>
+  abstract generateOTP(email: string): Observable<any>
+  abstract verifyOTP(email: string, otp: string): Observable<any>
   abstract update(user: User): Observable<User>
+  abstract updateProfileImage(id: string | number, file: File): Observable<User>
   abstract updateStatus(id: string, status: string): Observable<User>
   abstract updateCurrent(user: User): Observable<User>
   abstract create(user: User): Observable<User>

@@ -32,6 +32,18 @@ export class UsersService extends UserData {
     return observableOf(this.data.find(x => x.id === id))
   }
 
+  updateProfileImage(id: string | number, file: File): Observable<User> {
+    return observableOf(this.data.find(x => x.id === id))
+  }
+
+  generateOTP(email: string): Observable<any> {
+    return observableOf()
+  }
+
+  verifyOTP(email: string, otp: string): Observable<any> {
+    return observableOf()
+  }
+
   updateCurrent(user: User): Observable<User> {
     this.data[0] = user
 

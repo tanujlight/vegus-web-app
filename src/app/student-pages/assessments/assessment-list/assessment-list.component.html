@@ -94,6 +94,8 @@
         <div class="col-lg-4 col-md-6 col-12" *ngFor="let assessmentItem of availableAssessments">
           <nb-card>
             <nb-card-header class="text-center">
+              <nb-icon *ngIf="assessmentItem.disabled" icon="lock-outline" pack="eva"></nb-icon>
+
               <span> {{ assessmentItem.title }} </span>
             </nb-card-header>
             <nb-card-body>
@@ -108,6 +110,7 @@
                     >
                     <span *ngIf="assessmentItem.type == 'tutorial'">No Time Limit</span>
                   </p>
+                  <p>Validity: <b>14 days</b> after activation</p>
                 </div>
                 <div class="col-12 text-right">
                   <button

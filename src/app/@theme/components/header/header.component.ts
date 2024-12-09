@@ -13,6 +13,7 @@ import {Subject, Observable} from 'rxjs'
 import {UserStore} from '../../../@core/stores/user.store'
 import {SettingsData} from '../../../@core/interfaces/common/settings'
 import {User} from '../../../@core/interfaces/common/users'
+import * as moment from 'moment'
 
 @Component({
   selector: 'ngx-header',
@@ -66,6 +67,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         ? '/admin/users/current/'
         : '/student/users/current/'
       : ''
+
+    if (this.user?.role === 'subscriber' && this.user?.subscription.expired) {
+      return [{title: 'Log out', link: '/auth/logout'}]
+    }
+
     return [
       {title: 'Profile', link: userLink, queryParams: {profile: true}},
       {title: 'Change Password', link: '/auth/reset-password'},
@@ -83,6 +89,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (user) {
           this.user = user
           this.user.name = user.firstName + ' ' + user.lastName
+          if (this.user.role === 'subscriber') {
+            this.user.subscription.expiringSoon = false
+
+            if (this.user.subscription.endDate) {
+              const diffDays = moment(this.user.subscription.endDate).diff(moment(), 'days')
+              if (diffDays > 0 && diffDays < 7) {
+                this.user.subscription.expiringSoon = true
+                this.user.subscription.expiringIn = this.getPendingDays(this.user.subscription.endDate)
+              } else if (diffDays <= 0) {
+                this.user.subscription.expired = true
+              }
+            }
+          }
           this.userMenu = this.getMenuItems()
         }
       })
@@ -106,6 +125,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.currentTheme = themeName
         this.rippleService.toggle(themeName.startsWith('material'))
       })
+  }
+
+  getPendingDays(subscriptionEndDate) {
+    const today = moment() // Current date
+    const endDate = moment(subscriptionEndDate) // Subscription end date
+    const pendingDays = endDate.diff(today, 'days') // Difference in days
+
+    if (pendingDays < 0 || pendingDays === 0) {
+      return 'Expired'
+    } else {
+      return `${pendingDays} day${pendingDays > 1 ? 's' : ''}`
+    }
   }
 
   ngOnDestroy() {

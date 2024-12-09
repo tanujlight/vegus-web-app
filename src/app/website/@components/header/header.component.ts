@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
     } else if (userRole === 'user' || userRole === 'subscriber') {
       this.router.navigateByUrl('/student/dashboard')
     } else {
-      this.router.navigateByUrl('/auth/register')
+      this.router.navigateByUrl('/auth/login')
     }
   }
 

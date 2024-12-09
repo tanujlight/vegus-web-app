@@ -28,9 +28,37 @@
       <nb-search type="rotate-layout"></nb-search>
     </nb-action> -->
     <!-- <nb-action class="control-item" icon="email-outline"></nb-action> -->
-    <!-- <nb-action class="control-item" icon="bell-outline"></nb-action> -->
+    <nb-action *ngIf="user?.role === 'subscriber'" class="control-item">
+      <button
+        *ngIf="user?.subscription?.expiringSoon"
+        [routerLink]="['/student/subscription/plans']"
+        [queryParams]="{type: 'renewal'}"
+        [size]="'small'"
+        nbButton
+        status="warning"
+      >
+        Subscription expires in {{ user?.subscription?.expiringIn }}. Renew now!
+      </button>
+      <button
+        *ngIf="user?.subscription?.expired"
+        [routerLink]="['/student/subscription/plans']"
+        [queryParams]="{type: 'subscription'}"
+        [size]="'small'"
+        nbButton
+        status="warning"
+      >
+        Subscription expired!
+      </button>
+    </nb-action>
     <nb-action class="user-action" *nbIsGranted="['view', 'current-user']">
-      <nb-user [nbContextMenu]="userMenu" shape="rectangle" [name]="user?.name" [title]="user?.role"> </nb-user>
+      <nb-user
+        [picture]="user?.profileImage"
+        [nbContextMenu]="userMenu"
+        shape="rectangle"
+        [name]="user?.name"
+        [title]="user?.role"
+      >
+      </nb-user>
     </nb-action>
   </nb-actions>
 </div>

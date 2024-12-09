@@ -8,7 +8,12 @@
         </div>
       </div>
       <nb-tabset (changeTab)="changeTab($event)">
-        <nb-tab tabTitle="Subscription" tabId="subscription">
+        <nb-tab
+          [active]="type === 'subscription'"
+          tabTitle="Subscription"
+          tabId="subscription"
+          [disabled]="type === 'renewal'"
+        >
           <div class="plans-cards-container">
             <nb-card class="plan-card" *ngFor="let item of plans">
               <nb-card-body>
@@ -33,7 +38,7 @@
             </nb-card>
           </div>
         </nb-tab>
-        <nb-tab tabTitle="Renewal" tabId="renewal">
+        <nb-tab [active]="type === 'renewal'" tabTitle="Renewal" tabId="renewal" [disabled]="type === 'subscription'">
           <div class="plans-cards-container">
             <nb-card class="plan-card" *ngFor="let item of plans">
               <nb-card-body>

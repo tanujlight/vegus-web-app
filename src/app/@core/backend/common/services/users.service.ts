@@ -51,6 +51,19 @@ export class UsersService extends UserData {
   update(user: any): Observable<User> {
     return this.api.update(user)
   }
+
+  updateProfileImage(id: string, file: File): Observable<User> {
+    return this.api.updateProfileImage(id, file)
+  }
+
+  generateOTP(email: string): Observable<any> {
+    return this.api.generateOTP(email)
+  }
+
+  verifyOTP(email: string, otp: string): Observable<any> {
+    return this.api.verifyOTP(email, otp)
+  }
+
   updateStatus(id: string, status: string): Observable<User> {
     return this.api.updateStatus(id, status)
   }

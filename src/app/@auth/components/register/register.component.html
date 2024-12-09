@@ -116,14 +116,14 @@
               id="inputPhone"
               formControlName="phone"
               class="form-control"
-              [status]="(phone?.errors?.required || phone?.hasError('pattern')) && phone.touched ? 'danger' : ''"
-              [attr.aria-invalid]="email.invalid && email.touched ? true : null"
+              [status]="phone?.hasError('pattern') ? 'danger' : ''"
+              [attr.aria-invalid]="phone.invalid ? true : null"
               placeholder="Phone"
             />
             <ngx-validation-message
               label="Phone"
-              [showPattern]="phone?.hasError('pattern') && phone.touched"
-              [showRequired]="phone?.errors?.required && phone.touched"
+              [showPattern]="phone?.hasError('pattern')"
+              [showRequired]="phone?.errors?.required"
               min="10"
               max="10"
             ></ngx-validation-message>
@@ -253,7 +253,9 @@
           </div>
 
           <div *ngIf="!selectedPlanId" class="form-control-group accept-group col-12">
-            <nb-checkbox formControlName="alreadyClassEnrolled"> Are you already enrolled in the class? </nb-checkbox>
+            <nb-checkbox formControlName="alreadyClassEnrolled">
+              Are you enrolling for live virtual class with Ms. Sneha ?
+            </nb-checkbox>
           </div>
 
           <div class="form-control-group accept-group col-12" *ngIf="getConfigValue('forms.register.terms')">
@@ -263,15 +265,7 @@
             </nb-checkbox>
           </div>
 
-          <button
-            nbButton
-            fullWidth
-            status="primary"
-            size="large"
-            [disabled]="submitted || !registerForm.valid || !terms?.value || password.value != confirmPassword.value"
-            [class.btn-pulse]="submitted"
-            (click)="register()"
-          >
+          <button nbButton fullWidth status="primary" size="large" [class.btn-pulse]="submitted" (click)="submit()">
             {{ selectedPlanId ? 'Complete Purchase' : 'Register' }}
           </button>
         </div>

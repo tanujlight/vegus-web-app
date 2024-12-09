@@ -59,13 +59,21 @@ export const calculateRandomSkip = (availableCount: number, requiredCount: numbe
   return Math.floor(Math.random() * maxSkip)
 }
 
+const shuffleArray = (array: any[]) => {
+  const shuffledArray = [...array] // Clone the array to prevent mutation
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]] // Swap elements
+  }
+  return shuffledArray
+}
+
 export const prepareQuestionsForTest = (params: ICreatePracticeTestParams, allQuestions): string[] => {
   const {questionTypes, questionModes, categories, subcategories, noOfQuestions} = params
 
   let questions = []
 
   // filtered questions by questions type
-
   if (questionTypes.traditional && questionTypes.nextGeneration) {
     questions = allQuestions
   } else if (questionTypes.traditional && !questionTypes.nextGeneration) {
@@ -124,18 +132,16 @@ export const prepareQuestionsForTest = (params: ICreatePracticeTestParams, allQu
   })
 
   if (pickUnusedQuestionsCount > 0) {
-    // Calculate a random skip value
-    const randomSkip = calculateRandomSkip(availableUnusedQuestionsCount, pickUnusedQuestionsCount)
-    pickedUnusedQuestions = availableUnusedQuestions.slice(randomSkip, randomSkip + pickUnusedQuestionsCount)
+    const shuffledAvailableUnusedQuestions = shuffleArray(availableUnusedQuestions)
+    pickedUnusedQuestions = shuffledAvailableUnusedQuestions.slice(0, pickUnusedQuestionsCount)
   }
 
   if (pickUsedQuestionsCount > 0) {
-    // Calculate a random skip value
-    const randomSkip = calculateRandomSkip(availableUsedQuestionsCount, pickUsedQuestionsCount)
-    pickedUsedQuestions = availableUsedQuestions.slice(randomSkip, randomSkip + pickUsedQuestionsCount)
+    const shuffledAvailableUserQuestions = shuffleArray(availableUsedQuestions)
+    pickedUsedQuestions = shuffledAvailableUserQuestions.slice(0, pickUsedQuestionsCount)
   }
 
   const pickedQuestions = [...pickedUnusedQuestions, ...pickedUsedQuestions]
 
-  return pickedQuestions.map(i => i._id)
+  return shuffleArray(pickedQuestions).map(i => i._id)
 }

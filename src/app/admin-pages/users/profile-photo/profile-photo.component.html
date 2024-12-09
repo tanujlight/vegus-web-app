@@ -1,0 +1,10 @@
+<div class="profile-photo-container">
+  <div class="profile-circle" [style.backgroundImage]="currentProfilePic ? 'url(' + currentProfilePic + ')' : ''">
+    <span *ngIf="!currentProfilePic" class="avatar-text">{{ getUserInitials() }}</span>
+
+    <div class="overlay">
+      <button (click)="fileInput.click()">Change Picture</button>
+      <input #fileInput type="file" accept="image/*" (change)="onFileChange($event)" hidden />
+    </div>
+  </div>
+</div>

@@ -14,6 +14,7 @@ import {DataSource} from 'ng2-smart-table/lib/lib/data-source/data-source'
 @Injectable()
 export class UsersApi {
   private readonly apiController: string = 'users'
+  private readonly authApiController: string = 'auth'
 
   constructor(private api: HttpService) {}
 
@@ -78,5 +79,20 @@ export class UsersApi {
 
   updateStatus(id: string, status: string): Observable<any> {
     return this.api.put(`${this.apiController}/${id}/update-status`, {status: status})
+  }
+
+  updateProfileImage(id: string, file: File): Observable<any> {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    return this.api.post(`${this.apiController}/${id}/upload-profile-image`, formData)
+  }
+
+  generateOTP(email: string): Observable<any> {
+    return this.api.post(`${this.authApiController}/generate-otp`, {email})
+  }
+
+  verifyOTP(email: string, otp: string): Observable<any> {
+    return this.api.post(`${this.authApiController}/verify-otp`, {email, otp})
   }
 }

@@ -13,6 +13,16 @@
     <nb-card-body>
       <div [formGroup]="userForm" class="container">
         <div class="row">
+          <div *ngIf="user" class="col-12">
+            <ngx-profile-photo
+              [userId]="user?.id"
+              [firstName]="user?.firstName"
+              [lastName]="user?.lastName"
+              [initialProfilePic]="user?.profileImage"
+              (profilePicUpdated)="profilePicUpdated($event)"
+            ></ngx-profile-photo>
+          </div>
+
           <div *ngIf="mode != 'EditSelf'" class="col-sm-6">
             <!-- Role in user edit or add  -->
             <div class="form-group">
@@ -368,7 +378,7 @@
     </nb-card-footer>
   </nb-card>
 
-  <nb-card *ngIf="user?.role === 'subscriber'">
+  <nb-card *ngIf="user?.role === 'subscriber' && mode != 'EditSelf'">
     <nb-card-header> Subscription Details </nb-card-header>
     <nb-card-body>
       <p>
@@ -378,11 +388,10 @@
       </p>
       <p><strong>Plan Name:</strong> {{ user.subscription.name }}</p>
       <p><strong>Duration:</strong> {{ user.subscription.duration }} days</p>
-      <!-- <p><strong>Price:</strong> {{ user.subscription.price | currency }}</p> -->
       <p><strong>Start Date:</strong> {{ user.subscription.startDate | date }}</p>
       <p><strong>End Date:</strong> {{ user.subscription.endDate | date }}</p>
-      <h6>Features:</h6>
-      <ul>
+      <!-- <h6>Features:</h6> -->
+      <!-- <ul>
         <li *ngIf="user.subscription.features.tutor">Tutor Access</li>
         <li *ngIf="user.subscription.features.notes">Notes Access</li>
         <li *ngIf="user.subscription.features.videos">Video Access</li>
@@ -390,7 +399,7 @@
         <li *ngIf="user.subscription.features.assessments">
           Assessments: {{ user.subscription.features.assessments }}
         </li>
-      </ul>
+      </ul> -->
     </nb-card-body>
   </nb-card>
 </div>

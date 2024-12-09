@@ -10,6 +10,16 @@
 
   .category-selectAll {
     margin-left: 15px;
+
+    .heading {
+      font-weight: 700;
+    }
+  }
+
+  .subcategories-list {
+    .subcategory-name {
+      font-weight: 500;
+    }
   }
 
   .question-type-box {

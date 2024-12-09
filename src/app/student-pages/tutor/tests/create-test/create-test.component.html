@@ -133,7 +133,7 @@
                   (ngModelChange)="handleSubjectsSelection($event, 'all')"
                   [ngModel]="allCategorySubCategory"
                 >
-                  Subjects
+                  <span class="heading">Subjects</span>
                 </nb-checkbox>
               </label>
 
@@ -152,7 +152,7 @@
                   <nb-accordion-item-body>
                     <div class="row">
                       <div
-                        class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4"
+                        class="subcategories-list col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4"
                         *ngFor="let subCategoryItem of category.subCategories"
                       >
                         <nb-checkbox
@@ -161,7 +161,7 @@
                           (ngModelChange)="handleSubjectsSelection($event, 'subCategory', catIndex, category)"
                           [disabled]="!category.count || !subCategoryItem.count"
                         >
-                          <span
+                          <span class="subcategory-name"
                             >{{ subCategoryItem.name }}
                             <nb-badge [text]="subCategoryItem.count" position="initial"></nb-badge>
                           </span>
